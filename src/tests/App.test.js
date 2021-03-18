@@ -4,7 +4,7 @@ import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
 
 test('renders a reading with the text `Pokédex`', () => {
-  const { history } = renderWithRouter(<App />);
+  renderWithRouter(<App />);
 
   const heading = getByText(/Pokédex/i);
   expect(heading).toBeInTheDocument();
