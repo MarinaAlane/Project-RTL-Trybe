@@ -3,12 +3,6 @@ import renderWithRouter from './renderWithRouter';
 import About from '../components/About';
 
 describe('Testes na pagina About', () => {
-  it('Teste se a página contém as informações sobre a Pokédex.', () => {
-    const { getByText } = renderWithRouter(<About />);
-    expect(getByText(/digital encyclopedia containing all Pokémons/i))
-      .toBeInTheDocument();
-  });
-
   it('Teste se a página contém um heading h2 com o texto About Pokédex', () => {
     const { getByRole } = renderWithRouter(<About />);
     const elementPokedexH2 = getByRole('heading', { level: 2, name: 'About Pokédex' });
