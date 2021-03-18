@@ -64,7 +64,7 @@ describe('Teste o componente Pokedex', () => {
     />);
     const allBtn = screen.getAllByTestId('pokemon-type-button');
     allBtn.forEach((btn) => {
-      console.log(btn.value);
+      console.log(btn);
     });
   });
 });

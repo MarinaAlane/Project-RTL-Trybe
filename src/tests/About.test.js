@@ -5,7 +5,7 @@ import About from '../components/About';
 describe('Teste o componente "About"', () => {
   test('Teste se a página contém as informações sobre a Pokédex.', () => {
     const { getByText } = renderWithRouter(<About />);
-    const aboutPokedex = getByText(/a digital encyclopedia containing all Pokémons/i);
+    const aboutPokedex = getByText(/About Pokédex/i);
     expect(aboutPokedex).toBeInTheDocument();
   });
 
