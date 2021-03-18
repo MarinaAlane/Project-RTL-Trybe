@@ -14,7 +14,7 @@ test('Renderiza um titulo contendo a palavra `Pokédex`', () => {
   expect(heading).toBeInTheDocument();
 });
 
-test('Se tem 3 Links com os nomes `Home`, `About` e `Favorite Pokémons`', () => {
+test('Se há 3 Links com os nomes `Home`, `About` e `Favorite Pokémons`', () => {
   const { getByText } = renderWithRouter(<App />);
 
   const home = getByText('Home');
