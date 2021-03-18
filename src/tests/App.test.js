@@ -9,6 +9,16 @@ test('renders a reading with the text `Pokédex`', () => {
       <App />
     </MemoryRouter>,
   );
+  test('shows the Pokédex when the route is `/`', () => {
+    const { getByText } = render(
+      <MemoryRouter initialEntries={['/']}>
+        <App />
+      </MemoryRouter>,
+    );
+  
+    expect(getByText('Encountered pokémons')).toBeInTheDocument();
+  });
+  
   const heading = getByText(/Pokédex/i);
   expect(heading).toBeInTheDocument();
 });
