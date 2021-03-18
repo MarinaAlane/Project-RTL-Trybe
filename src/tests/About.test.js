@@ -7,7 +7,7 @@ describe('Testing page "About"', () => {
   // Verifica se a pagina possui um h2 com texto About Pokédex
   it('check if the page has an h2 with text "About Pokédex"', () => {
     const { getByRole } = render(<About />);
-    const checkH2 = getByRole('heading', { description: 'About Pokédex' });
+    const checkH2 = getByRole('heading', { name: 'About Pokédex' });
     expect(checkH2.tagName).toBe('H2');
   });
   // Verifica se a página possui dois paragrafos
