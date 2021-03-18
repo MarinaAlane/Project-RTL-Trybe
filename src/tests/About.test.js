@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import About from '../components/About';
 
-describe('Requisito 2 - Testando componente <About />', () => {
+describe('Requirement 2 - Testing component <About />', () => {
   test('tests if page contains two paragraphs', () => {
     render(<About />);
     // const paragraph1 = 'This application simulates a Pokédex'

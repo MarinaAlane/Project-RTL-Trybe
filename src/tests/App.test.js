@@ -4,7 +4,7 @@ import { render, fireEvent } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
-describe('Requisito 1 - Testando componente <App />', () => {
+describe('Requirement 1 - Testing component <App />', () => {
   test('renders a reading with the text `Pokédex`', () => {
     const { getByText } = render(
       <MemoryRouter>
