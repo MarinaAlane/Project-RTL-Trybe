@@ -1,8 +1,5 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render, fireEvent } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
-import FavoritePokemons from '../components/FavoritePokemons';
 import App from '../App';
 
 describe('Requisito 3', () => {
