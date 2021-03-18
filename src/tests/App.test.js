@@ -30,7 +30,7 @@ describe('Testa o component App', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     const home = getByText(/Home/i);
-    const { pathname } = history.location;
+    const { location: { pathname } } = history;
     userEvent.click(home);
     expect(pathname).toBe('/');
   });
@@ -41,7 +41,7 @@ describe('Testa o component App', () => {
     const about = getByText('About');
     expect(about).toBeInTheDocument();
     userEvent.click(about);
-    const { pathname } = history.location;
+    const { location: { pathname } } = history;
     expect(pathname).toBe('/about');
   });
 
@@ -50,7 +50,7 @@ describe('Testa o component App', () => {
 
     const favoritePokemons = getByText(/Favorite Pokémons/i);
     fireEvent.click(favoritePokemons);
-    const { pathname } = history.location;
+    const { location: { pathname } } = history;
     expect(pathname).toBe('/favorites');
   });
 

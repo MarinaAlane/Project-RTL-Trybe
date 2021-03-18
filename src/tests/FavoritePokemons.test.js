@@ -4,7 +4,8 @@ import FavoritePokemons from '../components/FavoritePokemons';
 
 describe('Testa o component FavoritePokemons', () => {
   test('Testa se é exibido na tela a mensagem No favorite pokemon found', () => {
-    const { getByText } = renderWithRouter(<FavoritePokemons pokemons={ [] } />);
+    const empty = [];
+    const { getByText } = renderWithRouter(<FavoritePokemons pokemons={ empty } />);
     const msg = 'No favorite pokemon found';
 
     const noFavorites = getByText(msg);
