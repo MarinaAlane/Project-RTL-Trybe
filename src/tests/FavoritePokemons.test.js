@@ -10,16 +10,30 @@ test('Teste se é exibido na tela a mensagem No favorite pokemon found', () => {
   expect(paragraphs).toBeInTheDocument();
 });
 
-test('Teste se é exibido todos os cards de pokémons favoritados', () => {
-  const { getByRole, getByText, getByTestId } = renderWithRouter(<App />);
-  const moreDetails = getByText('More details');
-  fireEvent.click(moreDetails);
+test('Teste se é exibido todos os cards de pokémons favoritados1', () => {
+  const { getByRole, getAllByText, getByText } = renderWithRouter(<App />);
+  const nextPokemon = getByText('Próximo pokémon');
+  fireEvent.click(nextPokemon);
+  let moreDetails = getAllByText(/More detail/i);
+  fireEvent.click(moreDetails[0]);
   const checkBox = getByRole('checkbox');
   fireEvent.click(checkBox);
   const favoritePokemons = getByText('Favorite Pokémons');
   fireEvent.click(favoritePokemons);
-  const favPokemons = getByTestId('fav-pokemon');
-  expect(favPokemons.children.length).toBe(1);
+  moreDetails = getAllByText('More details');
+  expect(moreDetails.length).toBe(1);
+});
+
+test('Teste se é exibido todos os cards de pokémons favoritados2', () => {
+  const { getByRole, getAllByText, getByText } = renderWithRouter(<App />);
+  let moreDetails = getAllByText(/More detail/i);
+  fireEvent.click(moreDetails[0]);
+  const checkBox = getByRole('checkbox');
+  fireEvent.click(checkBox);
+  const favoritePokemons = getByText('Favorite Pokémons');
+  fireEvent.click(favoritePokemons);
+  moreDetails = getAllByText('More details');
+  expect(moreDetails.length).toBe(2);
 });
 
 test('', () => {});
