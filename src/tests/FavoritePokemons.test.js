@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, getByTestId, screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import renderWithRouter from './helpers/renderWithRouter';
 import FavoritePokemons from '../components/FavoritePokemons';
 import App from '../App';
