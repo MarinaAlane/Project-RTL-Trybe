@@ -17,15 +17,18 @@ test('renders a reading with the text `Pokédex`', () => {
 
 describe('Teste do componente App.js', () => {
   it('Teste se o componente Pokedex é renderizada na rota "/"', () => {
-    renderWithRouter(<App />);
+    const { history } = renderWithRouter(<App />);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/');
     expect(screen.getByText(/Encountered pokémons/i)).toBeInTheDocument();
   });
 
   it('Teste se o topo da aplicação contém os links Home, About, Favorite', () => {
     renderWithRouter(<App />);
-    expect(screen.getByText(/home/i)).toBeInTheDocument();
-    expect(screen.getByText(/about/i)).toBeInTheDocument();
-    expect(screen.getByText(/favorite pokémons/i)).toBeInTheDocument();
+    const links = screen.getAllByRole('link');
+    expect(links[0]).toHaveTextContent(/home/i);
+    expect(links[1]).toHaveTextContent(/about/i);
+    expect(links[2]).toHaveTextContent(/favorite pokémons/i);
   });
 
   it('Teste se a aplicação é redirecionada para "/" ao clicar em Home', () => {
