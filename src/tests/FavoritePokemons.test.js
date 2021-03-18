@@ -28,4 +28,6 @@ describe('3. Teste o componente <FavoritePokemons.js />', () => {
     const averageWeightText = getByText(/Average weight/i);
     expect(averageWeightText).toBeInTheDocument();
   });
+
+  // Fazer caminho inverso, visto no plantão o questionamento dos colegas!
 });
