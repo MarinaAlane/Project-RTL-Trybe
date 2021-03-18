@@ -11,8 +11,11 @@ describe('Testes página sobre', () => {
 
   it('Verifica se o title About Pokédex é renderizada', () => {
     const { getByRole } = renderWithRouter(<About />);
-    const pokedexTitle = getByRole('heading');
-    expect(pokedexTitle.innerHTML).toBe('About Pokédex');
+    const pokedexTitle = getByRole('heading', {
+      name: 'About Pokédex',
+      level: 2,
+    });
+    expect(pokedexTitle).toBeInTheDocument('About Pokédex');
   });
 
   it('Testa se a página contém dois parágrafos com texto sobre a Pokédex', () => {
@@ -24,6 +27,6 @@ describe('Testes página sobre', () => {
   it('Teste se a página contém a seguinte imagem de uma Pokédex', () => {
     const { getByRole } = renderWithRouter(<About />);
     const pokedexImg = getByRole('img');
-    expect(pokedexImg.src).toBe('https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png')
+    expect(pokedexImg.src).toBe('https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
   });
 });
