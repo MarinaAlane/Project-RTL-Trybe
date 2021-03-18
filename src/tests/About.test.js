@@ -6,7 +6,7 @@ describe('testing About.js', () => {
   it('testing if the page contains pokedex information', () => {
     const { getByText } = render(<About />);
 
-    const aboutInfo = getByText(/digital encyclopedia/i);
+    const aboutInfo = getByText(/This application simulates/i);
     expect(aboutInfo).toBeInTheDocument();
   });
 
