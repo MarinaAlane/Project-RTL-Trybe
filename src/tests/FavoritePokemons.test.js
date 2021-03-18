@@ -3,7 +3,7 @@ import { fireEvent } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
-describe('Requisito 3', () => {
+describe('Requisito 3 - Testando componente <FavoritePokemons />', () => {
   test('correct message if there is no favorite pokemons', () => {
     const { getByText } = renderWithRouter(<App />);
     const favoriteLink = getByText('Favorite Pokémons');
