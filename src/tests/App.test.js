@@ -64,6 +64,6 @@ describe('Requisito 1 - Testando componente <App />', () => {
     const { history, getByRole } = renderWithRouter(<App />);
     history.push('/digimons/digitais');
     const notFoundText = getByRole('heading', { level: 2 });
-    expect(notFoundText.textContent).toBe('Page requested not found 😭');
+    expect(notFoundText.textContent).toBe('Page requested not found😭');
   });
 });
