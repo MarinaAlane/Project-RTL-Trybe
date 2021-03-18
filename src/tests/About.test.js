@@ -22,8 +22,7 @@ describe('Requisito 2', () => {
 
   test('tests if there is an image of a Pokédex', () => {
     render(<About />);
-    const imgAltText = 'https://cdn.bulbagarden.net/upload/'
-      + 'thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
+    const imgAltText = 'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
     const renderedImg = document.querySelector('img');
     expect(renderedImg.src).toBe(imgAltText);
   });
