@@ -61,9 +61,10 @@ describe('Requisito 1 - Testando componente <App />', () => {
   });
 
   test('tests if unknown page is correctly rendered', () => {
-    const { history, getByRole } = renderWithRouter(<App />);
+    const { history, getByText } = renderWithRouter(<App />);
     history.push('/digimonsdigitais');
-    const notFoundText = getByRole('heading', { level: 2 });
-    expect(notFoundText.textContent).toBe('Page requested not found 😭');
+    const notFoundText = getByText(/Page requested not found/i);
+    expect(notFoundText).toBeInTheDocument();
+    // console.log(notFoundText.textContent);
   });
 });
