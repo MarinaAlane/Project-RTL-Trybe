@@ -4,14 +4,8 @@ import About from '../components/About';
 
 test('Teste se a página contém as informações sobre a Pokédex', () => {
   const { getByText } = renderWithRouter(<About />);
-  const textA1 = 'This application simulates a Pokédex,';
-  const textA2 = ' a digital encyclopedia containing all Pokémons';
-  const pokedexTextA = getByText(textA1 + textA2);
-  expect(pokedexTextA).toBeInTheDocument();
-  const textB1 = 'This application simulates a Pokédex,';
-  const textB2 = ' a digital encyclopedia containing all Pokémons';
-  const pokedexTextB = getByText(textB1 + textB2);
-  expect(pokedexTextB).toBeInTheDocument();
+  const paragraphs = getByText(/This application simulates a Pokédex/i);
+  expect(paragraphs).toBeInTheDocument();
 });
 
 test('Teste se a página contém um heading h2 com o texto About Pokédex', () => {
