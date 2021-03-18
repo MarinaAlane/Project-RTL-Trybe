@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import About from '../components/About';
 
 describe('Requisito 2', () => {
-  test('tests if page contains information about Pokedex', () => {
+  test('tests if page contains two paragraphs', () => {
     render(<About />);
     const paragraph1 = 'This application simulates a Pokédex'
       + ', a digital encyclopedia containing all Pokémons';
