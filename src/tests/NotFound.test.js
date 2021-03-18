@@ -16,5 +16,4 @@ test('Tests Not Found', () => {
 
   expect(heading).toBeInTheDocument();
   expect(pokeImg).toHaveAttribute('src', 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
-
 });

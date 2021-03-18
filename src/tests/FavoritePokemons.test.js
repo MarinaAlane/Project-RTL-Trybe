@@ -42,5 +42,4 @@ test('Tests Favorite with pokemons', () => {
   expect(queryByText('Charmander')).toBeInTheDocument();
   expect(queryByText('Pikachu')).toBeInTheDocument();
   expect(queryByText('Squirtle')).not.toBeInTheDocument();
-
 });

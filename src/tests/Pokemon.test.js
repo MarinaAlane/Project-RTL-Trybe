@@ -30,5 +30,4 @@ test('Tests Pokemon', () => {
   expect(history.location.pathname).toBe(`/pokemons/${id}`);
   const favorite = getByRole('img', { name: `${name} is marked as favorite` });
   expect(favorite).toHaveAttribute('src', '/star-icon.svg');
-
 });
