@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
-describe('Testa toda APP', () => {
+describe('Testes na pagina App', () => {
   it('Página principal Pokédex é renderizada ao carregar no caminho de URL /', () => {
     const { getByText } = renderWithRouter(<App />);
     expect(getByText(/Pokédex/i)).toBeInTheDocument();
