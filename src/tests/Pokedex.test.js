@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, queryByRole } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import renderWithRouter from '../renderWithRouter';
 import Pokedex from '../components/Pokedex';
 import data from '../data';
