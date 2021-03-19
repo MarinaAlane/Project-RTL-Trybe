@@ -20,10 +20,15 @@ describe('Requirement 7: Test the component <PokemonDetails.js />', () => {
   });
 
   test('Test if there is a maps section with Pokémon locations', () => {
-    const { getByRole, getAllByRole, getByText } = renderWithRouter(<App />);
+    const { getByRole, getAllByRole } = renderWithRouter(<App />);
 
-    const detailsLink = getByText('More details');
+    // Solução para evitar erro ESLint de duplicidade
+    // no código por: Layo Kaminski
+    const detailsLink = getByRole('link', {
+      name: /more details/i,
+    });
     userEvent.click(detailsLink);
+    // --------------------------------------
 
     const pokeGameLocations = getByRole('heading', {
       level: 2,
