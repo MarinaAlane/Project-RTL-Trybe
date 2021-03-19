@@ -16,6 +16,7 @@ test('Should render a card with the pokémon information', () => {
 
   const pokemonWeight = screen.getByText(/average weight/i);
   expect(pokemonWeight).toBeInTheDocument();
+  expect(pokemonWeight).toHaveTextContent('Average weight: 6.0 kg');
 
   const pokemonImage = screen.getByAltText('Pikachu sprite');
   expect(pokemonImage).toBeInTheDocument();
