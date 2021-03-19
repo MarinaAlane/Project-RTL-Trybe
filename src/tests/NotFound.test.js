@@ -1,7 +1,6 @@
-import { getByText } from '@testing-library/react';
 import React from 'react';
 import NotFound from '../components/NotFound';
-import renderWithRouter from './renderWithRouter'
+import renderWithRouter from './renderWithRouter';
 
 test('testing if the page notFound is correct ', () => {
   const { getByAltText, getByRole } = renderWithRouter(<NotFound />);
