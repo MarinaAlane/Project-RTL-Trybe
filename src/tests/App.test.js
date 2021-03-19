@@ -13,7 +13,7 @@ describe('Testa o componente <App.js />', () => {
   });
 
   it(`Testa se o topo da aplicação contém um conjunto fixo
-        de links de navegação.`, () => {
+      de links de navegação.`, () => {
     const { getByText } = renderWithRouter(<App />);
     const linkHome = getByText('Home');
     const linkAbout = getByText('About');
@@ -25,7 +25,7 @@ describe('Testa o componente <App.js />', () => {
   });
 
   it(`Testa se a aplicação é redirecionada para a página
-        inicial, na URL /.`, () => {
+      inicial, na URL /.`, () => {
     const { getByText, history } = renderWithRouter(<App />);
     fireEvent.click(getByText(/Home/i));
     const { pathname } = history.location;
@@ -34,7 +34,7 @@ describe('Testa o componente <App.js />', () => {
   });
 
   it(`Testa se a aplicação é redirecionada para a página
-        About, na URL /about.`, () => {
+      About, na URL /about.`, () => {
     const { getByText, history } = renderWithRouter(<App />);
     fireEvent.click(getByText(/About/i));
     const { pathname } = history.location;
