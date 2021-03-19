@@ -38,7 +38,7 @@ describe('Testes aquivo App.js', () => {
     expect(favoritePokemonLink).toBeInTheDocument();
   });
 
-  it('Testa se a aplicação é redirecionada p/ pagina inicial, ao clicar em "Home"', () => {
+  it('Testa se a aplicação é redirecionada p/ pagina inicial, clicando em "Home"', () => {
     const history = createMemoryHistory();
     const { getByText } = render(
       <Router history={ history }>
@@ -49,7 +49,8 @@ describe('Testes aquivo App.js', () => {
     fireEvent.click(homeLink);
     expect(history.location.pathname).toBe('/');
   });
-  it('Testa se a aplicação é redirecionada p/ pagina about, ao clicar em "About"', () => {
+
+  it('Testa se a aplicação é redirecionada p/ pagina about, clicando em "About"', () => {
     const history = createMemoryHistory();
     const { getByText } = render(
       <Router history={ history }>
@@ -59,5 +60,17 @@ describe('Testes aquivo App.js', () => {
     const aboutLink = getByText('About');
     fireEvent.click(aboutLink);
     expect(history.location.pathname).toBe('/about');
+  });
+
+  it('Testa se a aplicação é redirecionada, clicando em "Favorite Pokémons"', () => {
+    const history = createMemoryHistory();
+    const { getByText } = render(
+      <Router history={ history }>
+        <App />
+      </Router>,
+    );
+    const favoritesLink = getByText('Favorite Pokémons');
+    fireEvent.click(favoritesLink);
+    expect(history.location.pathname).toBe('/favorites');
   });
 });
