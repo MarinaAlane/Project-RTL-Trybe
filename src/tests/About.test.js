@@ -3,7 +3,11 @@ import About from '../components/About';
 import renderWithRouter from './renderWithRouter';
 
 describe('Test <About />', () => {
-  const paragraphCount = 2;
+  const paragraphs = [
+    'This application simulates a Pokédex, '
+    + 'a digital encyclopedia containing all Pokémons',
+    'One can filter Pokémons by type, and see more details for each one of them',
+  ];
 
   it('renders a heading level 2 written "About Pokédex"', () => {
     const { getByRole } = renderWithRouter(<About />);
@@ -16,10 +20,11 @@ describe('Test <About />', () => {
   });
 
   test('if page contains two paragraphs', () => {
-    const { getAllByRole } = renderWithRouter(<About />);
-    const paragraphs = getAllByRole('paragraph');
+    const { getByText } = renderWithRouter(<About />);
 
-    expect(paragraphs.length).toBe(paragraphCount);
+    paragraphs.forEach((p) => (
+      expect(getByText(p)).toBeInTheDocument()
+    ));
   });
 
   it('renders an image of a Pokédex', () => {
