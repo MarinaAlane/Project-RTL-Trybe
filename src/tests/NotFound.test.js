@@ -18,4 +18,3 @@ test('Teste se página mostra a imagem', () => {
   );
   expect(containImg.src).toContain('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
 });
-
