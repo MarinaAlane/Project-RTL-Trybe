@@ -2,9 +2,9 @@ import React from 'react';
 // import { MemoryRouter } from 'react-router-dom';
 // import { render, screen } from '@testing-library/react';
 // import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
-import userEvent from '@testing-library/user-event';
 
 test('renders a reading with the text `Pokédex`', () => {
   const { getByText } = renderWithRouter(<App />);
