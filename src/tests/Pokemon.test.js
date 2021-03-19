@@ -21,7 +21,6 @@ describe('Requisito 06', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const linkPoke = getByText('More details');
     expect(linkPoke.attributes.href.value).toBe('/pokemons/25');
-
     fireEvent.click(linkPoke);
 
     const detailsPage = getByText('Pikachu Details');
