@@ -29,5 +29,19 @@ describe('3. Teste o componente <FavoritePokemons.js />', () => {
     expect(averageWeightText).toBeInTheDocument();
   });
 
-  // Fazer caminho inverso, visto no plantão o questionamento dos colegas!
+  it('Test if no Pokémon card is displayed, if it is not favored', () => {
+    const { getByLabelText, getByText } = renderWithRouter(<App />);
+
+    const linkMoreDetails = getByText(/more details/i);
+    userEvent.click(linkMoreDetails);
+
+    const favoritePokemon = getByLabelText(/favoritado/i);
+    userEvent.click(favoritePokemon);
+
+    const linkFavoritePokemons = getByText(/Favorite Pokémons/i);
+    userEvent.click(linkFavoritePokemons);
+
+    const message = getByText(/No favorite pokemon found/i);
+    expect(message).toBeInTheDocument();
+  });
 });
