@@ -1,5 +1,4 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import About from '../components/About';
 
@@ -12,7 +11,7 @@ describe('Testing <About />', () => {
 
   it('shold contain a heading h2 with the text "About Pokédex"', () => {
     const { getByRole } = render(<About />);
-    const headingH2 = getByRole('heading', { name: /About Pokédex/, });
+    const headingH2 = getByRole('heading', { name: /About Pokédex/ });
     expect(headingH2).toBeInTheDocument();
   });
 
@@ -28,5 +27,4 @@ describe('Testing <About />', () => {
     const image = getByAltText(/Pokédex/);
     expect(image.src).toBe(expectedUrl);
   });
-
 });
