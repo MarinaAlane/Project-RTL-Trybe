@@ -15,7 +15,8 @@ describe('Check component not found', () => {
   it('Checks if the page shows the image and the alternative text  ', () => {
     const { getByAltText } = render(<NotFound />);
     const checkLinkImage = 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif';
-    const altImg = getByAltText('Pikachu crying because the page requested was not found');
+    const msgImg = 'Pikachu crying because the page requested was not found';
+    const altImg = getByAltText(msgImg);
     expect(altImg.src).toBe(checkLinkImage);
   });
 });
