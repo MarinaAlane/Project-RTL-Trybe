@@ -41,7 +41,8 @@ describe('Test the App component', () => {
       expect(home).toBeInTheDocument();
 
       userEvent.click(home);
-      const { pathname } = history.location;
+      const { location } = history;
+      const { pathname } = location;
       expect(pathname).toBe('/');
     });
 
@@ -53,7 +54,8 @@ describe('Test the App component', () => {
       expect(about).toBeInTheDocument();
 
       userEvent.click(about);
-      const { pathname } = history.location;
+      const { location } = history;
+      const { pathname } = location;
       expect(pathname).toBe('/about');
     });
 
@@ -62,11 +64,12 @@ describe('Test the App component', () => {
   () => {
     const { history } = renderWithRouter(<App />);
 
-    const faviritePokemon = screen.getByText(/Favorite pokémon/i);
-    expect(faviritePokemon).toBeInTheDocument();
+    const favoritePokemon = screen.getByText(/Favorite pokémon/i);
+    expect(favoritePokemon).toBeInTheDocument();
 
-    userEvent.click(faviritePokemon);
-    const { pathname } = history.location;
+    userEvent.click(favoritePokemon);
+    const { location } = history;
+    const { pathname } = location;
     expect(pathname).toBe('/favorites');
   });
 
@@ -75,7 +78,8 @@ describe('Test the App component', () => {
       const { history } = renderWithRouter(<App />);
 
       history.push('/no-page');
-      const { pathname } = history.location;
+      const { location } = history;
+      const { pathname } = location;
       expect(pathname).toBe('/no-page');
 
       const pokeImage = screen.getByAltText(
