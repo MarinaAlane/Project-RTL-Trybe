@@ -62,9 +62,24 @@ describe('Teste o componente Pokedex', () => {
       pokemons={ pokemons }
       isPokemonFavoriteById={ isPokemonFavoriteById }
     />);
+    const filters = 7;
     const allBtn = screen.getAllByTestId('pokemon-type-button');
-    allBtn.forEach((btn) => {
-      console.log(btn);
+    expect(allBtn.length).toBe(filters);
+
+    const btnType = screen.getByRole('button', {
+      name: /Fire/,
     });
+    expect(btnType).toBeInTheDocument();
+  });
+
+  it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+    renderWithRouter(<Pokedex
+      pokemons={ pokemons }
+      isPokemonFavoriteById={ isPokemonFavoriteById }
+    />);
+    const bntAll = screen.getByRole('button', {
+      name: 'All',
+    });
+    expect(bntAll).toBeInTheDocument();
   });
 });
