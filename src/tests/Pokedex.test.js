@@ -20,6 +20,15 @@ describe('Requisito 05', () => {
       expect(namePoke.textContent).toBe(pokemon.name);
       fireEvent.click(buttonProx);
     });
+
+    const buttonAll = getByText('All');
+    fireEvent.click(buttonAll);
+
+    pokemons.forEach((pokemo) => {
+      const namePoke = getByTestId('pokemon-name');
+      expect(namePoke.textContent).toBe(pokemo.name);
+      fireEvent.click(buttonProx);
+    });
   });
 
   test('Teste se a Pokédex tem os botões de filtro.', () => {
@@ -28,29 +37,24 @@ describe('Requisito 05', () => {
     expect(buttonFilter[1].textContent).toBe('Fire');
   });
 
-  test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
-    const { getByText, getByTestId } = renderWithRouter(<App />);
-    const buttonAll = getByText('All');
-    fireEvent.click(buttonAll);
-
-    const buttonProx = getByText('Próximo pokémon');
-    pokemons.forEach((pokemo) => {
-      const namePoke = getByTestId('pokemon-name');
-      expect(namePoke.textContent).toBe(pokemo.name);
-      fireEvent.click(buttonProx);
-    });
-  });
-
   test('Tem um botão de filtro para cada tipo de Pokémon.', () => {
-    const { getAllByTestId } = renderWithRouter(<App />);
+    const { getAllByTestId, getByText } = renderWithRouter(<App />);
 
     const pokemonTypes = (
       [...new Set(pokemons.reduce((types, { type }) => [...types, type], []))]
     );
+    const namePokeType = getAllByTestId('pokemon-type-button');
 
     pokemonTypes.forEach((type, index) => {
-      const namePoke = getAllByTestId('pokemon-type-button');
-      expect(namePoke[index].textContent).toBe(type);
+      expect(namePokeType[index].textContent).toBe(type);
     });
+
+    const buttonProx = getByText('Próximo pokémon');
+
+    fireEvent.click(namePokeType[0]);
+    expect(buttonProx).toBeDisabled();
+
+    fireEvent.click(namePokeType[1]);
+    expect(buttonProx).not.toBeDisabled();
   });
 });
