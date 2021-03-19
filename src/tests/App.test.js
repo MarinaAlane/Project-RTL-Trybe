@@ -14,13 +14,13 @@ describe('Testa o componente <App.js />', () => {
   it(`Testa se o topo da aplicação contém um conjunto fixo
       de links de navegação.`, () => {
     const { getByText } = renderWithRouter(<App />);
-    const linkHome = getByText('Home');
+    const linkHome = getByText(/Home/i);
     expect(linkHome).toBeInTheDocument();
 
-    const linkAbout = getByText('About');
+    const linkAbout = getByText(/About/i);
     expect(linkAbout).toBeInTheDocument();
 
-    const linkFavoritePokémons = getByText('Favorite Pokémons');
+    const linkFavoritePokémons = getByText(/Favorite Pokémons/i);
     expect(linkFavoritePokémons).toBeInTheDocument();
   });
 

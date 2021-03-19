@@ -22,15 +22,15 @@ describe('Testa o componente <FavoritePokemons.js />', () => {
     const title = getByText(/Encountered pokémons/i);
     expect(title).toBeInTheDocument();
 
-    const buttonDragon = getByText('Dragon');
+    const buttonDragon = getByText(/Dragon/i);
     expect(buttonDragon.type).toBe('button');
     fireEvent.click(buttonDragon);
 
-    const moreDetails = getByText('More details');
+    const moreDetails = getByText(/More details/i);
     expect(moreDetails.href).toBe('http://localhost/pokemons/148');
     fireEvent.click(moreDetails);
 
-    const favorited = getByLabelText('Pokémon favoritado?');
+    const favorited = getByLabelText(/Pokémon favoritado?/i);
     expect(favorited.type).toBe('checkbox');
     fireEvent.click(favorited);
 
@@ -38,7 +38,7 @@ describe('Testa o componente <FavoritePokemons.js />', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/favorites');
 
-    const star = getByAltText('Dragonair is marked as favorite');
+    const star = getByAltText(/Dragonair is marked as favorite/i);
     expect(star).toBeInTheDocument();
     expect(star.src).toBe(
       'http://localhost/star-icon.svg',
