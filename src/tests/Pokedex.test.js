@@ -53,12 +53,13 @@ test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
 });
 
 test('Teste se é criado, dinamicamente, um botão de filtro para cada tipo', () => {
-  const { getByText, getAllByText } = renderWithRouter(<App />);
+  const { getByText, getAllByTestId } = renderWithRouter(<App />);
   const types = ['Fire', 'Psychic', 'Electric', 'Bug', 'Poison', 'Dragon', 'Normal'];
+  const lengthOfTypes = 7;
   types.forEach((_, index) => {
     fireEvent.click(getByText(types[index]));
-    const findType = getAllByText(types[index]);
-    expect(findType.length).toBe(2);
+    const findType = getAllByTestId('pokemon-type-button');
+    expect(findType.length).toBe(lengthOfTypes);
     const buttonAll = getByText('All');
     expect(buttonAll).toBeInTheDocument();
   });
