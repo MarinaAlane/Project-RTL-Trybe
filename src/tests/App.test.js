@@ -18,7 +18,7 @@ describe('Testa o componente App', () => {
     expect(pathname).toBe('/');
   });
 
-  test('Testa de o header possui Home, About e Favorite pokémon', () => {
+  test('Testa de o header possui links de Home, About e Favorite pokémon', () => {
     renderWithRouter(<App />);
 
     const home = screen.getByText(/Home/i);
