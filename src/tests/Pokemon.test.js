@@ -50,5 +50,5 @@ describe('Requirement 6: Test the component <Pokemon.js />', () => {
     const image = getAllByRole('img')[1];
     expect(image.src).toBe('http://localhost/star-icon.svg');
     expect(image.alt).toBe('Pikachu is marked as favorite');
-  })
+  });
 });
