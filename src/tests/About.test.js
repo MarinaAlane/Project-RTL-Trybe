@@ -25,7 +25,6 @@ test('Testa se a página contém dois parágrafos com texto sobre a Pokédex.', 
   expect(getByText(pokeInfoP1 && pokeInfoP2)).toBeDefined();
 });
 
-// Article that refers the code below: https://medium.com/@drake_beth/how-to-test-images-in-react-a70053b1634a
 test('Testa se a página contém a imagem de uma Pokédex:', () => {
   const { getByRole } = renderWithRouter(<About />);
 
