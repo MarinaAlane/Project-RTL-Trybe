@@ -2,7 +2,7 @@ import React from 'react';
 import renderWithRouter from '../services/RenderWithRouter';
 import About from '../components/About';
 
-describe('Testa se a página contém as informações sobre a Pokédex', () => {
+describe('Testa o componente <About.js />', () => {
   test('Testa se a página contém um heading h2 com o texto About Pokédex', () => {
     const { getByRole } = renderWithRouter(<About />);
     const h2 = getByRole('heading', { level: 2 });
