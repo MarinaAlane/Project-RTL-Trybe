@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, getAllByText } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
 
@@ -51,7 +51,8 @@ describe('Tests regarding Pokedex functionality', () => {
   it('tests if filter buttons exist', () => {
     const { getAllByTestId, getByRole } = renderWithRouter(<App />);
     const typeFilterArray = getAllByTestId('pokemon-type-button');
-    expect(typeFilterArray).toHaveLength(7);
+    const filterButtonNumber = 7;
+    expect(typeFilterArray).toHaveLength(filterButtonNumber);
     const allButton = getByRole('button', { name: 'All' });
     expect(allButton).toBeInTheDocument();
   });
