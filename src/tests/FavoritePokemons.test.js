@@ -4,45 +4,49 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
 
-describe('Testa o componente <FavoritePokemons />', () => {
+describe('Tests the FavoritePokemons component', () => {
   const favorites = '/favorites';
-  test('Se não tiver pokemons favotos a mensagem No favorite pokemon found aparece',
-    () => {
-      const { history } = renderWithRouter(<App />);
+  test(`If you dont have any favorite pokemon the message "No favorite pokemon
+  found" appears`,
+  () => {
+    const { history } = renderWithRouter(<App />);
 
-      const faviritePokemon = screen.getByText(/Favorite pokémon/i);
-      expect(faviritePokemon).toBeInTheDocument();
+    const faviritePokemon = screen.getByText(/Favorite pokémon/i);
+    expect(faviritePokemon).toBeInTheDocument();
 
-      userEvent.click(faviritePokemon);
-      const { pathname: favoritePage } = history.location;
-      expect(favoritePage).toBe(favorites);
+    userEvent.click(faviritePokemon);
+    const { location } = history;
+    const { pathname: favoritePage } = location;
+    expect(favoritePage).toBe(favorites);
 
-      const noFavoritePokemons = screen.getByText('No favorite pokemon found');
-      expect(noFavoritePokemons).toBeInTheDocument();
-    });
+    const noFavoritePokemons = screen.getByText('No favorite pokemon found');
+    expect(noFavoritePokemons).toBeInTheDocument();
+  });
 
-  test('testa se nenhum pokemon aparese se não favoritado', () => {
+  test('Tests if no pokemon appears if not favored', () => {
     const { history } = renderWithRouter(<App />);
 
     const faviritePokemon = screen.getByText(/Favorite pokémons/i);
     expect(faviritePokemon).toBeInTheDocument();
 
     userEvent.click(faviritePokemon);
-    const { pathname } = history.location;
+    const { location } = history;
+    const { pathname } = location;
     expect(pathname).toBe(favorites);
 
     const pokeCard = screen.queryByText(/More details/i);
     expect(pokeCard).toBeNull();
   });
 
-  test('testa os pokemons favoritados', () => {
+  test('Tests the favorite pokemons', () => {
     const { history } = renderWithRouter(<App />);
 
     const moredetails = screen.getByText(/More details/);
     expect(moredetails).toBeInTheDocument();
 
     userEvent.click(moredetails);
-    const { pathname } = history.location;
+    const { location } = history;
+    const { pathname } = location;
     expect(pathname).toBe('/pokemons/25');
 
     const favorite = screen.getByText(/Pokémon favoritado?/i);
@@ -54,7 +58,8 @@ describe('Testa o componente <FavoritePokemons />', () => {
     expect(faviritePokemon).toBeInTheDocument();
 
     userEvent.click(faviritePokemon);
-    const { pathname: favoritePath } = history.location;
+    const { location: local } = history;
+    const { pathname: favoritePath } = local;
     expect(favoritePath).toBe(favorites);
 
     const noFavoritePokemons = screen.queryByText('No favorite pokemon found');

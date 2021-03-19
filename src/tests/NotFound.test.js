@@ -3,8 +3,8 @@ import { screen } from '@testing-library/react';
 import renderWithRouter from '../services/renderWithRouter';
 import NotFound from '../components/NotFound';
 
-describe('Testa componente <NotFound.js />', () => {
-  test('Testa se o componente tem h2 e uma imagem', () => {
+describe('Tests the NotFound component', () => {
+  test('Tests if the component has a h2 and an image', () => {
     const { history } = renderWithRouter(<NotFound />);
 
     history.push('/no-page');

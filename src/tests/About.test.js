@@ -4,27 +4,31 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
 
-test('Tests the About component', () => {
-  const { history } = renderWithRouter(<App />);
+describe('Tests the About component', () => {
+  test('Test if the component has a h2 and the h2 has a text "About Pokédex"',
+    () => {
+      const { history } = renderWithRouter(<App />);
 
-  const linkAbout = screen.getByText(/About/i);
-  expect(linkAbout).toBeInTheDocument();
+      const linkAbout = screen.getByText(/About/i);
+      expect(linkAbout).toBeInTheDocument();
 
-  userEvent.click(linkAbout);
-  const { pathname } = history.location;
-  expect(pathname).toBe('/about');
+      userEvent.click(linkAbout);
+      const { location } = history;
+      const { pathname } = location;
+      expect(pathname).toBe('/about');
 
-  const heading2 = screen.getByRole('heading', {
-    level: 2,
-  });
+      const heading = screen.getByRole('heading', {
+        level: 2,
+      });
 
-  expect(heading2).toBeInTheDocument();
-  const pokedexHeading2 = screen.getByText(/About Pokédex/i);
-  expect(pokedexHeading2).toBeInTheDocument();
+      expect(heading).toBeInTheDocument();
+      const headingText = screen.getByText(/About Pokédex/i);
+      expect(headingText).toBeInTheDocument();
 
-  const image = screen.getByAltText(/Pokédex/i);
-  expect(image).toBeInTheDocument();
-  expect(image.src).toBe(
-    'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png',
-  );
+      const image = screen.getByAltText(/Pokédex/i);
+      expect(image).toBeInTheDocument();
+      expect(image.src).toBe(
+        'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png',
+      );
+    });
 });
