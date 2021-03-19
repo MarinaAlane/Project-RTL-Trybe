@@ -29,3 +29,5 @@ test('testando estrelinha', () => {
   fireEvent.click(getByRole('checkbox'));
   expect(getByAltText('Pikachu is marked as favorite')).toHaveProperty('src', 'http://localhost/star-icon.svg');
 });
+
+// referencias dos projetos de JRGCast, Cainan e Lucas Duque, turma 8
