@@ -37,6 +37,8 @@ describe('Requirement 6 - Testing component <Pokemon />', () => {
     userEvent.click(moreDetailsLink);
     userEvent.click(getByRole('checkbox'));
     const starImg = getByAltText(/marked as favorite/i);
+    expect(starImg).toBeInTheDocument();
     expect(starImg).toHaveAttribute('src', '/star-icon.svg');
+    expect(starImg).toHaveAttribute('alt', 'Pikachu is marked as favorite');
   });
 });
