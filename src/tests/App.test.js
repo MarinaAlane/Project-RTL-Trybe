@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
 
-describe('Test App.js component', () => {
+describe('Testin <App.js />', () => {
   it('should render the text `Pokédex` when loading in the "/" path', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const heading = getByText(/Pokédex/);
