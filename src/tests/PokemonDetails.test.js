@@ -17,7 +17,7 @@ describe('7. Teste o componente <PokemonDetails.js />', () => {
     const titles = getAllByRole('heading');
     expect(titles[1].textContent).toBe('Pikachu Details');
     expect(linkMoreDetails).not.toBeInTheDocument();
-    expect(titles[2].textContent).toBe(' Summary ');
+    expect(titles[2].textContent).toBe('Summary');
     expect(pokemonSummary).toBeInTheDocument();
   });
 

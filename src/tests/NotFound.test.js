@@ -9,7 +9,7 @@ describe('4. Teste o componente <NotFound.js />', () => {
       level: 2,
     });
 
-    expect(title.textContent).toBe('Page requested not found 😭 ');
+    expect(title.textContent).toBe('Page requested not found 😭');
   });
 
   it('Test if the page shows the image', () => {
