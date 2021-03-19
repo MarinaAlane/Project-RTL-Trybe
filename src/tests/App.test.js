@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
 
-describe('Testa o compoenente App', () => {
+describe('Testa o componente App', () => {
   test('renders a reading with the text `Pokédex`', () => {
     renderWithRouter(<App />);
 
