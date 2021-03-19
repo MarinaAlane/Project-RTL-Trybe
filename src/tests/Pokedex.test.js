@@ -35,9 +35,10 @@ describe('Testes do componente Pokedex', () => {
       isPokemonFavoriteById={ isPokemonFavoriteById }
     />);
     const allButtons = getAllByRole('button');
+    const nextPokemon = 'Próximo pokémon';
     const allButtonsLength = 9;
     expect(allButtons.length).toBe(allButtonsLength);
-    expect(allButtons[8].innerHTML).toBe('Próximo pokémon');
+    expect(allButtons[8].innerHTML).toBe(nextPokemon);
 
     pokemons.forEach((pokemon) => {
       const pokemonName = getByText(pokemon.name);
@@ -118,12 +119,13 @@ describe('Testes do componente Pokedex', () => {
       pokemons={ pokemons }
       isPokemonFavoriteById={ isPokemonFavoriteById }
     />);
+    const nextPokemon = 'Próximo pokémon';
     const typeButtons = getAllByTestId('pokemon-type-button');
     userEvent.click(typeButtons[0]);
-    const electricSeleted = getByText('Próximo pokémon');
+    const electricSeleted = getByText(nextPokemon);
     expect(electricSeleted).toBeDisabled();
     userEvent.click(typeButtons[2]);
-    const bugSeleted = getByText('Próximo pokémon');
+    const bugSeleted = getByText(nextPokemon);
     expect(bugSeleted).toBeDisabled();
   });
 });
