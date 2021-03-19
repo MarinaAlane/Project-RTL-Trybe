@@ -46,26 +46,22 @@ describe('Testes do componente Pokemon Details', () => {
   });
 
   it('Teste se o usuário pode favoritar um pokemon', () => {
-    const { history } = renderWithRouter(<App />);
+    renderWithRouter(<App />);
 
     const buttonDetails = screen.getByText(textButtonDetails);
     userEvent.click(buttonDetails);
 
     const checkbox = screen.getByLabelText('Pokémon favoritado?');
     expect(checkbox).toBeInTheDocument();
-    // console.log(checkbox.checked);
 
     userEvent.click(checkbox);
-    // console.log(checkbox.checked);
     userEvent.click(screen.getByText('Favorite Pokémons'));
     expect(screen.getByTestId('pokemon-name')).toBeInTheDocument();
     userEvent.click(screen.getByText('Home'));
 
     userEvent.click(screen.getByText(textButtonDetails));
     userEvent.click(checkbox);
-    console.log(checkbox.checked);
     userEvent.click(screen.getByText('Favorite Pokémons'));
-    console.log(history.location);
     // expect(screen.queryByText('Pikachu')).not.toBeInTheDocument();
   });
 });
