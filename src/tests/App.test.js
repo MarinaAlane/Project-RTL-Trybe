@@ -10,7 +10,5 @@ test('renders a reading with the text `Pokédex`', () => {
     </MemoryRouter>,
   );
   const heading = getByText(/Pokédex/i);
-  const path = location.pathname;
   expect(heading).toBeInTheDocument();
-  expect(path).toBe('/');
 });
