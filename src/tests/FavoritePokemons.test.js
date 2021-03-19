@@ -12,7 +12,6 @@ describe('Testa o componente <FavoritePokemons.js />', () => {
     expect(pathname).toBe('/favorites');
 
     const pokemonsNotFound = getByText(/No favorite pokemon found/i);
-
     expect(pokemonsNotFound).toBeInTheDocument();
   });
 

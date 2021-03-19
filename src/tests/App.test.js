@@ -5,10 +5,9 @@ import App from '../App';
 
 describe('Testa o componente <App.js />', () => {
   it(`Teste se a página principal da Pokédex é renderizada
-        ao carregar a aplicação no caminho de URL /.`, () => {
+      ao carregar a aplicação no caminho de URL /.`, () => {
     const { getByText } = renderWithRouter(<App />);
     const heading = getByText(/Pokédex/i);
-
     expect(heading).toBeInTheDocument();
   });
 
@@ -16,11 +15,12 @@ describe('Testa o componente <App.js />', () => {
       de links de navegação.`, () => {
     const { getByText } = renderWithRouter(<App />);
     const linkHome = getByText('Home');
-    const linkAbout = getByText('About');
-    const linkFavoritePokémons = getByText('Favorite Pokémons');
-
     expect(linkHome).toBeInTheDocument();
+
+    const linkAbout = getByText('About');
     expect(linkAbout).toBeInTheDocument();
+
+    const linkFavoritePokémons = getByText('Favorite Pokémons');
     expect(linkFavoritePokémons).toBeInTheDocument();
   });
 
@@ -28,8 +28,8 @@ describe('Testa o componente <App.js />', () => {
       inicial, na URL /.`, () => {
     const { getByText, history } = renderWithRouter(<App />);
     fireEvent.click(getByText(/Home/i));
-    const { pathname } = history.location;
 
+    const { pathname } = history.location;
     expect(pathname).toBe('/');
   });
 
@@ -37,8 +37,8 @@ describe('Testa o componente <App.js />', () => {
       About, na URL /about.`, () => {
     const { getByText, history } = renderWithRouter(<App />);
     fireEvent.click(getByText(/About/i));
-    const { pathname } = history.location;
 
+    const { pathname } = history.location;
     expect(pathname).toBe('/about');
   });
 
@@ -46,8 +46,8 @@ describe('Testa o componente <App.js />', () => {
       Pokémons Favoritados, na URL /favorites.`, () => {
     const { getByText, history } = renderWithRouter(<App />);
     fireEvent.click(getByText(/Favorite Pokémons/i));
-    const { pathname } = history.location;
 
+    const { pathname } = history.location;
     expect(pathname).toBe('/favorites');
   });
 
@@ -56,9 +56,9 @@ describe('Testa o componente <App.js />', () => {
     const { getByText, history } = renderWithRouter(<App />);
     history.push('/notFound');
     const { pathname } = history.location;
-    const pageNotFound = getByText(/Page requested not found/i);
-
-    expect(pageNotFound).toBeInTheDocument();
     expect(pathname).toBe('/notFound');
+
+    const pageNotFound = getByText(/Page requested not found/i);
+    expect(pageNotFound).toBeInTheDocument();
   });
 });
