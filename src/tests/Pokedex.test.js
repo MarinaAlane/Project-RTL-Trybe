@@ -16,6 +16,10 @@ describe('Testa o component Pokedex', () => {
     148: false,
     151: false,
   };
+
+  const listLength = data.length;
+  const nameId = 'pokemon-name';
+
   test('Testa se página contém um heading h2 com o texto Encountered pokémons', () => {
     const { getByText } = renderWithRouter(<Pokedex
       pokemons={ data }
@@ -27,42 +31,22 @@ describe('Testa o component Pokedex', () => {
   });
 
   test('Testa se é exibido o próximo Pokémon quando o botão é clicado', () => {
-    const { queryByText } = renderWithRouter(<Pokedex
+    const { queryByText, getByTestId } = renderWithRouter(<Pokedex
       pokemons={ data }
       isPokemonFavoriteById={ isPokemonFavoriteById }
     />);
 
     const nextButton = queryByText(/Próximo pokémon/i);
     expect(nextButton).toBeInTheDocument();
+    const firstPokemon = getByTestId(nameId).innerHTML;
 
-    expect(queryByText(/Pikachu/i)).toBeInTheDocument();
-    fireEvent.click(nextButton);
-    expect(queryByText(/Pikachu/i)).not.toBeInTheDocument();
-    expect(queryByText(/Charmander/i)).toBeInTheDocument();
-    fireEvent.click(nextButton);
-    expect(queryByText(/Charmander/i)).not.toBeInTheDocument();
-    expect(queryByText(/Caterpie/i)).toBeInTheDocument();
-    fireEvent.click(nextButton);
-    expect(queryByText(/Caterpie/i)).not.toBeInTheDocument();
-    expect(queryByText(/Ekans/i)).toBeInTheDocument();
-    fireEvent.click(nextButton);
-    expect(queryByText(/Ekans/i)).not.toBeInTheDocument();
-    expect(queryByText(/Alakazam/i)).toBeInTheDocument();
-    fireEvent.click(nextButton);
-    expect(queryByText(/Alakazam/i)).not.toBeInTheDocument();
-    expect(queryByText(/Mew/i)).toBeInTheDocument();
-    fireEvent.click(nextButton);
-    expect(queryByText(/Mew/i)).not.toBeInTheDocument();
-    expect(queryByText(/Rapidash/i)).toBeInTheDocument();
-    fireEvent.click(nextButton);
-    expect(queryByText(/Rapidash/i)).not.toBeInTheDocument();
-    expect(queryByText(/Snorlax/i)).toBeInTheDocument();
-    fireEvent.click(nextButton);
-    expect(queryByText(/Snorlax/i)).not.toBeInTheDocument();
-    expect(queryByText(/Dragonair/i)).toBeInTheDocument();
-    fireEvent.click(nextButton);
-    expect(queryByText(/Dragonair/i)).not.toBeInTheDocument();
-    expect(queryByText(/Pikachu/i)).toBeInTheDocument();
+    for (let index = 0; index < listLength; index += 1) {
+      const prevPokemon = getByTestId(nameId).innerHTML;
+      fireEvent.click(nextButton);
+      const currentPokemon = getByTestId(nameId).innerHTML;
+      expect(prevPokemon).not.toBe(currentPokemon);
+    }
+    expect(getByTestId(nameId).innerHTML).toBe(firstPokemon);
   });
 
   test('Testa se é mostrado apenas um Pokémon por vez', () => {
@@ -71,7 +55,7 @@ describe('Testa o component Pokedex', () => {
       isPokemonFavoriteById={ isPokemonFavoriteById }
     />);
 
-    const renderedPokemon = queryAllByTestId('pokemon-name');
+    const renderedPokemon = queryAllByTestId(nameId);
     expect(renderedPokemon.length).toBe(1);
   });
 
@@ -96,8 +80,6 @@ describe('Testa o component Pokedex', () => {
       isPokemonFavoriteById={ isPokemonFavoriteById }
     />);
 
-    const listLength = 9;
-
     const nextButton = queryByText(/Próximo pokémon/i);
     expect(nextButton).toBeInTheDocument();
     const allButton = queryByText('All');
@@ -109,7 +91,7 @@ describe('Testa o component Pokedex', () => {
       fireEvent.click(nextButton);
     }
 
-    expect(getByTestId('pokemon-name').innerHTML).toBe('Pikachu');
+    expect(getByTestId(nameId).innerHTML).toBe('Pikachu');
   });
 
   test('Testa se é criado, dinamicamente, um botão de filtro para cada tipo', () => {
@@ -118,7 +100,8 @@ describe('Testa o component Pokedex', () => {
       isPokemonFavoriteById={ isPokemonFavoriteById }
     />);
 
-    const types = ['Electric', 'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon'];
+    const types = data
+      .reduce((acc, { type }) => (acc.includes(type) ? acc : [...acc, type]), []);
 
     const typesButtons = getAllByTestId('pokemon-type-button');
     expect(types.length).toBe(typesButtons.length);
