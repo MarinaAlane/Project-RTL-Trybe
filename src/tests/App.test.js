@@ -73,4 +73,13 @@ describe('Testes aquivo App.js', () => {
     fireEvent.click(favoritesLink);
     expect(history.location.pathname).toBe('/favorites');
   });
+  it('Testa notfound quando passado um link inexistente', () => {
+    const { getByText } = render(
+      <MemoryRouter initialEntries={ ['/dasdasd'] }>
+        <App />
+      </MemoryRouter>,
+    );
+    const notfoundTitle = getByText(/Page requested not found/i);
+    expect(notfoundTitle).toBeInTheDocument();
+  });
 });
