@@ -6,7 +6,7 @@ describe('Requisito 04', () => {
   test('Teste se página contém um heading h2 com o texto Page requested not foun', () => {
     const { container } = renderWithRouter(<NotFound />);
     const tagH2 = container.querySelector('h2');
-    expect(tagH2.textContent).toBe('Page requested not found 😭 ');
+    expect(tagH2).toHaveTextContent(/Page requested not found 😭/i);
   });
 
   test('Teste se página mostra a imagem', () => {
