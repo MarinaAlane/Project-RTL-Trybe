@@ -33,10 +33,3 @@ test('Teste se é exibido todos os cards de pokémons favoritados.', () => {
   const averageWeight = getByText(/Average weight: 6.0 kg/i);
   expect(averageWeight).toBeInTheDocument();
 });
-
-/* test('Teste se nenhum card de pokémon é exibido, se ele não estiver favoritado.', () => {
-  const { getByText } = render(<FavoritePokemons />);
-  const { notFound } = FavoritePokemons;
-  const  = getByText(/No favorite pokemon found/i);
-  expect(notFound).toBeInTheDocument();
-}); */
