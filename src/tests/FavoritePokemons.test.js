@@ -18,9 +18,6 @@ describe('Requisito 03', () => {
       history,
       getByAltText,
     } = renderWithRouter(<App />);
-    const buttonHome = getByText('Home');
-    fireEvent.click(buttonHome);
-
     const linkDetails = getByText('More details');
     fireEvent.click(linkDetails);
 

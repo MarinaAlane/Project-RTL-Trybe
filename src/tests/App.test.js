@@ -13,12 +13,16 @@ describe('Requisito 01', () => {
 
   test('Pokédex é renderizada ao carregar a aplicação no caminho de URL /.', () => {
     const { getByText, history } = renderWithRouter(<App />);
-    history.push('/');
+    const { pathname } = history.location;
+    expect(pathname).toBe('/');
+
     const home = getByText('Home');
-    const about = getByText('About');
-    const favPoke = getByText('Favorite Pokémons');
     expect(home).toBeInTheDocument();
+
+    const about = getByText('About');
     expect(about).toBeInTheDocument();
+
+    const favPoke = getByText('Favorite Pokémons');
     expect(favPoke).toBeInTheDocument();
   });
 
