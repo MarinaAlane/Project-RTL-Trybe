@@ -38,7 +38,8 @@ describe('Testa o componente App', () => {
     expect(home).toBeInTheDocument();
 
     userEvent.click(home);
-    const { pathname } = history.location;
+    const { location } = history;
+    const { pathname } = location;
     expect(pathname).toBe('/');
   });
 
