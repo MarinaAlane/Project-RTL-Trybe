@@ -46,7 +46,6 @@ describe('Teste o componente "Pokemon"', () => {
 
     const image = screen.getByAltText('Pikachu is marked as favorite');
     expect(image).toBeInTheDocument();
-    console.log(image.src);
     expect(image.src).toBe('http://localhost/star-icon.svg');
   });
 });

@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import Pokedex from '../components/Pokedex';
 import pokemons from '../data';
+import App from '../App';
 
 describe('Teste o componente Pokedex', () => {
   const isPokemonFavoriteById = {
@@ -72,14 +73,37 @@ describe('Teste o componente Pokedex', () => {
     expect(btnType).toBeInTheDocument();
   });
 
-  it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
-    renderWithRouter(<Pokedex
-      pokemons={ pokemons }
-      isPokemonFavoriteById={ isPokemonFavoriteById }
-    />);
-    const bntAll = screen.getByRole('button', {
+  it('Teste se a Pokédex contém um botão para resetar o filtro', async () => {
+    renderWithRouter(<App />);
+
+    const next = screen.getByRole('button', {
+      name: 'Próximo pokémon',
+    });
+
+    pokemons.forEach(() => {
+      userEvent.click(next);
+    });
+
+    const pikachu = screen.getByText(/Pikachu/i);
+    expect(pikachu).toBeInTheDocument();
+
+    const btnType = screen.getByRole('button', {
+      name: /Fire/,
+    });
+
+    userEvent.click(btnType);
+    pokemons.forEach(() => {
+      userEvent.click(next);
+    });
+    const pikachu2 = screen.queryByText(/Pikachu/i);
+    expect(pikachu2).toBeNull();
+
+    const btnAll = screen.getByRole('button', {
       name: 'All',
     });
-    expect(bntAll).toBeInTheDocument();
+
+    userEvent.click(btnAll);
+    const pikachu3 = screen.getByText(/Pikachu/i);
+    expect(pikachu3).toBeInTheDocument();
   });
 });
