@@ -9,8 +9,8 @@ describe('Teste o componente "Pokemon"', () => {
   const pokemon = pokemons[0];
   const weight = pokemon.averageWeight.value;
   const unit = pokemon.averageWeight.measurementUnit;
-  it('Teste se é renderizado um card com as informações de determinado pokémon', async () => {
-    const { history, findByText } = renderWithRouter(<Pokemon
+  it('Teste se é renderizado um cardde determinado pokémon', async () => {
+    renderWithRouter(<Pokemon
       pokemon={ pokemon }
       isFavorite={ false }
     />);
