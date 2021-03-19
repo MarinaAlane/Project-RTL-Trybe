@@ -10,7 +10,7 @@ const pokemonData = {
   pokeWeight: 'Average weight: 6.0 kg',
 };
 
-describe('Test "Favorite Pokemons" funcionality', () => {
+describe('Test "Favorite Pokemons" functionality', () => {
   test('Render message, if there is no favorite pokemon', () => {
     renderWithRouter(<FavoritePokemons />);
     const noPokemons = screen.getByText('No favorite pokemon found');

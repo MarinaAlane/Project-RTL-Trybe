@@ -4,7 +4,7 @@ import NotFound from '../components/NotFound';
 
 const url = 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif';
 
-describe('Test "Not Found" funcionality', () => {
+describe('Test "Not Found" functionality', () => {
   test('Renders message with h2 tag', () => {
     render(<NotFound />);
     const message = screen.getByText(/Page requested not found/);

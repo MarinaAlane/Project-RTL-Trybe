@@ -3,7 +3,7 @@ import { screen, fireEvent } from '@testing-library/react';
 import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
 
-describe('Test App funcionality', () => {
+describe('Test App functionality', () => {
   test('Render Home when the app loads with "/"', () => {
     renderWithRouter(<App />);
     const app = screen.getByText(/Encountered pokémons/);

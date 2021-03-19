@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import About from '../components/About';
 
-describe('Test "About" component', () => {
+describe('Test "About" functionality', () => {
   test('Component renders all "Pokédex" info', () => {
     render(<About />);
     const mainMessage = screen.getByText('About Pokédex');
