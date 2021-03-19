@@ -17,7 +17,7 @@ describe('Requisito 07', () => {
     const summaryT01 = 'This intelligent Pokémon roasts hard ';
     const summaryT02 = 'berries with electricity to make them tender enough to eat.';
     const allH2 = container.querySelectorAll('h2');
-    expect(allH2[1].textContent).toBe('Summary');
+    expect(allH2[1].textContent).toBe(' Summary ');
     expect(allH2[1].nextElementSibling.textContent).toBe(`${summaryT01}${summaryT02}`);
   });
 
