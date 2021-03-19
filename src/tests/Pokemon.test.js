@@ -42,6 +42,6 @@ describe('Teste do componente Pokémon', () => {
     userEvent.click(screen.getAllByRole('link')[0]);
     const imgStar = screen.getByAltText('Pikachu is marked as favorite');
     expect(imgStar).toBeInTheDocument();
-    expect(imgStar.src).toBe('http://localhost/star-icon.svg');
+    expect(imgStar.src).toContain('star-icon.svg');
   });
 });
