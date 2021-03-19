@@ -1,5 +1,4 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import About from '../components/About';
 
@@ -28,11 +27,9 @@ test('Testa se a página contém dois parágrafos com texto sobre a Pokédex.', 
 
 // Article that refers the code below: https://medium.com/@drake_beth/how-to-test-images-in-react-a70053b1634a
 test('Testa se a página contém a imagem de uma Pokédex:', () => {
-  render(<About />);
+  const { getByRole } = renderWithRouter(<About />);
 
-  // getByRole
-  
   const pokedexImgSrc = 'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
-  const getImgTag = document.querySelector('img');
+  const getImgTag = getByRole('img');
   expect(getImgTag.src).toBe(pokedexImgSrc);
 });
