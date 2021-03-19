@@ -4,15 +4,6 @@ import { createMemoryHistory } from 'history';
 import { fireEvent, render } from '@testing-library/react';
 import App from '../App';
 
-/* test('renders a reading with the text `Pokédex`', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
-  const heading = getByText(/Pokédex/i);
-  expect(heading).toBeInTheDocument();
-}); */
 describe('Testes aquivo App.js', () => {
   it('Mostra a Pokédex quando a rota é `/`', () => {
     const { getByText } = render(
