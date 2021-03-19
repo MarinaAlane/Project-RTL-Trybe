@@ -6,13 +6,12 @@ import App from '../App';
 describe('Requirement 7 - testing component <PokemonDetails />', () => {
   const pikachuUrl = '/pokemons/25';
   test('if detailed information is shown', () => {
-    const { queryByText, getByRole, getAllByRole, history } = renderWithRouter(<App />);
+    const { queryByText, getByRole, history } = renderWithRouter(<App />);
     history.push(pikachuUrl);
 
-    const headings = getAllByRole('heading', { level: 2 });
     expect(getByRole('heading', { name: 'Pikachu Details' })).toBeInTheDocument();
     expect(queryByText('More details')).toBeNull();
-    expect(headings[1].textContent).toBe('Summary');
+    expect(queryByText('Summary')).toBeInTheDocument();
     expect(queryByText(/This intelligent Pokémon roasts hard berries/i))
       .toBeInTheDocument();
     expect(document.querySelectorAll('p')[3]).toBeInTheDocument();
