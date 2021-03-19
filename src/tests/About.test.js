@@ -30,8 +30,9 @@ test('Testa se a página contém dois parágrafos com texto sobre a Pokédex.', 
 test('Testa se a página contém a imagem de uma Pokédex:', () => {
   render(<About />);
 
+  // getByRole
+  
   const pokedexImgSrc = 'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
   const getImgTag = document.querySelector('img');
-
   expect(getImgTag.src).toBe(pokedexImgSrc);
 });
