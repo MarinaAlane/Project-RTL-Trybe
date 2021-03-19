@@ -8,7 +8,7 @@ describe('test About.js component', () => {
     const about = getByRole('heading', { level: 2, name: 'About Pokédex' });
     const text = [
       'This application simulates a Pokédex',
-      ' a digital encyclopedia containing all Pokémons ',
+      ' a digital enciclopedia containing all Pokémons ',
     ];
     const p1 = getByText(text.join());
     const text2 = [
