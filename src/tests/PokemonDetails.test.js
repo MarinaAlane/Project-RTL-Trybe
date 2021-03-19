@@ -13,7 +13,7 @@ describe('Requirement 7: Test the component <PokemonDetails.js />', () => {
 
     const pokeHeadings = getAllByRole('heading');
     expect(pokeHeadings[1].textContent).toBe('Pikachu Details');
-    expect(pokeHeadings[2].textContent).toBe('Summary');
+    expect(pokeHeadings[2].textContent).toBe(' Summary ');
 
     const pokeSummary = getByText(/roasts hard berries with electricity/i);
     expect(pokeSummary).toBeInTheDocument();
