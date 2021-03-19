@@ -46,7 +46,7 @@ describe('Testa o componente <About.js />', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/about');
 
-    const imgAlt = getByAltText(/About Pokédex/i);
+    const imgAlt = getByAltText(/Pokédex/i);
     expect(imgAlt).toBeInTheDocument();
     expect(imgAlt.src).toBe(
       'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png',
