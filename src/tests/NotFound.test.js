@@ -10,4 +10,3 @@ describe('testando componente not found', () => {
     expect(getByText('Page requested not found')).toBeInTheDocument();
   });
 });
-npx stryker run ./stryker/NotFound.conf.json
