@@ -23,18 +23,30 @@ describe('Teste o componente "Pokemon"', () => {
     expect(averageWeight).toBeInTheDocument();
     const image = screen.getByAltText(`${pokemon.name} sprite`);
     expect(image.src).toBe(pokemon.image);
+  });
+
+  it('Teste se o card contém um link de navegação para exibir detalhes ', () => {
+    const { history } = renderWithRouter(<Pokemon
+      pokemon={ pokemon }
+      isFavorite
+    />);
 
     const link = screen.getByText(/more details/i);
     expect(link).toBeInTheDocument();
-
     userEvent.click(link);
+    const { pathname } = history.location;
+    expect(pathname).toBe(`/pokemons/${pokemon.id}`);
+  });
 
-    // await findByText('Summary');
+  it('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
+    renderWithRouter(<Pokemon
+      pokemon={ pokemon }
+      isFavorite
+    />);
 
-    // const summary = screen.getByText('Summary');
-    // expect(summary).toBeInTheDocument();
-
-    // const { pathname } = history.location;
-    // expect(pathname).toBe(`/pokemons/${pokemon.id}`);
+    const image = screen.getByAltText('Pikachu is marked as favorite');
+    expect(image).toBeInTheDocument();
+    console.log(image.src);
+    expect(image.src).toBe('http://localhost/star-icon.svg');
   });
 });
