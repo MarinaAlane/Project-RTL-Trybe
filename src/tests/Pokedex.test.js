@@ -67,7 +67,6 @@ describe('Testa o componente Pokedex', () => {
 });
 
 describe('Teste se a Pokédex contém um botão para resetar o filtro', () => {
-
   const isPokemonFavoriteById = {
     4: false,
     10: false,
