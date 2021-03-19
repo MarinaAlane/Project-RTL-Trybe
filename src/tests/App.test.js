@@ -66,7 +66,7 @@ describe('Testa o componente App', () => {
       expect(pathname).toBe('/favorites');
     });
 
-  test('testa se á pagian é direcionada para not found com url inválida', () => {
+  test('testa se á página é direcionada para not found com url inválida', () => {
     const { history } = renderWithRouter(<App />);
 
     history.push('/no-page');
