@@ -7,7 +7,7 @@ describe('Test component About', () => {
     const { getByText } = renderWithRouter(<About />);
     const info = getByText(
       'This application simulates a Pokédex,'
-      + 'a digital encyclopedia containing all Pokémons',
+      + ' a digital encyclopedia containing all Pokémons',
     );
     expect(info).toBeInTheDocument();
   });
