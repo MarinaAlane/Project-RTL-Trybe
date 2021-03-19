@@ -15,10 +15,8 @@ describe('Test the `<About.js />` component', () => {
 
   it('the page contains two paragraphs with text about the Pokédex', () => {
     const { getByText } = renderWithRouter(<About />);
-    const paragraph1 = getByText(/This application simulates a Pokédex/i);
-    expect(paragraph1).toBeInTheDocument();
-    const paragraph2 = getByText(/One can filter Pokémons by type,/i);
-    expect(paragraph2).toBeInTheDocument();
+    expect(getByText(/This application simulates a Pokédex/i)).toBeInTheDocument();
+    expect(getByText(/One can filter Pokémons by type,/i)).toBeInTheDocument();
   });
 
   it('the page contains a specific Pokédex image', () => {
