@@ -13,6 +13,7 @@ describe('testing pokédex component', () => {
     });
     expect(pokedexHeading).toBeInTheDocument();
   });
+
   it('should show next pokémon when clicked', () => {
     const { getByText, getByRole, history } = renderWithRouter(<App />);
     userEvent.click(getByText(/home/i));
@@ -25,17 +26,20 @@ describe('testing pokédex component', () => {
     });
     expect(getByText(/pikachu/i)).toBeInTheDocument();
   });
+
   it('should show only one per time', () => {
     const { getByTestId } = renderWithRouter(<App />);
     const card = getByTestId(/pokemon-name/i);
     expect(card).toBeInTheDocument();
   });
+
   it('should test filter buttons', () => {
     const { getAllByTestId, getByText, getByTestId } = renderWithRouter(<App />);
     const btnType = getAllByTestId('pokemon-type-button');
     btnType.forEach((item) => {
       expect(item).toBeInTheDocument();
     });
+
     userEvent.click(btnType[1]);
     expect(getByText(/charmander/i)).toBeInTheDocument();
     const btn = getByTestId('next-pokemon');
@@ -45,10 +49,12 @@ describe('testing pokédex component', () => {
         userEvent.click(btn);
         expect(getByText(item.name)).toBe(item.type);
       });
+
     btnType.forEach((item) => {
       expect(item).toBeInTheDocument();
     });
   });
+
   it('should reset the filter button', () => {
     const { getByText, getByRole } = renderWithRouter(<App />);
     const allbutton = getByText(/all/i);
