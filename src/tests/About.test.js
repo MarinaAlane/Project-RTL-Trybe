@@ -3,7 +3,6 @@ import renderWithRouter from '../helper/renderWithRouter';
 import { About } from '../components';
 
 describe('Second requirement, testing the About.js component', () => {
-
   it('has the info about the Pokédex', () => {
     const { getByText } = renderWithRouter(<About />);
     const paragraphOnAboutPage1 = 'This application simulates a Pokédex, ';
