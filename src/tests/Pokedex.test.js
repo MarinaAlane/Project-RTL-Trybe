@@ -72,8 +72,8 @@ describe('tests the Pokedex componenet', () => {
       const typeButton = screen.getByRole('button', { name: button });
       expect(typeButton).toBeInTheDocument();
       userEvent.click(typeButton);
-      const pokeType = screen.getAllByTestId('pokemon-type-button');
-      expect(pokeType.length).toBe(arrayBtns.length);
+      const allPokeType = screen.getAllByTestId('pokemon-type-button');
+      expect(allPokeType.length).toBe(arrayBtns.length);
 
       switch (button) {
       case 'Electric':

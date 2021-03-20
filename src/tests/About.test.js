@@ -19,11 +19,9 @@ describe('Tests the About component', () => {
 
       const heading = screen.getByRole('heading', {
         level: 2,
+        name: 'About Pokédex',
       });
-
       expect(heading).toBeInTheDocument();
-      const headingText = screen.getByText(/About Pokédex/i);
-      expect(headingText).toBeInTheDocument();
 
       const image = screen.getByAltText(/Pokédex/i);
       expect(image).toBeInTheDocument();
