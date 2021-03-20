@@ -1,6 +1,5 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import App from '../App';
 import renderWithRouter from './renderWithRouter';
 import pokemons from '../data';
 import { Pokemon } from '../components';
