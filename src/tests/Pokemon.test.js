@@ -9,10 +9,13 @@ describe('Test if it renders a pokemon card info', () => {
     const { getByText, getByAltText } = renderWithRouter(
       <Pokemon pokemon={ pokemons[0] } isFavorite={ false } />,
     );
+
+    const { value } = pokemons[0].averageWeight;
+    const { measurementUnit } = pokemons[0].averageWeight;
     const pokemonInfo = [
       getByText(pokemons[0].name),
       getByText(pokemons[0].type),
-      getByText(/average weight/i),
+      getByText(`Average weight: ${value} ${measurementUnit}`),
       getByAltText(/sprite/i),
     ];
     expect(pokemonInfo[3].src).toContain(`${pokemons[0].image}`);
@@ -42,7 +45,7 @@ describe('Test if it renders a pokemon card info', () => {
     const { getByAltText } = renderWithRouter(
       <Pokemon pokemon={ pokemons[0] } isFavorite />,
     );
-    const favoriteIcon = getByAltText(/marked as favorite/i);
+    const favoriteIcon = getByAltText(`${pokemons[0].name} is marked as favorite`);
     expect(favoriteIcon.src).toContain('/star-icon.svg');
     expect(favoriteIcon).toBeInTheDocument();
   });
