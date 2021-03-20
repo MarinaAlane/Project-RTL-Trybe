@@ -42,10 +42,12 @@ describe('Fourth requirement, testing the Pokedex.js component', () => {
       <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isPokemonFavoriteById } />,
     );
     const nextButton = getByTestId('next-pokemon');
+    const pokemonName = 'pokemon-name';
+    const pokemonWeight = 'pokemon-weight';
     const firstPokemonOnScreen = {
-      name: getByTestId('pokemon-name').textContent,
+      name: getByTestId(pokemonName).textContent,
       type: getByTestId('pokemonType').textContent,
-      weight: getByTestId('pokemon-weight').textContent,
+      weight: getByTestId(pokemonWeight).textContent,
     };
     expect(firstPokemonOnScreen).toStrictEqual({
       name: 'Pikachu',
@@ -54,9 +56,9 @@ describe('Fourth requirement, testing the Pokedex.js component', () => {
     });
     fireEvent.click(nextButton);
     const secondPokemonOnScreen = {
-      name: getByTestId('pokemon-name').textContent,
+      name: getByTestId(pokemonName).textContent,
       type: getByTestId('pokemonType').textContent,
-      weight: getByTestId('pokemon-weight').textContent,
+      weight: getByTestId(pokemonWeight).textContent,
     };
     expect(secondPokemonOnScreen).toStrictEqual({
       name: 'Charmander',
