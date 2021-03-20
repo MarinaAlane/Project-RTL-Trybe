@@ -40,7 +40,7 @@ test('has nav links', () => {
   expect(favoritePokemons.textContent).toBe('Favorite Pokémons');
 });
 
-test('is redirected to \'Home\' at \'/\'', () => {
+test('is redirected to `Home` at `/`', () => {
   const { getByText, history } = renderWithRouter(<App />);
 
   const home = getByText('Home');
@@ -49,7 +49,7 @@ test('is redirected to \'Home\' at \'/\'', () => {
   expect(pathname).toBe('/');
 });
 
-test('is redirected to \'About\' at \'/about\'', () => {
+test('is redirected to `About` at `/about`', () => {
   const { getByText, history } = renderWithRouter(<App />);
 
   const about = getByText('About');
@@ -58,7 +58,7 @@ test('is redirected to \'About\' at \'/about\'', () => {
   expect(pathname).toBe('/about');
 });
 
-test('is redirected to \'Favorite Pokémons\' at \'/favorites\'', () => {
+test('is redirected to `Favorite Pokémons` at `/favorites`', () => {
   const { getByText, history } = renderWithRouter(<App />);
 
   const favoritePokemons = getByText('Favorite Pokémons');
@@ -67,7 +67,7 @@ test('is redirected to \'Favorite Pokémons\' at \'/favorites\'', () => {
   expect(pathname).toBe('/favorites');
 });
 
-test('is redirected to \'Not Found\' at \'unknown path\'', () => {
+test('is redirected to `Not Found` at `unknown path`', () => {
   const { getByText, history } = renderWithRouter(<App />);
 
   history.push('/unknown-path');
