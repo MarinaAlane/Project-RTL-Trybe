@@ -30,18 +30,20 @@ describe('Testing Pokemon component', () => {
   it('should redirect to details when clicked', () => {
     const { getByText, history } = renderWithRouter(<App />);
     userEvent.click(getByText(/more details/i));
-    history.push('/pokemons/25');
+    const pathWay = '/pokemons/25';
+    history.push(pathWay);
     const { location: { pathname } } = history;
-    expect(pathname).toBe('/pokemons/25');
+    expect(pathname).toBe(pathWay);
     const details = getByText(/summary/i);
     expect(details).toBeInTheDocument();
   });
   it('should have an icon on favorite pokemons', () => {
     const { getByAltText, getByText, history } = renderWithRouter(<App />);
     userEvent.click(getByText(/details/i));
-    history.push('/pokemons/25');
+    const pathline = '/pokemons/25';
+    history.push(pathline);
     const { location: { pathname } } = history;
-    expect(pathname).toBe('/pokemons/25');
+    expect(pathname).toBe(pathline);
     const favoriting = getByText(/pokémon favoritado/i);
     expect(favoriting).toBeInTheDocument();
     userEvent.click(favoriting);
