@@ -40,4 +40,22 @@ describe('Teste de links no menu', () => {
     expect(about).toBeInTheDocument();
     expect(favPokemons).toBeInTheDocument();
   });
+
+  it('links com URLs - / - /about - /favorites - e NotFound para desconhecidos', () => {
+    // access
+    const { getByText, history } = renderWithRouter(<App />);
+    const home = getByText('Home');
+    const about = getByText('About');
+    const favovirites = getByText('Favorite Pokémons');
+
+    // interact
+    history.push('/paranguamicotirimiruaro');
+
+    // test
+    expect(home.getAttribute('href')).toBe('/');
+    expect(about.getAttribute('href')).toBe('/about');
+    expect(favovirites.getAttribute('href')).toBe('/favorites');
+    const notFound = getByText('Page requested not found');
+    expect(notFound).toBeInTheDocument();
+  });
 });
