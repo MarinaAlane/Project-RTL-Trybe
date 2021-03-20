@@ -35,4 +35,11 @@ describe('Requirement 06, testing the Pokemon.js component', () => {
     expect(pokemonWeight.textContent).toBe('Average weight: 6.0 kg');
     expect(pokemonImage.src).toBe('https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
   });
+  it('has a navigation link to show details', () => {
+    const { getByRole, history } = renderWithRouter(<App />);
+    const moreDetailsButton = getByRole('link', { name: 'More details' });
+    fireEvent.click(moreDetailsButton);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/pokemons/25');
+  });
 });
