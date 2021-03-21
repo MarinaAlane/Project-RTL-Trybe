@@ -4,7 +4,7 @@ import { createMemoryHistory } from 'history';
 import { fireEvent, render } from '@testing-library/react';
 import App from '../App';
 
-describe('Testes aquivo App.js', () => {
+describe('Bloco de testes para o componente App.js', () => {
   it('Mostra a Pokédex quando a rota é `/`', () => {
     const { getByText } = render(
       <MemoryRouter initialEntries={ ['/'] }>

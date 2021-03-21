@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import Aboult from '../components/About';
 
-describe('Bloco de testes para o componente about', () => {
+describe('Bloco de testes para o componente About.js', () => {
   it('Testa se a página contem as informacoes da Pokédex', () => {
     const { getByText } = render(<Aboult />);
     const aboutTitle = getByText('About Pokédex');
