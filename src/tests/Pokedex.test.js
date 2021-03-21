@@ -61,16 +61,37 @@ describe('Test <Pokedex /> display', () => {
 
 describe('Test <Pokedex /> buttons', () => {
   it('renders buttons for all available types of pokemon', () => {
-    const { getByRole } = renderWithRouter(<Pokedex
+    const { getByRole, getAllByTestId } = renderWithRouter(<Pokedex
       pokemons={ pokemons }
       isPokemonFavoriteById={ isPokemonFavoriteById }
     />);
 
-    types.forEach((type) => {
-      expect(getByRole('button', { name: new RegExp(type, 'i') })).toBeInTheDocument();
-      // "All" button is always shown
-      expect(getByRole('button', { name: /all/i })).toBeInTheDocument();
+    const allButon = getByRole('button', { name: /all/i });
+    expect(allButon).toBeInTheDocument();
+
+    getAllByTestId('pokemon-type-button').forEach((e) => {
+      expect(types).toContain(e.textContent);
     });
+  });
+
+  test('"All" button shows all pokemons', () => {
+    const { getByRole, getByTestId } = renderWithRouter(<Pokedex
+      pokemons={ pokemons }
+      isPokemonFavoriteById={ isPokemonFavoriteById }
+    />);
+
+    const allButon = getByRole('button', { name: /all/i });
+    userEvent.click(allButon);
+
+    // If no filter is selected, then filteredPokemons array
+    // must have length of pokemons array
+    const nextButton = getByRole('button', {
+      name: /próximo pokémon/i,
+    });
+    pokemons.forEach(() => userEvent.click(nextButton));
+
+    const currentPokemon = getByTestId(pokemonNameTestId);
+    expect(currentPokemon).toHaveTextContent(pokemons[0].name);
   });
 
   test('"All" button is selected by default', () => {
@@ -95,7 +116,7 @@ describe('Test <Pokedex /> buttons', () => {
     const randomType = typesCopy[Math.floor(Math.random() * typesCopy.length)];
     const filteredPokemons = pokemons.filter(({ type }) => type === randomType);
 
-    const { getByRole, getByTestId } = renderWithRouter(<Pokedex
+    const { getByRole, getByText } = renderWithRouter(<Pokedex
       pokemons={ pokemons }
       isPokemonFavoriteById={ isPokemonFavoriteById }
     />);
@@ -104,12 +125,16 @@ describe('Test <Pokedex /> buttons', () => {
     const typeButton = getByRole('button', { name: new RegExp(randomType, 'i') });
     userEvent.click(typeButton);
 
+    // All button must be shown
+    const allButon = getByRole('button', { name: /all/i });
+    expect(allButon).toBeInTheDocument();
+
     // Checking the types of filtered pokemons
     const nextButton = getByRole('button', {
       name: /próximo pokémon/i,
     });
     filteredPokemons.forEach(() => {
-      expect(getByTestId('pokemonType')).toHaveTextContent(randomType);
+      expect(getByText(randomType, { selector: 'p' })).toBeInTheDocument();
       userEvent.click(nextButton);
     });
   });
