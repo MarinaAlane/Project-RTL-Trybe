@@ -1,10 +1,9 @@
 import React from 'react';
-import { getByAltText, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Pokemon from '../components/Pokemon';
-import Pokemons from '../data';
 import renderWithRouter from '../services/renderWithRouter';
 import pokemons from '../data';
-import userEvent from '@testing-library/user-event';
 
 const POKEMON_NAME = 'pokemon-name';
 const POKEMON_TYPE = 'pokemonType';
@@ -27,7 +26,7 @@ describe('test Pokemon component', () => {
     expect(image).toHaveAttribute('src', pokemons[0].image);
   });
 
-  it('test if pokemon card has a show details link', () =>{
+  it('test if pokemon card has a show details link', () => {
     renderWithRouter(<Pokemon pokemon={ pokemons[0] } isFavorite />);
 
     const details = screen.getByRole('link', { name: 'More details' });
