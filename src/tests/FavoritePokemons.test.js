@@ -13,7 +13,7 @@ describe('Bloco de testes para o componente FavoritePokemons.js', () => {
   });
 
   it('Testa se é exibido todos os cards de Pókemons favoritados', () => {
-    const { getByText, getAllByRole, getByRole } = render(
+    const { getByText, getByRole, getByAltText } = render(
       <MemoryRouter initialEntries={ ['/'] }>
         <App />
       </MemoryRouter>,
@@ -26,7 +26,7 @@ describe('Bloco de testes para o componente FavoritePokemons.js', () => {
     fireEvent.click(favoriteCheckBox);
     const favoritePokemonsLink = getByText('Favorite Pokémons');
     fireEvent.click(favoritePokemonsLink);
-    const favoritePokemons = getAllByRole('img');
-    expect(favoritePokemons[0]).toBeInTheDocument();
+    const favoritePokemons = getByAltText('Pikachu sprite');
+    expect(favoritePokemons).toBeInTheDocument();
   });
 });
