@@ -10,8 +10,9 @@ test('renders a reading with the text `Pokédex`', () => {
 });
 
 test('shows the Pokédex when the route is `/`', () => {
-  const { getByText } = renderWithRouter(<App />);
-  expect(getByText('Encountered pokémons')).toBeInTheDocument();
+  const { getByRole } = renderWithRouter(<App />);
+  const heading = getByRole('heading', { level: 1, name: 'Pokédex' });
+  expect(heading).toBeInTheDocument();
 });
 
 test('has nav links', () => {
