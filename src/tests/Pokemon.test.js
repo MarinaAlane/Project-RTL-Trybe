@@ -2,15 +2,9 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import renderWithRouter from '../helpers/renderWithRouter';
 import App from '../App';
+import pokemons from '../data';
 
-const pokemon = {
-  id: 25,
-  name: 'Pikachu',
-  type: 'Electric',
-  averageWeight: { value: '6.0', measurementUnit: 'kg' },
-  image: 'https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png',
-};
-
+const pokemon = pokemons[0];
 const detailsLinkName = 'More details';
 
 test('renders a card with Pokémon\'s info', () => {
@@ -31,7 +25,7 @@ test('has a link to show more info about a Pokémon', () => {
 test('when clicked on `More detais` it redirects to PokemonDetails page', () => {
   const { getByText } = renderWithRouter(<App />);
   fireEvent.click(getByText(detailsLinkName));
-  expect(getByText(`${pokemon.name} Details`)).toBeInTheDocument();
+  expect(getByText('Summary')).toBeInTheDocument();
 });
 
 test('changes URL to `/pokemon/<id>`', () => {
