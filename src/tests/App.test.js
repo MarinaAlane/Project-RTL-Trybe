@@ -1,6 +1,8 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
 describe('Teste o componente App.js', () => {
@@ -23,31 +25,37 @@ describe('Teste o componente App.js', () => {
     expect(getByText('Encountered pokémons')).toBeInTheDocument();
   });
 
-  test('Topo da aplicação contém um os links de navegação', () => {
-    const { getByText } = render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>,
-    );
-    expect(getByText('Home')).toBeInTheDocument();
-    expect(getByText('About')).toBeInTheDocument();
-    expect(getByText('Favorite Pokémons')).toBeInTheDocument();
+  test('the top of the application contains a fixed set of navigation links', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    expect(getByRole('link', { name: /Home/i })).toBeInTheDocument();
+    expect(getByRole('link', { name: /About/i })).toBeInTheDocument();
+    expect(getByRole('link', { name: /Favorite Pokémons/i })).toBeInTheDocument();
   });
 
-  test('É redirecionada para page inicial / ao clicar em Home', () => {
-    const { getByText } = render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>,
-    );
-    const linkHome = getByText('Home');
-    const linkAbout = getByText('About');
-    const linkFavorites = getByText('Favorite Pokémons');
-    fireEvent.click(linkHome);
+  test('the Home link redirects to the `/` URL', () => {
+    const { getByRole, getByText, history } = renderWithRouter(<App />);
+    const { pathname } = history.location;
+    const homeLink = getByRole('link', { name: /Home/i });
+    userEvent.click(homeLink);
+    expect(pathname).toBe('/');
     expect(getByText('Encountered pokémons')).toBeInTheDocument();
-    fireEvent.click(linkAbout);
+  });
+
+  test('the About link redirects to the `/about` URL', () => {
+    const { getByRole, getByText, history } = renderWithRouter(<App />);
+    const aboutLink = getByRole('link', { name: /About/i });
+    userEvent.click(aboutLink);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/about');
     expect(getByText('About Pokédex')).toBeInTheDocument();
-    fireEvent.click(linkFavorites);
+  });
+
+  test('the Favorite Pokémons link redirects to the `/favorites` URL', () => {
+    const { getByRole, getByText, history } = renderWithRouter(<App />);
+    const favLink = getByRole('link', { name: /Favorite Pokémons/i });
+    userEvent.click(favLink);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/favorites');
     expect(getByText('Favorite pokémons')).toBeInTheDocument();
   });
 });
