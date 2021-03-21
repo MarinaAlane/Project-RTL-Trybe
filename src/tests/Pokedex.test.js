@@ -16,8 +16,8 @@ describe('testes da pagina pokedex', () => {
 
   it('botao com texto - All', () => {
     // access
-    const { getByTestId } = renderWithRouter(<App />);
-    const bottonAll = getByTestId('');
+    const { getByText } = renderWithRouter(<App />);
+    const bottonAll = getByText('All');
 
     // test
     expect(bottonAll.textContent).toBe('All');
