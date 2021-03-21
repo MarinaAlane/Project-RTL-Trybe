@@ -20,7 +20,7 @@ describe('testes da pagina pokedex', () => {
     const bottonAll = getByTestId('');
 
     // test
-    expect(bottonAll.innerHTML).toBe('All');
+    expect(bottonAll.textContent).toBe('All');
   });
 
   it('botao com texto - Próximo pokémon ', () => {
@@ -38,19 +38,19 @@ describe('testes da pagina pokedex', () => {
     const bottonType = getAllByTestId('pokemon-type-button');
 
     // test
-    expect(bottonType[0].innerHTML).toBe('Electric');
-    expect(bottonType[1].innerHTML).toBe('Fire');
-    expect(bottonType[2].innerHTML).toBe('Bug');
-    expect(bottonType[3].innerHTML).toBe('Poison');
-    expect(bottonType[4].innerHTML).toBe('Psychic');
-    expect(bottonType[5].innerHTML).toBe('Normal');
-    expect(bottonType[6].innerHTML).toBe('Dragon');
+    expect(bottonType[0].textContent).toBe('Electric');
+    expect(bottonType[1].textContent).toBe('Fire');
+    expect(bottonType[2].textContent).toBe('Bug');
+    expect(bottonType[3].textContent).toBe('Poison');
+    expect(bottonType[4].textContent).toBe('Psychic');
+    expect(bottonType[5].textContent).toBe('Normal');
+    expect(bottonType[6].textContent).toBe('Dragon');
   });
 
   it('teste do botao de resetar o filtro', () => {
     // access
-    const { getByTestId } = renderWithRouter(<App />);
-    const bottonAll = getByTestId('');
+    const { getByText } = renderWithRouter(<App />);
+    const bottonAll = getByText('All');
 
     // interact
     fireEvent.click(bottonAll);
