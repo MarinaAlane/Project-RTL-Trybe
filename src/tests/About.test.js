@@ -26,7 +26,7 @@ describe('Testing About.js', () => {
   test('tests whether the page has a pokédex image', () => {
     const { getByAltText } = renderWithRouter(<About />);
     const image = getByAltText('Pokédex');
-    const src = 'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
-    expect(image.src).toBe(src);
+    const url = 'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
+    expect(image.src).toBe(url);
   });
 });
