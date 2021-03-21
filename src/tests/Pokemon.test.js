@@ -23,8 +23,9 @@ describe('Testes do componente <Pokemon />', () => {
 
     expect(pokeName).toHaveTextContent(/Pikachu/i);
     expect(pokeType).toHaveTextContent(/Electric/i);
-    expect(pokeWeight).toHaveTextContent(/6.0 kg/i);
+    expect(pokeWeight).toHaveTextContent(/Average weight: 6.0 kg/i);
     expect(pokeURL).toHaveProperty('src', pikachuPath);
+    expect(pokeURL).toHaveProperty('alt', 'Pikachu sprite');
   });
 
   it('Verifica se existe um link para exibir os detalhes do pokémon', () => {
