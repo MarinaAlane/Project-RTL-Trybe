@@ -33,7 +33,7 @@ describe('Bloco de testes para o componente about', () => {
     const aboutImage = getByRole('img');
 
     expect(aboutImage.src).toBe(
-      'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png'
+      'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png',
     );
   });
 });
