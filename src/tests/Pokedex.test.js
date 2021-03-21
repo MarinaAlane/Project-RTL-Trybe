@@ -70,7 +70,7 @@ describe('Pokedex.js', () => {
   test('Verify reset filter button', () => {
     renderWithRouter(<App />);
 
-    const resetButton = screen.getByTestId('');
+    const resetButton = screen.getByText('All');
     expect(resetButton.innerHTML).toBe('All');
 
     userEvent.click(resetButton);
@@ -100,7 +100,7 @@ describe('Pokedex.js', () => {
       expect(counter.length).toBe(1);
     });
 
-    const buttonAll = screen.getByTestId('');
+    const buttonAll = screen.getByText('All');
     expect(buttonAll).toBeInTheDocument();
   });
 
@@ -118,7 +118,7 @@ describe('Pokedex.js', () => {
       expect(nextButton.disabled).toBe(true);
     });
 
-    const buttonAll = screen.getByTestId('');
+    const buttonAll = screen.getByText('All');
     expect(buttonAll).toBeInTheDocument();
   });
 });
