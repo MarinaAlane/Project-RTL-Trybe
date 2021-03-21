@@ -7,6 +7,8 @@ import pokemons from '../data';
 
 const testIdName = 'pokemon-name';
 const testIdType = 'pokemonType';
+const testIdNext = 'next-pokemon';
+const testIdTypeButton = 'pokemon-type-button';
 
 describe('Pokedex.js', () => {
   test('Verify message o Encountered pokémons', () => {
@@ -19,7 +21,7 @@ describe('Pokedex.js', () => {
   test('Verify display next pokémon', () => {
     renderWithRouter(<App />);
 
-    const button = screen.getByTestId('next-pokemon');
+    const button = screen.getByTestId(testIdNext);
     expect(button.innerHTML).toBe('Próximo pokémon');
 
     for (let index = 0; index < pokemons.length; index += 1) {
@@ -50,7 +52,7 @@ describe('Pokedex.js', () => {
     renderWithRouter(<App />);
 
     const pokeType = Math.round(Math.random() * 2);
-    const arrayButtons = screen.getAllByTestId('pokemon-type-button');
+    const arrayButtons = screen.getAllByTestId(testIdTypeButton);
 
     if (pokeType === 0) {
       const buttonFilter = arrayButtons.find((button) => button.innerHTML === 'Fire');
@@ -75,7 +77,7 @@ describe('Pokedex.js', () => {
     const firstType = screen.getByTestId(testIdType);
     expect(firstType.innerHTML).toBe('Electric');
 
-    const nextPokemon = screen.getByTestId('next-pokemon');
+    const nextPokemon = screen.getByTestId(testIdNext);
     userEvent.click(nextPokemon);
     const secondType = screen.getByTestId(testIdType);
     expect(secondType.innerHTML).toBe('Fire');
@@ -83,5 +85,40 @@ describe('Pokedex.js', () => {
     userEvent.click(nextPokemon);
     const thirdType = screen.getByTestId(testIdType);
     expect(thirdType.innerHTML).toBe('Bug');
+  });
+
+  test('Verify dynamic create filter button', () => {
+    renderWithRouter(<App />);
+
+    const arrayButtons = [
+      'Fire', 'Psychic', 'Electric', 'Bug', 'Poison', 'Dragon', 'Normal'];
+    const filterButtons = screen.getAllByTestId(testIdTypeButton);
+
+    let counter;
+    arrayButtons.forEach((button) => {
+      counter = filterButtons.filter((btn) => btn.innerHTML === button);
+      expect(counter.length).toBe(1);
+    });
+
+    const buttonAll = screen.getByTestId('');
+    expect(buttonAll).toBeInTheDocument();
+  });
+
+  test('Verify disable next Pokemon button', () => {
+    renderWithRouter(<App />);
+
+    const arrayButtons = ['Electric', 'Bug', 'Poison', 'Dragon', 'Normal'];
+    const filterButtons = screen.getAllByTestId(testIdTypeButton);
+    const nextButton = screen.getByTestId(testIdNext);
+    let buttonClick;
+
+    arrayButtons.forEach((button) => {
+      buttonClick = filterButtons.find((btn) => btn.innerHTML === button);
+      userEvent.click(buttonClick);
+      expect(nextButton.disabled).toBe(true);
+    });
+
+    const buttonAll = screen.getByTestId('');
+    expect(buttonAll).toBeInTheDocument();
   });
 });
