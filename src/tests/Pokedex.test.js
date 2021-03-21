@@ -104,7 +104,7 @@ describe('Pokedex.js', () => {
     expect(buttonAll).toBeInTheDocument();
   });
 
-  test('Verify disable next Pokemon button', () => {
+  test('Verify disable next Pokemon button ', () => {
     renderWithRouter(<App />);
 
     const arrayButtons = ['Electric', 'Bug', 'Poison', 'Dragon', 'Normal'];
