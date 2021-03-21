@@ -58,4 +58,10 @@ describe('Teste o componente App.js', () => {
     expect(pathname).toBe('/favorites');
     expect(getByText('Favorite pokémons')).toBeInTheDocument();
   });
+
+  test('an unknown URL redirects to the Not Found page', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    history.push('/pagina/que-nao-existe/');
+    expect(getByText(/Page requested not found/i)).toBeInTheDocument();
+  });
 });
