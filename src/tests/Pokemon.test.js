@@ -1,6 +1,6 @@
 import React from 'react';
-import RenderWithRouter from '../services/RenderWithRouter';
 import userEvent from '@testing-library/user-event';
+import RenderWithRouter from '../services/RenderWithRouter';
 import data from '../data';
 import App from '../App';
 
@@ -28,7 +28,7 @@ describe('Testa o componente <Pokemon.js />', () => {
     expect(h2details).toBeInTheDocument();
   });
   test('Testa se contém um link de navegação para exibir detalhes', () => {
-    const { getByText, getByAltText, history } = RenderWithRouter(<App />);
+    const { getByText, getByAltText } = RenderWithRouter(<App />);
     const moreDetails = getByText(/More details/i);
     userEvent.click(moreDetails);
     const checkFavorite = getByText(/Pokémon favoritado?/i);
