@@ -1,18 +1,18 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import renderWithRouter from '../services/RenderWithRouter';
+import RenderWithRouter from '../services/RenderWithRouter';
 import App from '../App';
 import FavoritePokemons from '../components/FavoritePokemons';
 
 describe('Testa o componente <FavoritePokemons.js /', () => {
   test('Testa se é exibido na tela a mensagem No favorite pokemon found', () => {
-    const { getByText } = renderWithRouter(<FavoritePokemons />);
+    const { getByText } = RenderWithRouter(<FavoritePokemons />);
     const p = getByText(/No favorite pokemon found/i);
     expect(p).toBeInTheDocument();
   });
 
   test('Testa se é exibido todos os cards de pokémons favoritados.', () => {
-    const { getByText, getByAltText } = renderWithRouter(<App />);
+    const { getByText, getByAltText } = RenderWithRouter(<App />);
     const btnAll = getByText(/All/i);
     userEvent.click(btnAll);
     const moreDetails = getByText(/More details/i);
@@ -39,7 +39,7 @@ describe('Testa o componente <FavoritePokemons.js /', () => {
   });
 
   test('Testa se nenhum card é exibido, caso não tenha nenhum favoritado.', () => {
-    const { getByText } = renderWithRouter(<FavoritePokemons />);
+    const { getByText } = RenderWithRouter(<FavoritePokemons />);
     expect(getByText(/No favorite pokemon found/i)).toBeInTheDocument();
   });
 });

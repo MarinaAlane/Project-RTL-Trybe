@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
-import renderWithRouter from '../services/RenderWithRouter';
+import RenderWithRouter from '../services/RenderWithRouter';
 import App from '../App';
 
 test('renders a reading with the text `Pokédex`', () => {
@@ -15,7 +15,7 @@ test('renders a reading with the text `Pokédex`', () => {
 });
 
 test('Teste se a home é renderizada ao carregar a aplicação no caminho de URL /', () => {
-  const { getByText, history } = renderWithRouter(<App />);
+  const { getByText, history } = RenderWithRouter(<App />);
   const home = getByText(/Encountered pokémons/i);
   expect(home).toBeInTheDocument();
   const { pathname } = history.location;
