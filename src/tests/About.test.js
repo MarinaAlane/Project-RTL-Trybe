@@ -4,7 +4,7 @@ import Aboult from '../components/About';
 
 describe('Bloco de testes para o componente about', () => {
   it('Testa se a página contem as informacoes da Pokédex', () => {
-    const { getByText, getByAltText } = render(<Aboult />);
+    const { getByText } = render(<Aboult />);
     const aboutTitle = getByText('About Pokédex');
     const aboutParagraph = getByText(/This application simulates a Pokédex/i);
 
