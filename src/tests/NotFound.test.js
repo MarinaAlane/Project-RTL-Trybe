@@ -1,9 +1,6 @@
 import React from 'react';
-import { fireEvent } from '@testing-library/react';
 import renderWithRouter from '../renderWithRouter';
-import { FavoritePokemons, NotFound } from '../components';
-import App from '../App';
-import { render } from 'react-dom';
+import { NotFound } from '../components';
 
 describe('testing NotFound.js', () => {
   test('tests if it contains a heading level two', () => {
