@@ -1,5 +1,5 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event'
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
@@ -21,7 +21,7 @@ describe('Test App component', () => {
     expect(homeLink).toBeInTheDocument();
     expect(aboutLink).toBeInTheDocument();
     expect(favoriteLink).toBeInTheDocument();
-  })
+  });
 
   test('Home link redirects to the homepage', () => {
     const { getByText, history } = renderWithRouter(<App />);
@@ -30,7 +30,7 @@ describe('Test App component', () => {
 
     userEvent.click(homeLink);
     expect(history.location.pathname).toBe('/');
-  })
+  });
 
   test('About link redirects to the about page', () => {
     const { getByText, history } = renderWithRouter(<App />);
@@ -39,7 +39,7 @@ describe('Test App component', () => {
 
     userEvent.click(aboutLink);
     expect(history.location.pathname).toBe('/about');
-  })
+  });
 
   test('Favorite link redirects to the favorite pokémons page', () => {
     const { getByText, history } = renderWithRouter(<App />);
@@ -48,7 +48,7 @@ describe('Test App component', () => {
 
     userEvent.click(favoriteLink);
     expect(history.location.pathname).toBe('/favorites');
-  })
+  });
 
   test('Redirects to NotFound page when needed', () => {
     const { getByText, history } = renderWithRouter(<App />);
@@ -58,7 +58,7 @@ describe('Test App component', () => {
     expect(history.location.pathname).toBe('/notfound');
 
     const notfound = getByText(/not found/);
-    
+  
     expect(notfound).toBeInTheDocument();
-  })
-})
+  });
+});
