@@ -29,7 +29,7 @@ describe('testes da pagina pokedex', () => {
     const bottonNext = getByTestId('next-pokemon');
 
     // test
-    expect(bottonNext.innerHTML).toBe('Próximo pokémon');
+    expect(bottonNext.textContent).toBe('Próximo pokémon');
   });
 
   it('botos de filtro - ire, Psychic, Electric, Bug, Poison, Dragon e Normal', () => {
