@@ -69,6 +69,6 @@ describe('Testes para o componente <Pokemon detail />', () => {
     userEvent.click(screen.getByText(/More details/i));
     const checkbox = screen.getByText(/Pokémon favoritado?/i);
     userEvent.click(checkbox);
-    const favorite = screen.getByAltText(/Pikachu is marked as favorite/i);
+    screen.getByAltText(/Pikachu is marked as favorite/i);
   });
 });

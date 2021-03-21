@@ -3,13 +3,13 @@ import { screen } from '@testing-library/react';
 import renderWithRouter from '../components/RenderWithRouter';
 import NotFound from '../components/NotFound';
 
-describe('Testes para o componente <NotFound />', () => {
-  it('Verifica se existe um heding h2 com o texto `Page requested not found 😭`', () => {
+describe('Testes do componente <NotFound />', () => {
+  it('Verifica se existe um heading h2 com o texto Page requested not found', () => {
     renderWithRouter(<NotFound />);
 
     const heading = screen.getByRole('heading', {
       level: 2,
-      text: /Page requested not found 😭/i,
+      name: /Page requested not found/i,
     });
 
     expect(heading).toBeInTheDocument();
