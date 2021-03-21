@@ -58,7 +58,7 @@ describe('Test App component', () => {
     expect(history.location.pathname).toBe('/notfound');
 
     const notfound = getByText(/not found/);
-  
+
     expect(notfound).toBeInTheDocument();
   });
 });
