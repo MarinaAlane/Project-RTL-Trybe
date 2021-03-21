@@ -1,5 +1,4 @@
 import React from 'react';
-import { render } from 'react-dom';
 import About from '../components/About';
 import renderWithRouter from '../helper/renderWithRouter';
 
