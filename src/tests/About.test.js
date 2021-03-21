@@ -1,6 +1,6 @@
 import React from 'react';
-import About from '../components/About';
 import renderWithRouter from '../helpers/renderWithRouter';
+import About from '../components/About';
 
 test('has a heading with text `About Pokédex`', () => {
   const { getByRole } = renderWithRouter(<About />);

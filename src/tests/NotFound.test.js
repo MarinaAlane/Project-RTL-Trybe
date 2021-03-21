@@ -1,6 +1,6 @@
 import React from 'react';
-import NotFound from '../components/NotFound';
 import renderWithRouter from '../helpers/renderWithRouter';
+import NotFound from '../components/NotFound';
 
 test('has `h2` heading with content `Page requested not found 😭`', () => {
   const { getByRole } = renderWithRouter(<NotFound />);
