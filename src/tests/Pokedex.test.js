@@ -30,12 +30,7 @@ describe('test Pokedex component', () => {
 
     const button = screen.getByText(NEXT_POKEMON);
     checkAllButtons(button);
-    // pokemons.forEach((pokemon) => {
-    //   const name = screen.getByTestId(POKEMON_NAME);
-    //   expect(name).toHaveTextContent(pokemon.name);
 
-    //   userEvent.click(button);
-    // });
     const name = screen.getByTestId(POKEMON_NAME);
     expect(name).toHaveTextContent(pokemons[0].name);
   });
@@ -66,12 +61,6 @@ describe('test Pokedex component', () => {
     userEvent.click(allButton);
 
     checkAllButtons(button);
-    // pokemons.forEach((pokemon) => {
-    //   const name = screen.getByTestId(POKEMON_NAME);
-    //   expect(name).toHaveTextContent(pokemon.name);
-
-    //   userEvent.click(button);
-    // });
   });
 
   it('test if there is a button for every type of pokemon', () => {
