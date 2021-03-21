@@ -13,7 +13,7 @@ describe('Test <About />', () => {
     const { getByRole } = renderWithRouter(<About />);
     const heading = getByRole('heading', {
       level: 2,
-      name: new RegExp('About Pokédex', 'i'),
+      name: /About Pokédex/i,
     });
 
     expect(heading).toBeInTheDocument();
@@ -29,7 +29,7 @@ describe('Test <About />', () => {
 
   it('renders an image of a Pokédex', () => {
     const { getByRole } = renderWithRouter(<About />);
-    const image = getByRole('img', { name: new RegExp('Pokédex', 'i') });
+    const image = getByRole('img', { name: /Pokédex/i });
 
     expect(image).toBeInTheDocument();
     expect(image.src).toBe('https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');

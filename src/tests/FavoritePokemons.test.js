@@ -18,7 +18,7 @@ describe('Test <FavoritePokemons />', () => {
     } = renderWithRouter(<FavoritePokemons pokemons={ pokemons } />);
 
     const starIcons = getAllByRole('img', {
-      name: new RegExp(/is marked as favorite$/i),
+      name: /is marked as favorite$/i,
     });
     expect(starIcons.length).toBe(pokemons.length);
 
@@ -42,7 +42,7 @@ describe('Test <FavoritePokemons />', () => {
 
     // Favorites are shown
     const starIcons = getAllByRole('img', {
-      name: new RegExp(/is marked as favorite$/i),
+      name: /is marked as favorite$/i,
     });
     expect(starIcons.length).toBe(favorites.length);
     favorites.forEach(({ name }) => (
