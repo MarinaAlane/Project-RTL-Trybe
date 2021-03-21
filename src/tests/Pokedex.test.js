@@ -69,8 +69,6 @@ describe('Testa o componente <Pokedex.js />', () => {
     const btnElectric = getByRole('button', { name: 'Electric' });
     userEvent.click(btnElectric);
     const btnNext = queryByText(proximoPokemon);
-    console.log('#################################', btnNext);
-    console.log('#################################', btnElectric);
     expect(btnNext).toBeDisabled();
   });
 });
