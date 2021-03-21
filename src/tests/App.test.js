@@ -1,6 +1,6 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
+// import { MemoryRouter } from 'react-router-dom';
+// import { render } from '@testing-library/react';
 import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
 
@@ -10,12 +10,20 @@ test('renders a reading with the text `Pokédex`', () => {
   expect(heading).toBeInTheDocument();
 });
 
-test('shows the Pokédex when the route is `/`', () => {
-  const { getByText } = render(
-    <MemoryRouter initialEntries={ ['/'] }>
-      <App />
-    </MemoryRouter>,
-  );
+test('teste se o primeiro link deve possuir o texto home', () => {
+  const { getByText } = renderWithRouter(<App />);
+  const home = getByText(/home/i);
+  expect(home).toBeInTheDocument();
+});
 
-  expect(getByText('Encountered pokémons')).toBeInTheDocument();
+test('teste se o primeiro link deve possuir o texto home', () => {
+  const { getByText } = renderWithRouter(<App />);
+  const about = getByText(/about/i);
+  expect(about).toBeInTheDocument();
+});
+
+test('teste se o primeiro link deve possuir o texto Favorite Pokémons', () => {
+  const { getByText } = renderWithRouter(<App />);
+  const favoritePokemons = getByText(/favorite/i);
+  expect(favoritePokemons).toBeInTheDocument();
 });
