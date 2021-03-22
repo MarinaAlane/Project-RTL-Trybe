@@ -56,3 +56,4 @@ test('renders about page through URL `/favorites`', () => {
 //   expect(about).toBeInTheDocument();
 // });
 // npx stryker run ./stryker/PokemonDetails.conf.json
+// npx stryker run ./stryker/App.conf.json
