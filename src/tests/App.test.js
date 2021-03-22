@@ -1,4 +1,5 @@
 import React from 'react';
+import { fireEvent } from '@testing-library/react';
 import renderWithRouter from '../helper/renderWithRouter';
 import App from '../App';
 
@@ -31,4 +32,14 @@ describe('Test for component App.js', () =>{
     const favoriteLink = getByText(/Favorite Pokémons/i);
     expect(favoriteLink).toBeInTheDocument();
   });
+
+  it('Should redirect to "/" when clicking the link Home', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+
+    fireEvent.click(getByText(/Home/i));
+    const { pathname } = history.location;
+
+    expect(pathname).toBe('/');
+    expect(getByText('Encountered pokémons')).toBeInTheDocument();
+  })
 })
