@@ -29,14 +29,15 @@ test('renders links to Home, About and Favorites components', () => {
 });
 
 test('renders main page through URL `/`', () => {
-  const { history: { location: { pathname }} } = renderWithRouter(<App />);
+  const { history: { location: { pathname } } } = renderWithRouter(<App />);
   expect(pathname).toBe('/');
 });
 
 test('renders about page through URL `/about`', () => {
   const { getByText, history } = renderWithRouter(<App />);
   fireEvent.click(getByText(/About/i));
-  const pathname = history.location.pathname;
+  const { location: { pathname } } = history;
+  // const pathname = pathname;
   expect(pathname).toBe('/about');
 });
 
