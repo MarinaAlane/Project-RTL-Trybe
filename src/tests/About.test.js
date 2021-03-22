@@ -12,7 +12,7 @@ test('Page contains Pokédex infos', () => {
 test('Page contains a heading `h2` with the text `About Pokédex`.', () => {
   renderWithRouter(<About />);
   const heading = screen.getByRole('heading');
-  expect(heading.tagName).toEqual('H2')
+  expect(heading.tagName).toEqual('H2');
   const headingText = screen.getByText('About Pokédex');
   expect(headingText).toBeInTheDocument();
 });
