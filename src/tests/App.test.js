@@ -6,6 +6,7 @@ import App from '../App';
 describe('Testando o componente App', () => {
   it('Teste se Pokédex é renderizada ao carregar o caminho de URL /', () => {
     const { getByText, history } = renderWithRouter(<App />);
+
     const pokedexHeader = getByText(/Encountered pokémons/i);
     const { location } = history;
 
