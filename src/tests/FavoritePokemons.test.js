@@ -1,6 +1,6 @@
 import React from 'react';
-import renderWithRouter from './renderWithRouter';
 import userEvent from '@testing-library/user-event';
+import renderWithRouter from './renderWithRouter';
 import { FavoritePokemons } from '../components';
 import App from '../App';
 
@@ -25,7 +25,7 @@ describe('Test FavoritePokemons component', () => {
     userEvent.click(favoritePokemonCheckbox);
 
     const favoritePokemonLink = getByText(/Favorite Pokémons/i);
-    
+
     userEvent.click(favoritePokemonLink);
 
     const favoritedPokemon = getByText(/pikachu/i);
@@ -45,12 +45,11 @@ describe('Test FavoritePokemons component', () => {
     userEvent.click(favoritePokemonCheckbox);
 
     const favoritePokemonLink = getByText(/Favorite Pokémons/i);
-    
+
     userEvent.click(favoritePokemonLink);
 
     const favoritedPokemon = queryByText(/pikachu/i);
 
     expect(favoritedPokemon).not.toBeInTheDocument();
   });
-
 });
