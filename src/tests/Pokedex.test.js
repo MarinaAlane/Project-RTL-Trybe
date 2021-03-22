@@ -47,4 +47,28 @@ describe('Tests for the Pokedex component', () => {
     const typeButtons = getAllByTestId('pokemon-type-button');
     expect(typeButtons.length).toBe(pokemonTypesList.length);
   });
+
+  it('should have a reset button', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const resetButton = getByText(/All/);
+
+    expect(resetButton).toBeInTheDocument();
+
+    fireEvent.click(resetButton);
+    expect(getByText(/Pikachu/i)).toBeInTheDocument();
+  });
+
+  it('should disable "Proximo Pokemon" when there is only one pokemon', () => {
+    const { getByText } = renderWithRouter(<App />);
+
+    const nextButton = getByText(/Próximo pokémon/i);
+    expect(nextButton).toBeInTheDocument();
+    expect(nextButton.disabled).toBeFalsy();
+
+    const dragonTypeButton = getByText(/Dragon/i);
+    expect(dragonTypeButton).toBeInTheDocument();
+
+    fireEvent.click(dragonTypeButton);
+    expect(nextButton.disabled).toBeTruthy();
+  });
 });
