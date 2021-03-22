@@ -17,6 +17,18 @@ describe('testes do  componente App.js', () => {
   });
 
   it(
+    'Página principal da Pokédex é renderizada ao carregar a aplicação na URL /',
+    () => {
+      const { getByText } = render(
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>,
+      );
+      expect(getByText(/Encountered/)).toBeInTheDocument(); // used regex
+    },
+  );
+
+  it(
     'Página principal da Pokédex deve renderizar no caminho de URL / onCLick Home',
     () => {
       const { getByText, history } = renderRoute(<App />);
@@ -36,16 +48,4 @@ describe('testes do  componente App.js', () => {
     expect(aboutLink).toBeInTheDocument();
     expect(favoriteLink).toBeInTheDocument();
   });
-
-  it(
-    'Página principal da Pokédex é renderizada ao carregar a aplicação na URL /',
-    () => {
-      const { getByText } = render(
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>,
-      );
-      expect(getByText(/Encountered/)).toBeInTheDocument(); // used regex
-    },
-  );
 });
