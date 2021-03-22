@@ -18,10 +18,11 @@ describe('Test the About.js component', () => {
   });
 
   test('the page contains two paragraphs', () => {
-    const { getByTestId } = renderWithRouter(<About />);
-    const paragraphOne = getByTestId('p-one');
-    expect(paragraphOne).toBeInTheDocument();
-    const paragraphTwo = getByTestId('p-two');
-    expect(paragraphTwo).toBeInTheDocument();
+    const { getByText } = renderWithRouter(<About />);
+    const paragraphs = [
+      'This application simulates a Pokédex, '
+      + 'a digital encyclopedia containing all Pokémons',
+      'One can filter Pokémons by type, and see more details for each one of them'];
+    paragraphs.forEach((paragraph) => expect(getByText(paragraph)).toBeInTheDocument());
   });
 });
