@@ -42,7 +42,7 @@ describe('About.js', () => {
 
   //   expect(pathname).toBe('/about');
 
-  //   const paragraph = screen.getAllByRole('p');
+  //   const paragraph = screen.getAllByRole(<p />);
   //   expect(paragraph).toBeInTheDocument();
   //   expect(paragraph.length).toBe(2);
   // });
