@@ -14,11 +14,11 @@ describe('Tests for the NotFound component', () => {
     expect(getByText(/Page requested not found/i)).toBeInTheDocument();
   });
 
-  it('should show a gif in the page with a specific url',() => {
+  it('should show a gif in the page with a specific url', () => {
     const url = 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif';
     const { getAllByRole } = renderWithRouter(<NotFound />);
 
     // Tem que ser getAllByRole porque tem mais de uma imagem na tela...
     expect(getAllByRole('img')[1].src).toBe(url);
   });
-})
+});
