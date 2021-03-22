@@ -3,11 +3,11 @@ import { screen } from '@testing-library/react';
 import About from '../components/About';
 import renderWithRouter from '../renderWithRouter';
 
-test('Page contains Pokédex infos', () => {
-  renderWithRouter(<About />);
-  const about = screen.getByTestId('about-infos');
-  expect(about).toBeInTheDocument();
-});
+// test('Page contains Pokédex infos', () => {
+//   renderWithRouter(<About />);
+//   const about = screen.getByTestId('about-infos');
+//   expect(about).toBeInTheDocument();
+// });
 
 test('Page contains a heading `h2` with the text `About Pokédex`.', () => {
   renderWithRouter(<About />);
@@ -19,9 +19,12 @@ test('Page contains a heading `h2` with the text `About Pokédex`.', () => {
 
 test('Page contains two paragraphs with texts about Pokédex', () => {
   renderWithRouter(<About />);
-  const paragraphs = screen.getAllByTestId('about-paragraph');
-  // console.log(paragraphs);
-  expect(paragraphs.length).toEqual(2);
+  // const paragraphs = screen.getAllByTestId('about-paragraph');
+  // expect(paragraphs.length).toEqual(2);
+  const paragraphOne = screen.getByText(/This application simulates a Pokédex/i);
+  expect(paragraphOne).toBeInTheDocument();
+  const paragraphTwo = screen.getByText(/One can filter Pokémons by type/i);
+  expect(paragraphTwo).toBeInTheDocument();
 });
 
 test('Page contains especific Pokédex image', () => {
