@@ -61,5 +61,13 @@ describe('Test for component App.js', () => {
 
     expect(pathname).toBe('/favorites');
     expect(getByText(/No favorite pokemon found/i)).toBeInTheDocument();
-  })
+  });
+
+  it('should render a not found page when using an unknown URL', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+
+    history.push('/spiked-ear-pichu');
+
+    expect(getByText(/Page requested not found/i)).toBeInTheDocument();
+  });
 });
