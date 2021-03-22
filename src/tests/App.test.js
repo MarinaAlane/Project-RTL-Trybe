@@ -1,9 +1,8 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { getByText, render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
-import { About } from '../components';
 
 test('renders a reading with the text `Pokédex`', () => {
   const { getByText } = render(
@@ -36,15 +35,24 @@ test('renders main page through URL `/`', () => {
 });
 
 test('renders about page through URL `/about`', () => {
-  const { history } = renderWithRouter(<App />);  
-  expect(history.location.pathname).toBe('/about');
+  const { getByText, history } = renderWithRouter(<App />);
+  fireEvent.click(getByText(/About/i));
+  const pathname = history.location.pathname;
+  expect(pathname).toBe('/about');
 });
 
-test('renders a link to About component', () => {
-  // const { getByText } = renderWithRouter(<App />);
-  // const about = getByText(/About/i);
-  renderWithRouter(<App />);
-  const about = screen.getByText(/About/i);
-  expect(about).toBeInTheDocument();
+test('renders about page through URL `/favorites`', () => {
+  const { getByText, history } = renderWithRouter(<App />);
+  fireEvent.click(getByText(/Favorite Pokémons/i));
+  const pathname = history.location.pathname;
+  expect(pathname).toBe('/favorites');
 });
+
+// test('renders a link to About component', () => {
+//   // const { getByText } = renderWithRouter(<App />);
+//   // const about = getByText(/About/i);
+//   renderWithRouter(<App />);
+//   const about = screen.getByText(/About/i);
+//   expect(about).toBeInTheDocument();
+// });
 // npx stryker run ./stryker/PokemonDetails.conf.json

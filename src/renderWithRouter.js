@@ -6,7 +6,7 @@ import { render } from '@testing-library/react';
 
 const renderWithRouter = (component) => {
   const history = createMemoryHistory();
-  console.log({...render(<Router history={history}>{component}</Router>), history})
+  // console.log({...render(<Router history={history}>{component}</Router>), history})
   return ({
     ...render(<Router history={history}>{component}</Router>), history,
   });
