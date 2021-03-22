@@ -32,4 +32,4 @@ test('Page contains especific Pokédex image', () => {
   expect(image.src).toBe('https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
 });
 
-// npx stryker run ./stryker/App.conf.json
+// npx stryker run ./stryker/About.conf.json
