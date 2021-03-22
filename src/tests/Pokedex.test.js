@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, getAllByText } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import renderWithRouter from '../helper/renderWithRouter';
 import App from '../App';
 import pokemons from '../data';
@@ -31,5 +31,20 @@ describe('Tests for the Pokedex component', () => {
     const { getAllByTestId } = renderWithRouter(<App />);
 
     expect(getAllByTestId('pokemon-name').length).toBe(1);
-  })
+  });
+
+  it('should render all pokemon type buttons', () => {
+    const pokemonTypesList = [
+      'Electric',
+      'Fire',
+      'Bug',
+      'Poison',
+      'Psychic',
+      'Normal',
+      'Dragon',
+    ];
+    const { getAllByTestId } = renderWithRouter(<App />);
+    const typeButtons = getAllByTestId('pokemon-type-button');
+    expect(typeButtons.length).toBe(pokemonTypesList.length);
+  });
 });
