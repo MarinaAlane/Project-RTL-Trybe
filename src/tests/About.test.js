@@ -17,4 +17,19 @@ describe('testes do componente FavoritePokemons.js', () => {
       level: 2, name: 'About Pokédex' });
     expect(h2).toBeInTheDocument();
   });
+
+  test('A página deve conter dois parágrafos com texto sobre a Pokédex', () => {
+    const { getAllByText } = renderWithRouter(<About />);
+    const p = getAllByText(/pokémons/i);
+    expect(p.length).toBe(2);
+  });
+
+  it('test if there is a pokédex image', () => {
+    const { getByRole } = renderWithRouter(<About />);
+    const img = getByRole('img');
+    expect(img).toHaveAttribute(
+      'src',
+      'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png',
+    );
+  });
 });
