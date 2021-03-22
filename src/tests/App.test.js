@@ -29,8 +29,8 @@ test('renders links to Home, About and Favorites components', () => {
 });
 
 test('renders main page through URL `/`', () => {
-  const { history } = renderWithRouter(<App />);
-  expect(history.location.pathname).toBe('/');
+  const { history: { location: { pathname }} } = renderWithRouter(<App />);
+  expect(pathname).toBe('/');
 });
 
 test('renders about page through URL `/about`', () => {
@@ -43,8 +43,8 @@ test('renders about page through URL `/about`', () => {
 test('renders about page through URL `/favorites`', () => {
   const { getByText, history } = renderWithRouter(<App />);
   fireEvent.click(getByText(/Favorite Pokémons/i));
-  const { location } = history;
-  const pathname = location.pathname;
+  const { location: { pathname } } = history;
+  const pathname = pathname;
   expect(pathname).toBe('/favorites');
 });
 
