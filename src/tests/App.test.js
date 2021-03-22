@@ -44,7 +44,7 @@ test('renders about page through URL `/favorites`', () => {
   const { getByText, history } = renderWithRouter(<App />);
   fireEvent.click(getByText(/Favorite Pokémons/i));
   const { location: { pathname } } = history;
-  const pathname = pathname;
+  // const pathname = pathname;
   expect(pathname).toBe('/favorites');
 });
 
