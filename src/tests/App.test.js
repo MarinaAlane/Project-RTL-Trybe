@@ -19,5 +19,16 @@ describe('Default test by Trybe, modified to use renderWithRouter', () => {
 });
 
 describe('Test for component App.js', () =>{
+  it('Should have  the links "Home", "About" and "Favorite Pokémons"',() => {
+    const { getByText } = renderWithRouter(<App />);
+    
+    const homeLink = getByText(/Home/i);
+    expect(homeLink).toBeInTheDocument();
 
+    const aboutLink = getByText(/About/i);
+    expect(aboutLink).toBeInTheDocument();
+
+    const favoriteLink = getByText(/Favorite Pokémons/i);
+    expect(favoriteLink).toBeInTheDocument();
+  });
 })
