@@ -5,7 +5,7 @@ import App from '../App';
 
 describe('Testes for the PokemonDetails component', () => {
   it('should show the detailed pokemon info', () => {
-    const { getByRole, getByText } = renderWithRouter(<App />);
+    const { getByRole, getByText, history } = renderWithRouter(<App />);
 
     const detailsButton = getByRole('link', {
       name: /more details/i,
@@ -13,6 +13,8 @@ describe('Testes for the PokemonDetails component', () => {
     expect(detailsButton).toBeInTheDocument();
 
     fireEvent.click(detailsButton);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/pokemons/25');
 
     expect(getByText(/Pikachu Details/i)).toBeInTheDocument();
     expect(detailsButton).not.toBeInTheDocument();
@@ -39,7 +41,7 @@ describe('Testes for the PokemonDetails component', () => {
 
     const locationsHeading = getByRole('heading', {
       level: 2,
-      name: /Game Locations/i,
+      name: /Game Locations of Pikachu/i,
     });
 
     expect(locationsHeading).toBeInTheDocument();
@@ -54,5 +56,21 @@ describe('Testes for the PokemonDetails component', () => {
       expect(map).toBeInTheDocument();
       expect(map.src).toBe(url[index]);
     });
+  });
+  it('should be possible to favorite a pokemon on the details page', () => {
+    const { getByRole, getByLabelText, getByAltText } = renderWithRouter(<App />);
+
+    const detailsButton = getByRole('link', {
+      name: /more details/i,
+    });
+    expect(detailsButton).toBeInTheDocument();
+
+    fireEvent.click(detailsButton);
+    const favoriteCheckButton = getByLabelText(/Pokémon favoritado?/);
+    expect(favoriteCheckButton).toBeInTheDocument();
+
+    fireEvent.click(favoriteCheckButton);
+    const favoriteIcon = getByAltText(/Pikachu is marked as favorite/i);
+    expect(favoriteIcon.src).toContain('/star-icon.svg');
   });
 });
