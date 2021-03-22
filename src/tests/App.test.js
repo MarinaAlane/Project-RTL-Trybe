@@ -74,6 +74,7 @@ describe('testes do  componente App.js', () => {
     () => {
       const { getByText, history } = renderWithRouter(<App />);
       history.push('/notFound');
+      // add url notFound to history
       const notFound = getByText(/Not Found/i);
       expect(notFound).toBeInTheDocument();
     },
