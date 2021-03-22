@@ -7,5 +7,23 @@ describe('Tests for the About component',() => {
     const { getByText } = renderWithRouter(<About />);
 
     expect(getByText(/About Pokédex/i)).toBeInTheDocument();
-  })
+  });
+
+  it('should have a h2 component in the page', () => {
+    const { getByRole } = renderWithRouter(<About />);
+
+    const heading2 = getByRole('heading', {
+      level: 2
+    });
+
+    expect(heading2).toBeInTheDocument();
+  });
+
+  it('should have 2 paragraphs with text', () => {
+    const { getAllByText } = renderWithRouter(<About />);
+
+    const paragraphs = getAllByText(/Pokémons/i);
+    expect(paragraphs.length).toBe(2);
+  });
+  
 });
