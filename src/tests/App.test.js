@@ -31,7 +31,7 @@ describe('Testando o componente App', () => {
     expect(linksAvailable[2].innerHTML).toBe('Favorite Pokémons');
 
     expect(linksAvailable[3]).toBeInTheDocument();
-    expect(linksAvailable[3].innerHTML).toBenpm audit fix('More details');
+    expect(linksAvailable[3].innerHTML).toBe('More details');
   });
 
   it('Teste se o link Home redireciona para /', () => {
