@@ -8,10 +8,10 @@ describe('Tests for the NotFound component', () => {
 
     const heading2 = getByRole('heading', {
       level: 2,
+      name: /Page requested not found/i,
     });
 
     expect(heading2).toBeInTheDocument();
-    expect(getByText(/Page requested not found/i)).toBeInTheDocument();
   });
 
   it('should show a gif in the page with a specific url', () => {
