@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
 
@@ -14,12 +14,11 @@ test('renders a reading with the text `Pokédex`', () => {
   expect(heading).toBeInTheDocument();
 });
 
-
 test('renders links to Home, About and Favorites components', () => {
   const { getByText } = render(
     <MemoryRouter>
-    <App />
-  </MemoryRouter>,
+      <App />
+    </MemoryRouter>,
   );
   const linkToHome = getByText('Home');
   expect(linkToHome).toBeInTheDocument();
@@ -30,7 +29,7 @@ test('renders links to Home, About and Favorites components', () => {
 });
 
 test('renders main page through URL `/`', () => {
-  const { history } = renderWithRouter(<App />);  
+  const { history } = renderWithRouter(<App />);
   expect(history.location.pathname).toBe('/');
 });
 
@@ -44,7 +43,8 @@ test('renders about page through URL `/about`', () => {
 test('renders about page through URL `/favorites`', () => {
   const { getByText, history } = renderWithRouter(<App />);
   fireEvent.click(getByText(/Favorite Pokémons/i));
-  const pathname = history.location.pathname;
+  const { location } = history;
+  const pathname = location.pathname;
   expect(pathname).toBe('/favorites');
 });
 
