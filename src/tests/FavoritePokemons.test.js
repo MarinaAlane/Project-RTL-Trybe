@@ -5,10 +5,6 @@ import FavoritePokemons from '../components/FavoritePokemons';
 import App from '../App';
 
 describe('Test the FavoritePokemons.js component', () => {
-  test('Render the component', () => {
-    render(<FavoritePokemons />);
-  });
-
   test('no favorite pokemon found message is displayed', () => {
     const { getByText } = renderWithRouter(<FavoritePokemons pokemons={ [] } />);
     expect(getByText('No favorite pokemon found')).toBeInTheDocument();

@@ -3,9 +3,6 @@ import renderWithRouter from '../renderWithRouter';
 import NotFound from '../components/NotFound';
 
 describe('Test the NotFound.js component', () => {
-  test('Render the component', () => {
-    render(<NotFound />);
-  });
   test('the page contains an h2 heading', () => {
     const { getByRole } = renderWithRouter(<NotFound />);
     expect(getByRole('heading', {
