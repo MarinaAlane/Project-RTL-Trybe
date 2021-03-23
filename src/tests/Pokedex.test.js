@@ -49,18 +49,19 @@ test(
     pokemons.forEach(({ type }) => {
       expect(getByRole('button', { name: type })).toBeInTheDocument();
     });
+    expect(getByRole('button', { name: 'All' })).toBeInTheDocument();
   },
 );
 
-// test(
-//   'O botão de Próximo pokémon deve ser desabilitado quando tiver um só pokémon',
-//   () => {
-//     const { getByRole } = renderWithRouter(<App />);
-//     const btn = getByRole('button', { name: 'Próximo pokémon' });
-//     pokemons.forEach((type) => {
-//       if (type.type === pokemons.type) {
-//         expect(btn).not.toBeDisabled();
-//       } else expect(btn).toBeDisabled();
-//     });
-//   },
-// );
+test(
+  'O botão de Próximo pokémon deve ser desabilitado quando tiver um só pokémon',
+  () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const btn = getByRole('button', { name: 'Próximo pokémon' });
+    pokemons.forEach(({ type }) => {
+      if (type.type === pokemons.type) {
+        expect(btn).not.toBeDisabled();
+      } else expect(btn).toBeDisabled();
+    });
+  },
+);
