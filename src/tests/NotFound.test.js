@@ -1,6 +1,6 @@
 import React from 'react';
 // import { fireEvent } from '@testing-library/react';
-// import { screen } from '@testing-library/dom';
+import { screen } from '@testing-library/dom';
 import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
 
@@ -12,5 +12,11 @@ describe('NotFound.js', () => {
     const { pathname } = history.location;
 
     expect(pathname).toBe('/not-found');
+
+    const emoji = screen.getByText('😭');
+    expect(emoji).toBeInTheDocument();
+
+    const text = screen.getByText('Page requested not found');
+    expect(text).toBeInTheDocument();
   });
 });
