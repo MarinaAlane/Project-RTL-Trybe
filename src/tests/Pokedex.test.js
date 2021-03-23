@@ -1,7 +1,6 @@
 import React from 'react';
 import { fireEvent, cleanup } from '@testing-library/react';
 import App from '../App';
-import renderWithRouter from '../renderWithRouter';
 import pokemons from '../data';
 
 afterEach(cleanup);
