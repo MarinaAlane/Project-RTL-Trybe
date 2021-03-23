@@ -25,7 +25,7 @@ describe('testes do componente FavoritePokemons.js',
       expect(p.length).toBe(2);
     });
 
-    it('test if there is a pokédex image', () => {
+    test('Teste se a página contém a imagem de uma Pokédex com src correta', () => {
       const { getByRole } = renderWithRouter(<About />);
       const img = getByRole('img');
       expect(img).toHaveAttribute(

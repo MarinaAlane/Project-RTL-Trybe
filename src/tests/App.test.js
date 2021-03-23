@@ -16,7 +16,7 @@ describe('testes do componente App.js', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  it(
+  test(
     'Página principal da Pokédex é renderizada ao carregar a aplicação na URL /',
     () => {
       const { getByText } = render(
@@ -28,7 +28,7 @@ describe('testes do componente App.js', () => {
     },
   );
 
-  it('Topo da aplicação deve conter links Home, About e Favorite Pokémons', () => {
+  test('Topo da aplicação deve conter links Home, About e Favorite Pokémons', () => {
     const { getByRole } = renderWithRouter(<App />);
     const homeLink = getByRole('link', { name: 'Home' });
     const aboutLink = getByRole('link', { name: 'About' });
@@ -39,7 +39,7 @@ describe('testes do componente App.js', () => {
     expect(favoriteLink).toBeInTheDocument();
   });
 
-  it(
+  test(
     'Deve renderizar a URL / com evento onCLick no link Home',
     () => {
       const { getByText, history } = renderWithRouter(<App />);
@@ -49,7 +49,7 @@ describe('testes do componente App.js', () => {
     },
   );
 
-  it(
+  test(
     'Deve renderizar a URL /about com evento onCLick no link About',
     () => {
       const { getByText, history } = renderWithRouter(<App />);
@@ -59,7 +59,7 @@ describe('testes do componente App.js', () => {
     },
   );
 
-  it(
+  test(
     'Deve renderizar a URL /favorites onCLick Favorite Pokémons',
     () => {
       const { getByText, history } = renderWithRouter(<App />);
@@ -69,7 +69,7 @@ describe('testes do componente App.js', () => {
     },
   );
 
-  it(
+  test(
     'Deve renderizar a URL /notFound se for uma URL desconhecida',
     () => {
       const { getByText, history } = renderWithRouter(<App />);
