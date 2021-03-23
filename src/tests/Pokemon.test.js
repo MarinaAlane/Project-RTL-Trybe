@@ -2,6 +2,7 @@ import React from 'react';
 import { fireEvent } from '@testing-library/dom';
 import renderWithRouter from '../services/renderWithRouter';
 import Pokemon from '../components/Pokemon';
+import App from '../App';
 
 describe('Teste o componente <Pokemon.js />', () => {
   const pokemonTest = {
@@ -52,10 +53,11 @@ describe('Teste o componente <Pokemon.js />', () => {
   });
 
   it('Clicar no link é feito o redirecionamento para a página de detalhes', () => {
-    const { getByText } = renderWithRouter(<Pokemon pokemon={ pokemonTest } />);
+    const { getByText } = renderWithRouter(<App />);
 
     expect(getByText(moreDeatils)).toBeInTheDocument();
     fireEvent.click(getByText(moreDeatils));
+    expect(getByText(`${name} Details`)).toBeInTheDocument();
   });
 
   it('URL exibida no navegador muda para /pokemon/<id>', () => {
