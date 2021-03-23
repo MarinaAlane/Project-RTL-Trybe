@@ -15,7 +15,8 @@ describe('Test the `<Pokemon.js />` component', () => {
       const { value, measurementUnit } = pokemon.averageWeight;
       expect(getByTestId('pokemon-name')).toHaveTextContent(name);
       expect(getByTestId('pokemonType')).toHaveTextContent(type);
-      expect(getByTestId('pokemon-weight')).toHaveTextContent(`Average weight: ${value} ${measurementUnit}`);
+      expect(getByTestId('pokemon-weight'))
+        .toHaveTextContent(`Average weight: ${value} ${measurementUnit}`);
       const pokemonImage = getByRole('img');
       expect(pokemonImage.src).toBe(image);
       expect(pokemonImage.alt).toBe(`${name} sprite`);
