@@ -6,9 +6,10 @@ import pokemons from '../data';
 test('O nome correto do Pokémon deve ser exibido', () => {
   const { getByTestId, getByText } = renderWithRouter(<App />);
   const cardPokemon = getByText(/Pikachu/i);
+  const next = 'next-pokemon';
 
   expect(cardPokemon).toBeInTheDocument();
-  fireEvent.click(getByTestId('next-pokemon'));
+  fireEvent.click(getByTestId(next));
 
   const charmander = getByText(/Charmander/);
   expect(charmander).toBeInTheDocument();
@@ -21,9 +22,10 @@ test('O peso médio do pokémon deve ser exibido', () => {
     const valuePokemon = poke.averageWeight.value;
     const measurement = poke.averageWeight.measurementUnit;
     const text = `Average weight: ${valuePokemon} ${measurement}`;
+    const next = 'next-pokemon';
 
     expect(getByTestId('pokemon-weight')).toHaveTextContent(text);
-    fireEvent.click(getByTestId('next-pokemon'));
+    fireEvent.click(getByTestId(next));
   });
 });
 
@@ -32,10 +34,11 @@ test('A imagem do Pokémon deve ser exibida', () => {
 
   pokemons.forEach((poke) => {
     const text = `${poke.name} sprite`;
+    const next = 'next-pokemon';
 
     expect(getByAltText(text)).toBeInTheDocument();
     expect(getByRole(/img/i).src).toBe(poke.image);
-    fireEvent.click(getByTestId('next-pokemon'));
+    fireEvent.click(getByTestId(next));
   });
 });
 
