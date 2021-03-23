@@ -22,9 +22,9 @@ describe('Testing <FavoritePokemons />', () => {
     const moreDetailsLink = getByText('More details');
     expect(moreDetailsLink).toBeInTheDocument();
     fireEvent.click(moreDetailsLink);
-    const pokekonfav = getByLabelText('Pokémon favoritado?');
-    fireEvent.click(pokekonfav);
-    expect(pokekonfav).toBeChecked();
+    const pokemonFav = getByLabelText('Pokémon favoritado?');
+    fireEvent.click(pokemonFav);
+    expect(pokemonFav).toBeChecked();
     fireEvent.click(getByText(/Favorite Pokémons/));
     expect(screen.getByTestId('pokemon-name').textContent).toBe(pokemonData.pokemName);
   });

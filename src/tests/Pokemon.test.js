@@ -1,5 +1,4 @@
 import React from 'react';
-import { getByAltText, getByTestId, render, screen } from '@testing-library/react';
 import { fireEvent } from '@testing-library/react';
 import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
@@ -26,10 +25,23 @@ describe('Testing <Pokemon />', () => {
   });
 
   it('should have a star icon at favorited Pokemons', () => {
-    const { getByText, history } = renderWithRouter(<App />);
+    const {
+      getByText,
+      getByAltText,
+      getByLabelText,
+      history,
+    } = renderWithRouter(<App />);
     const moreDetailsLink = getByText('More details');
     fireEvent.click(moreDetailsLink);
     const { location: { pathname } } = history;
     expect(pathname).toBe('/pokemons/25');
+    const pokemonFav = getByLabelText('Pokémon favoritado?');
+    fireEvent.click(pokemonFav);
+    expect(pokemonFav).toBeChecked();
+    const homeLink = getByText('Home');
+    fireEvent.click(homeLink);
+    const pokemonPicture = getByAltText(/Pikachu is marked as favorite/);
+    expect(pokemonPicture).toBeInTheDocument();
+    expect(pokemonPicture.src).toMatch(/star-icon.svg/i);
   });
 });
