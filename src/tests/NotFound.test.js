@@ -7,8 +7,8 @@ describe('4th Requirement: NotFound Component', () => {
   it('h2 tag with text \'Page requested not found 😭\'', () => {
     renderWithRouter(<NotFound />);
     expect(screen.getByRole('heading', { level: 2 })).toBeInTheDocument();
-    expect(screen.getByTestId('not-found-heading'))
-      .toHaveTextContent('Page requested not found 😭');
+    expect(screen.getByText('Page requested not found')).toBeInTheDocument();
+    expect(screen.getByText('😭')).toBeInTheDocument();
   });
   it('checks img src', () => {
     renderWithRouter(<NotFound />);
