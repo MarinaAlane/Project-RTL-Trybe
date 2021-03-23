@@ -6,6 +6,7 @@ import pokemons from '../data';
 
 describe('Test the `<Pokemon.js />` component', () => {
   const nextPokemon = 'Próximo pokémon';
+  const detailsLink = 'More details';
 
   it('a card with the information of a certain Pokémon is rendered', () => {
     const { getByTestId, getByText, getByRole } = renderWithRouter(<App />);
@@ -26,14 +27,21 @@ describe('Test the `<Pokemon.js />` component', () => {
     const { getByText } = renderWithRouter(<App />);
     pokemons.forEach((pokemon) => {
       const { id } = pokemon;
-      expect(getByText('More details')).toHaveAttribute('href', `/pokemons/${id}`);
+      expect(getByText(detailsLink)).toHaveAttribute('href', `/pokemons/${id}`);
       userEvent.click(getByText(nextPokemon));
     });
   });
 
+  it('details navigation link redirects to Pokémon details page', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    userEvent.click(getByText(detailsLink));
+    const { pathname } = history.location;
+    expect(pathname).toBe('/pokemons/25');
+  });
+
   it('there is a star icon on favorite Pokémon', () => {
     const { getByText, getByAltText } = renderWithRouter(<App />);
-    userEvent.click(getByText('More details'));
+    userEvent.click(getByText(detailsLink));
     userEvent.click(getByText(/Pokémon favoritado/i));
     const favoritedIcon = getByAltText('Pikachu is marked as favorite');
     expect(favoritedIcon).toHaveAttribute('src', '/star-icon.svg');
