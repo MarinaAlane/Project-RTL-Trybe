@@ -1,7 +1,7 @@
 import React from 'react';
+import { render } from 'react-dom';
 import renderWithRouter from '../renderWithRouter';
 import About from '../components/About';
-import { render } from 'react-dom';
 
 describe('Test the About.js component', () => {
   test('Render the component', () => {
