@@ -1,8 +1,13 @@
 import React from 'react';
 import renderWithRouter from '../renderWithRouter';
 import About from '../components/About';
+import { render } from 'react-dom';
 
 describe('Test the About.js component', () => {
+  test('Render the component', () => {
+    render(<About />);
+  });
+
   test('the page contains an heading h2 with the text `About Pokédex`.', () => {
     const { getByRole } = renderWithRouter(<About />);
     expect(getByRole('heading', {
