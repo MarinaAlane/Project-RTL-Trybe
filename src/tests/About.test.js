@@ -1,6 +1,6 @@
 import React from 'react';
-import renderWithRouter from './renderWithRouter';
 import { screen } from '@testing-library/react';
+import renderWithRouter from './renderWithRouter';
 import { About } from '../components';
 
 describe('Test About component', () => {
