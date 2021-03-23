@@ -1,14 +1,18 @@
 import React from 'react';
-import { fireEvent } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
 
 describe('Testing <Pokemon />', () => {
-  it('should properly render the Pokemon information', () => {
-    const { getByText, getByRole } = renderWithRouter(<App />);
-    const moreDetailsLink = getByText('More details');
+  const moreDetails = () => {
+    const moreDetailsLink = screen.getByText('More details');
     expect(moreDetailsLink).toBeInTheDocument();
     fireEvent.click(moreDetailsLink);
+  };
+
+  it('should properly render the Pokemon information', () => {
+    const { getByText, getByRole } = renderWithRouter(<App />);
+    moreDetails();
     const pokemonDetails = getByRole('heading', { name: 'Pikachu Details' });
     expect(pokemonDetails).toBeInTheDocument();
     const summaryText = getByRole('heading', { name: 'Summary' });
@@ -19,8 +23,7 @@ describe('Testing <Pokemon />', () => {
 
   it('should render a section with the pokemon`s location', () => {
     const { getByText, getByRole, getAllByAltText } = renderWithRouter(<App />);
-    const moreDetailsLink = getByText('More details');
-    fireEvent.click(moreDetailsLink);
+    moreDetails();
     const pokemonLocation = getByRole('heading', { name: 'Game Locations of Pikachu' });
     expect(pokemonLocation).toBeInTheDocument();
     const locationList = getAllByAltText('Pikachu location');
@@ -32,9 +35,8 @@ describe('Testing <Pokemon />', () => {
   });
 
   it('the user should be able to favorite a pokemon', () => {
-    const { getByText, getByLabelText } = renderWithRouter(<App />);
-    const moreDetailsLink = getByText('More details');
-    fireEvent.click(moreDetailsLink);
+    const { getByLabelText } = renderWithRouter(<App />);
+    moreDetails();
     const pokemonFav = getByLabelText('Pokémon favoritado?');
     fireEvent.click(pokemonFav);
     expect(pokemonFav).toBeChecked();
