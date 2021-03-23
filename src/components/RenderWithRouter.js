@@ -9,5 +9,5 @@ const renderWhithRouter = (component) => {
     ...render(<Router history={ history }> {component} </Router>), history
   });
 };
-console.log(global);
+
 export default renderWhithRouter;
