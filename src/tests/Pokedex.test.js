@@ -58,7 +58,6 @@ describe('Testando Pokedex', () => {
   test('testa se o botão all é renderizado', () => {
     const { getByRole } = renderWithRouter(<App />);
     const btnAll = getByRole('button', { name: /all/i });
-    console.log(btnAll.attributes);
     expect(btnAll).toBeInTheDocument();
   });
 });
