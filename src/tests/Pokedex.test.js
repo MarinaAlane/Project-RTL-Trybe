@@ -62,4 +62,12 @@ describe('5- Test the component <Pokedex />', () => {
     const nextPokemon = getByText('Próximo pokémon');
     expect(nextPokemon).toBeDisabled();
   });
+
+  it('Should render Pikachu when click all', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const btnAll = getByText('All');
+    userEvent.click(btnAll);
+    const pikachu = getByText('Pikachu');
+    expect(pikachu).toBeInTheDocument();
+  });
 });
