@@ -22,6 +22,7 @@ describe('Componente App.js', () => {
         <App />
       </MemoryRouter>,
     );
+
     // faz o teste
     expect(getByText('Encountered pokémons')).toBeInTheDocument();
   });
@@ -32,6 +33,7 @@ describe('Componente App.js', () => {
     const homeLink = screen.getByText(/Home/i);
     const aboutLink = screen.getByText(/About/i);
     const favoriteLink = screen.getByText(/Favorite/i);
+
     // faz o teste
     expect(homeLink).toBeInTheDocument();
     expect(aboutLink).toBeInTheDocument();
@@ -43,8 +45,9 @@ describe('Componente App.js', () => {
     const { history } = renderWithRouter(<App />);
     const homePage = screen.getByText('Home');
     userEvent.click(homePage);
-    const pathName = history.location.pathname;
+
     // Faz teste
+    const pathName = history.location.pathname;
     expect(pathName).toBe(pathName);
   });
 
@@ -53,6 +56,7 @@ describe('Componente App.js', () => {
     const { history } = renderWithRouter(<App />);
     const aboutPage = screen.getByText('About');
     userEvent.click(aboutPage);
+
     // faz o teste
     const { pathname } = history.location;
     expect(pathname).toBe('/about');
@@ -62,8 +66,9 @@ describe('Componente App.js', () => {
     // acessa o elemento
     const { getByText, history } = renderWithRouter(<App />);
     const favoritesPage = getByText('Favorite Pokémons');
-    // faz o teste
     userEvent.click(favoritesPage);
+
+    // faz o teste
     const { pathname } = history.location;
     expect(pathname).toBe('/favorites');
   });
@@ -74,6 +79,7 @@ describe('Componente App.js', () => {
       const { history } = renderWithRouter(<App />);
       history.push('/unknownpath');
       const noFoundtMessage = screen.getByText(/Page requested/);
+
       // faz o teste
       expect(noFoundtMessage).toBeInTheDocument();
       // Consultei o repositório da colega Sabrina Alves
