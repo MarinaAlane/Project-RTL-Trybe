@@ -14,7 +14,7 @@ describe('Test the Pokemon.js component', () => {
     expect(type).toHaveTextContent('Electric');
 
     const weight = getByTestId('pokemon-weight');
-    expect(weight).toHaveTextContent('6.0 kg');
+    expect(weight).toHaveTextContent('Average weight: 6.0 kg');
 
     const img = getByRole('img', { name: /pikachu sprite/i });
     expect(img).toHaveAttribute('src', 'https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
