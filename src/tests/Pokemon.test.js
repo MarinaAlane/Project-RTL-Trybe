@@ -17,7 +17,7 @@ describe('Test the Pokemon.js component', () => {
     expect(weight).toHaveTextContent('6.0 kg');
 
     const img = getByRole('img', { name: /pikachu sprite/i });
-    expect(img).toBeInTheDocument();
+    expect(img).toHaveAttribute('src', 'https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
   });
 
   test('contém um link de navegação para exibir detalhes', () => {
