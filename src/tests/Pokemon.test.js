@@ -1,11 +1,11 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
 import RenderWithRouter from './RenderWithRouter';
 import data from '../data';
 import { Pokemon } from '../components';
-import userEvent from '@testing-library/user-event';
 
 describe('Component <Pokemon.js /> Test', () => {
   test('renders a pokémon card with info', () => {
