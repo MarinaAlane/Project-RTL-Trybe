@@ -88,7 +88,7 @@ describe('Test the App component', () => {
       const { pathname } = location;
       expect(pathname).toBe('/not-founded');
 
-      const message = screen.getByqText(
+      const message = screen.getByText(
         'Page requested not found',
       );
       expect(message).toBeInTheDocument();
