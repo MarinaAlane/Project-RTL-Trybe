@@ -17,25 +17,4 @@ describe('Testing the <FavoritePokemons.js /> component', () => {
     const textNoFavorite = h2.nextElementSibling.textContent;
     expect(textNoFavorite).toMatch(/No favorite pokemon found/i);
   });
-  test('if all favorite Pokémon cards are displayed.', () => {
-    renderWithRouter(<App />);
-    const buttonPsychic = screen.getByRole('button', {
-      name: /Psychic/,
-    });
-    userEvent.click(buttonPsychic);
-    const moreDetailsPsychic = screen.getByRole('link', {
-      name: /More details/,
-    });
-    userEvent.click(moreDetailsPsychic);
-    const checkbox = screen.getByRole('checkbox');
-    userEvent.click(checkbox);
-    const favoriteStar = screen.getByRole('img', {
-      name: /Alakazam is marked as favorite/,
-    });
-    expect(favoriteStar.src).toMatch(/star-icon.svg/);
-    const navFavoritePokémons = screen.getByRole('navigation').children[2];
-    userEvent.click(navFavoritePokémons);
-    const divAlakazam = screen.getByText('Alakazam');
-    expect(divAlakazam).toBeInTheDocument();
-  });
 });
