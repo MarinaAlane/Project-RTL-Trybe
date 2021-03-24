@@ -15,12 +15,10 @@ test('renders a reading with the text `Pokédex`', () => {
 });
 
 test('if it renders when finish loading /', () => {
-  const { getByText } = render(
-    <MemoryRouter initialEntries={ ['/'] }>
-      <App />
-    </MemoryRouter>,
-  );
+  const { getByText, history } = renderWithRouter(<App />);
+
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
+  expect(history.location.pathname).toBe('/');
 });
 
 test('if all three links are in the top', () => {
