@@ -25,7 +25,7 @@ describe('Comportamentos do App.', () => {
     expect(getByText(/Favorite Pokémons/i)).toBeInTheDocument();
   });
 
-  it('Testa se a aplicação é redirecionada para a página inicial, na URL "/" ao clicar no link Home da barra de navegação', () => {
+  it('Testa se a aplicação é redirecionada para a página inicial, na URL "/" ao clicar no link "Home" da barra de navegação', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     fireEvent.click(getByText(/Home/i));
@@ -43,5 +43,15 @@ describe('Comportamentos do App.', () => {
     const { pathname } = history.location;
 
     expect(pathname).toBe('/about');
+  });
+
+  it('Testa se a aplicação é redirecionada para a página de "Pokémons Favoritados", ao clicar no link "Favorite Pokémons" da barra de navegação', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+
+    fireEvent.click(getByText(/Favorite Pokémons/i));
+
+    const { pathname } = history.location;
+
+    expect(pathname).toBe('/favorites');
   });
 });
