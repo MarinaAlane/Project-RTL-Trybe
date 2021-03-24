@@ -2,7 +2,6 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
-import pokemons from '../data';
 
 test('test of the correct information and card is correct', () => {
   const { getByTestId } = renderWithRouter(<App />);
@@ -41,5 +40,4 @@ test('Test if if there is a star icon on favorite Pokémon', () => {
   expect(favoriteImg).toBeInTheDocument();
   expect(favoriteImg).toHaveAttribute('src', '/star-icon.svg');
   expect(favoriteImg).toHaveAttribute('alt', 'Pikachu is marked as favorite');
-
 });

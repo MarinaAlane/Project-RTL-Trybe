@@ -14,7 +14,7 @@ test('test if h2 is in the document', () => {
 });
 
 test('test if button Proximo Pokemon is working', () => {
-  const { getByText, getAllByTestId } = renderWithRouter(<App />);
+  const { getByText } = renderWithRouter(<App />);
 
   const pokemonsNames = pokemons.map((pokemon) => pokemon.name);
   const button = getByText(/Próximo Pokémon/i);
