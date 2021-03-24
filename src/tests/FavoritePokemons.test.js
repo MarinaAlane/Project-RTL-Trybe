@@ -15,10 +15,10 @@ describe('Requirement 3: Component FavoritePokemon tests', () => {
     userEvent.click(getByText(/More Details/i));
     userEvent.click(getByLabelText(/Pokémon favoritado/i));
     userEvent.click(getByText(/Favorite Pokémons/i));
-    expect(getByText('Charmander')).toBeInTheDocument();
+    expect(getByText('Pikachu')).toBeInTheDocument();
   });
   it('Not renders no-favorite pokemon card', () => {
     const { queryByText } = renderWithRouter(<FavoritePokemons />);
-    expect(queryByText('Charmander')).toBe(null);
+    expect(queryByText('Pikachu')).toBe(null);
   });
 });
