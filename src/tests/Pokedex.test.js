@@ -5,6 +5,9 @@ import renderWithRouter from './renderWithRouter';
 import Pokedex from '../components/Pokedex';
 import isPokemonFavoriteById from '../App';
 
+const nextPokemonStr = 'Próximo pokémon';
+const pokemonNameStr = 'pokemon-name';
+
 test('Teste se página contém um heading h2 com o texto Encountered pokémons', () => {
   const { queryByRole } = renderWithRouter(<Pokedex
     pokemons={ pokemons }
@@ -24,8 +27,8 @@ test('Testa se é exibido o próximo Pokémon da lista quando o botão é clicad
     isPokemonFavoriteById={ isPokemonFavoriteById }
   />);
 
-  const button = queryByRole('button', { name: 'Próximo pokémon' });
-  const currentPokemon = getByTestId('pokemon-name');
+  const button = queryByRole('button', { name: nextPokemonStr });
+  const currentPokemon = getByTestId(pokemonNameStr);
   expect(currentPokemon).toContainHTML('Pikachu');
   userEvent.click(button);
   expect(currentPokemon).toContainHTML('Charmander');
@@ -53,18 +56,19 @@ test('Teste se é mostrado apenas um Pokémon por vez.', () => {
     isPokemonFavoriteById={ isPokemonFavoriteById }
   />);
 
-  const displayedPokemon = queryAllByTestId('pokemon-name');
+  const displayedPokemon = queryAllByTestId(pokemonNameStr);
   expect(displayedPokemon).toHaveLength(1);
 });
 
 test('Teste se a Pokédex tem os botões de filtro.', () => {
-  const { getByRole, getByTestId } = renderWithRouter(<Pokedex
+  const { getByRole, getByTestId, queryByRole } = renderWithRouter(<Pokedex
     pokemons={ pokemons }
     isPokemonFavoriteById={ isPokemonFavoriteById }
   />);
-  const electricTypeButton = getByRole('button', { name: 'Electric' });
-  const nextPokemonButton = getByRole('button', { name: 'Próximo pokémon' });
-  const currentPokemon = getByTestId('pokemon-name');
+
+  const electricTypeButton = queryByRole('button', { name: /Electric/i });
+  const nextPokemonButton = getByRole('button', { name: nextPokemonStr });
+  const currentPokemon = getByTestId(pokemonNameStr);
 
   userEvent.click(electricTypeButton);
   expect(currentPokemon).toContainHTML('Pikachu');
@@ -76,9 +80,9 @@ test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
     pokemons={ pokemons }
     isPokemonFavoriteById={ isPokemonFavoriteById }
   />);
-  const allTypeButton = getByRole('button', { name: 'All' });
-  const nextPokemonButton = getByRole('button', { name: 'Próximo pokémon' });
-  const currentPokemon = getByTestId('pokemon-name');
+  const allTypeButton = getByRole('button', { name: /All/i });
+  const nextPokemonButton = getByRole('button', { name: nextPokemonStr });
+  const currentPokemon = getByTestId(pokemonNameStr);
 
   userEvent.click(allTypeButton);
   expect(currentPokemon).toContainHTML('Pikachu');
@@ -100,4 +104,31 @@ test('Teste se a Pokédex contém um botão para resetar o filtro', () => {
   expect(currentPokemon).toContainHTML('Dragonair');
   userEvent.click(nextPokemonButton);
   expect(currentPokemon).toContainHTML('Pikachu');
+});
+
+test('Teste se é criado, um botão de filtro para cada tipo de Pokémon', () => {
+  const { queryAllByTestId, getByRole } = renderWithRouter(<Pokedex
+    pokemons={ pokemons }
+    isPokemonFavoriteById={ isPokemonFavoriteById }
+  />);
+
+  const allTypeButton = getByRole('button', { name: /all/i });
+  const nextPokemonButton = getByRole('button', { name: nextPokemonStr });
+
+  const typeButton = queryAllByTestId('pokemon-type-button');
+  expect(typeButton[0]).toContainHTML('Electric');
+  expect(typeButton[1]).toContainHTML('Fire');
+  expect(typeButton[2]).toContainHTML('Bug');
+  expect(typeButton[3]).toContainHTML('Poison');
+  expect(typeButton[4]).toContainHTML('Psychic');
+  expect(typeButton[5]).toContainHTML('Normal');
+  expect(typeButton[6]).toContainHTML('Dragon');
+
+  userEvent.click(typeButton[1]);
+  expect(allTypeButton).toBeEnabled();
+
+  const displayedPokemon = queryAllByTestId(pokemonNameStr);
+  userEvent.click(typeButton[0]);
+  expect(displayedPokemon).toHaveLength(1);
+  expect(nextPokemonButton).toBeDisabled();
 });
