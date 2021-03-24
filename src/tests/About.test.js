@@ -4,7 +4,7 @@ import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
 describe('Test the About component', () => {
-  test('the component should render', () => {
+  test('the component About should render', () => {
     const { getByText, getByRole } = renderWithRouter(<App />);
     const aboutLink = getByText(/About/i);
     userEvent.click(aboutLink);
