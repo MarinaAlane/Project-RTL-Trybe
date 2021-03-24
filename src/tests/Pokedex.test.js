@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../helpers/renderWithRouter';
 import App from '../App';
 import pokemons from '../data';
-import { getByTestId } from '@testing-library/dom';
 
 describe('Requisito 05 - Testes do Pokedex.js', () => {
   it('A página contém um heading h2 com o texto "Encountered pokémons"', () => {
