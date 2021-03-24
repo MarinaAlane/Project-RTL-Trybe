@@ -4,7 +4,7 @@ import App from '../App';
 import renderWithRouter from '../renderWithRouter';
 
 describe('Test the Pokemon.js component', () => {
-  test('é renderizado um card com as informações de determinado pokémon', () => {
+  test('a card is rendered with the information of a certain Pokémon', () => {
     const { getByTestId, getByRole } = renderWithRouter(<App />);
 
     const name = getByTestId('pokemon-name');
@@ -20,14 +20,14 @@ describe('Test the Pokemon.js component', () => {
     expect(img).toHaveAttribute('src', 'https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
   });
 
-  test('contém um link de navegação para exibir detalhes', () => {
+  test('the do card contains a navigation link to display details', () => {
     const { getByRole } = renderWithRouter(<App />);
     const link = getByRole('link', { name: /more details/i });
     expect(link).toBeInTheDocument();
     expect(link).toHaveAttribute('href', '/pokemons/25');
   });
 
-  test('redirecionamento para a página de detalhes de Pokémon e url.', () => {
+  test('the Pokémon`s navigation link redirects to the Pokémon details page', () => {
     const { getByRole, history } = renderWithRouter(<App />);
     const link = getByRole('link', { name: /more details/i });
     expect(link).toBeInTheDocument();
@@ -38,7 +38,7 @@ describe('Test the Pokemon.js component', () => {
     expect(pathname).toBe('/pokemons/25');
   });
 
-  test('existe um ícone de estrela nos Pokémons favoritados', () => {
+  test('there is a star icon on favorite Pokémon.', () => {
     const { getByRole } = renderWithRouter(<App />);
     const linkMoreDetails = getByRole('link', { name: /More details/i });
     expect(linkMoreDetails).toBeInTheDocument();
