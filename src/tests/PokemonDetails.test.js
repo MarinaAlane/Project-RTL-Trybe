@@ -5,7 +5,7 @@ import App from '../App';
 import Pokemons from '../data';
 
 describe('Test the PokemonDetails.js component', () => {
-  test('as informações detalhadas do Pokémon select são mostradas na tela', () => {
+  test('detailed information about the selected Pokémon is shown on the screen', () => {
     const { getByRole, getByText } = renderWithRouter(<App />);
     const link = getByRole('link', { name: /more details/i });
     expect(link).toBeInTheDocument();
@@ -16,7 +16,7 @@ describe('Test the PokemonDetails.js component', () => {
     expect(getByText(Pokemons[0].summary)).toBeInTheDocument();
   });
 
-  test('seção com os mapas', () => {
+  test('there is a section with maps containing the locations of the pokémon', () => {
     const { getByRole, getByText, getAllByRole } = renderWithRouter(<App />);
     const link = getByRole('link', { name: /more details/i });
     expect(link).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe('Test the PokemonDetails.js component', () => {
     });
   });
 
-  test('usuarui favorita', () => {
+  test('the user can bookmark a pokémon through the details page', () => {
     const { getByRole } = renderWithRouter(<App />);
     const link = getByRole('link', { name: /more details/i });
     expect(link).toBeInTheDocument();
