@@ -11,7 +11,7 @@ describe('Testando o componente <App />', () => {
     expect(pathname).toBe('/');
   });
 
-  it('Verifica se o menu principal contém os links de navegação', () => {
+  it('Verifica se o menu principal contém os links', () => {
     const { getByText } = renderWithRouter(<App />);
 
     const home = getByText(/home/i);
@@ -23,7 +23,7 @@ describe('Testando o componente <App />', () => {
     expect(favoritesPokemons).toBeInTheDocument();
   });
 
-  it('Verifica se acessamos a página "Home" ao clicar no link de navegação', () => {
+  it('Verifica se acessamos a página "Home" ao clicar no link', () => {
     const { getByText, getByRole, history } = renderWithRouter(<App />);
 
     userEvent.click(getByText(/home/i));
@@ -36,7 +36,7 @@ describe('Testando o componente <App />', () => {
     expect(textHeading).toHaveTextContent('Encountered pokémons');
   });
 
-  it('Verifica se acessamos a página "About" ao clicar no link de navegação', () => {
+  it('Verifica se acessamos a página "About" ao clicar no link', () => {
     const { getByText, getByRole, history } = renderWithRouter(<App />);
 
     userEvent.click(getByText(/about/i));
@@ -49,7 +49,7 @@ describe('Testando o componente <App />', () => {
     expect(textHeading).toHaveTextContent('About Pokédex');
   });
 
-  it('Verifica se acessamos a página "Pokémons Favoritados" ao clicar no link de navegação', () => {
+  it('Verifica se acessamos a página "Pokémons Favoritados" ao clicar no link', () => {
     const { getByText, getByRole, history } = renderWithRouter(<App />);
 
     userEvent.click(getByText(/Favorite\sPokémons/i));
