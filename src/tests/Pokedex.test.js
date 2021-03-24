@@ -34,7 +34,7 @@ describe('Testando a Pokedex', () => {
     });
 
     it('O primeiro item deve ser mostrado se estiver no último item da lista', () => {
-      const { getByText, queryAllByRole, getByTestId } = renderWithRouter(<App />);
+      const { queryAllByRole, getByTestId } = renderWithRouter(<App />);
 
       const button = getByTestId('next-pokemon');
 
