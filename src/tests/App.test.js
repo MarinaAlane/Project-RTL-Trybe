@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
 
-
 test('renders a reading with the text `Pokédex`', () => {
   const { getByText } = renderWithRouter(<App />);
   const heading = getByText(/Pokédex/i);
@@ -89,7 +88,7 @@ describe('Test the App component', () => {
       const { pathname } = location;
       expect(pathname).toBe('/not-founded');
 
-      const message = screen.getByText(
+      const message = screen.getByqText(
         'Page requested not found',
       );
       expect(message).toBeInTheDocument();
