@@ -2,6 +2,7 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import FavoritePokemons from '../components/FavoritePokemons';
 import App from '../App';
+import renderWithRouter from '../renderWithRouter';
 
 afterEach(() => localStorage.clear());
 

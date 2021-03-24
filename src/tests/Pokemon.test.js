@@ -2,6 +2,7 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import App from '../App';
 import pokemons from '../data';
+import renderWithRouter from '../renderWithRouter';
 
 const next = 'next-pokemon';
 
