@@ -4,13 +4,13 @@ import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
 
 describe('testing App component paths of the webpage', () => {
-    it('Testing path on Home', () => {
-      const { history, getByText } = renderWithRouter(<App />);
-      const { pathname } = history.location;
-      const homeLink = getByText(/Home/i);
-      expect(homeLink).toBeInTheDocument();
-      expect(pathname).toBe('/');
-    });
+  it('Testing path on Home', () => {
+    const { history, getByText } = renderWithRouter(<App />);
+    const { pathname } = history.location;
+    const homeLink = getByText(/Home/i);
+    expect(homeLink).toBeInTheDocument();
+    expect(pathname).toBe('/');
+  });
 
   it('renders `Pokédex` homepage', () => {
     const { getByText } = renderWithRouter(<App />);
