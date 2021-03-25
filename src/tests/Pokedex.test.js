@@ -29,6 +29,6 @@ describe('Tests Pokedex', () => {
 
   test('Tests reset filters button', () => {
     const resetFiltersButton = screen.getByText('All');
-    fireEvent(resetFiltersButton, 'click');
+    fireEvent.click(resetFiltersButton);
   });
 });
