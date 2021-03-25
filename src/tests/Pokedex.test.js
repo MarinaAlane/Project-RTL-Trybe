@@ -39,16 +39,20 @@ test('test if show just 1 pokemon at time', () => {
 });
 
 test('test if pokedex has filter button', () => {
-  const { getByTestId, getByRole } = renderWithRouter(<App />);
+  const { getAllByTestId } = renderWithRouter(<App />);
+  const pokemonsNumberOfTypes = 7;
+  const buttonsType = getAllByTestId('pokemon-type-button');
+  expect(buttonsType.length).toBe(pokemonsNumberOfTypes);
+  expect(buttonsType[0].innerHTML).toBe('Electric');
+});
+
+test('test if the app create dynamics buttons of each type', () => {
+  const { getByRole } = renderWithRouter(<App />);
 
   const pokemonsTypes = pokemons.map((pokemon) => pokemon.type);
-
   pokemonsTypes.forEach((type) => {
     const buttonType = getByRole('button', { name: type });
     expect(buttonType).toBeInTheDocument();
-    userEvent.click(buttonType);
-    const pokemonType = getByTestId('pokemonType');
-    expect(pokemonType.innerHTML).toBe(type);
   });
 });
 
