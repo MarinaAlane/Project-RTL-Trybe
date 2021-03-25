@@ -11,10 +11,12 @@ describe('testa o component About.js', () => {
   });
 
   test('testa se a página contém dois parágrafos', () => {
-    const { getAllByRole, history } = renderWithRouter(<App />);
+    const { getByText, history } = renderWithRouter(<App />);
     history.push('/about');
-    const paragraphs = getAllByRole('p');
-    expect(paragraphs).toHaveLength(2);
+    const firstParagraph = getByText(/This application simulates/);
+    const secondParagraph = getByText(/One can filter Pokémons/);
+    expect(firstParagraph).toBeInTheDocument();
+    expect(secondParagraph).toBeInTheDocument();
   });
 
   test('testa se a página contém uma determinada imagem', () => {
