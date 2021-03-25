@@ -1,1 +1,26 @@
-test('', () => {});
+import React from 'react';
+import App from '../App';
+import renderWithRouter from '../services/renderWithRouter';
+
+describe('testa o component About.js', () => {
+  test('testa se a página contém um heading h2', () => {
+    const { getByRole, history } = renderWithRouter(<App />);
+    history.push('/about');
+    const heading = getByRole('heading', { level: 2 });
+    expect(heading).toBeInTheDocument('About Pokédex');
+  });
+
+  test('testa se a página contém dois parágrafos', () => {
+    const { getAllByRole, history } = renderWithRouter(<App />);
+    history.push('/about');
+    const paragraphs = getAllByRole('p');
+    expect(paragraphs).toHaveLength(2);
+  });
+
+  test('testa se a página contém uma determinada imagem', () => {
+    const { getByRole, history } = renderWithRouter(<App />);
+    history.push('/about');
+    const image = getByRole('img', { name: 'Pokédex' });
+    expect(image.src).toBe('https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
+  });
+});
