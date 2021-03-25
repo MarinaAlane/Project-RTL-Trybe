@@ -1,16 +1,8 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
-import Pokemon from '../components/Pokemon';
-// import isPokemonFavoriteById from '../App';
-import pokemons from '../data';
 import App from '../App';
 
-const pokemon = pokemons[0];
-{/* <Pokemon
-    pokemon={ pokemon }
-    isFavorite={ isPokemonFavoriteById[pokemon.id] }
-  /> */}
 test('É renderizado um card com as informações de determinado pokémon.', () => {
   const { getByTestId, getByAltText } = renderWithRouter(<App />);
 
