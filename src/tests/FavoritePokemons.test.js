@@ -1,6 +1,10 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import { cleanup, render } from '@testing-library/react';
 import FavoritePokemons from '../components/FavoritePokemons';
+import renderWithRouter from '../services/renderWithRouter';
+import App from '../App';
+import pokemons from '../data';
 
 afterEach(cleanup);
 
@@ -13,5 +17,14 @@ describe('Teste o COmpomente FavoritePokemons', () => {
   });
 
   it('Teste se é exibido todos os cards de pokémons favoritados.', () => {
+    const { getByText, getByLabelText } = renderWithRouter(<App />);
+    const linkMDetails = getByText(/More Details/i);
+    userEvent.click(linkMDetails);
+    const linkFavoriteCheck = getByLabelText(/Pokémon favoritado?/i);
+    userEvent.click(linkFavoriteCheck);
+    const linkFavorite = getByText(/Favorite Pokémon/i);
+    userEvent.click(linkFavorite);
+    const Pikachu = getByText(/Pikachu/i);
+    expect(Pikachu).toBeInTheDocument();
   });
 });
