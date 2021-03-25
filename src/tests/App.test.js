@@ -15,7 +15,7 @@ describe('testa o componente App.js', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  test('testa se o topo da aplicação contém um conjunto fixo de links de navegação', () => {
+  test('testa se o topo da aplicação contém um conjunto fixo de links', () => {
     const { getAllByRole } = render(
       <MemoryRouter>
         <App />
@@ -48,7 +48,7 @@ describe('testa o componente App.js', () => {
     expect(history.location.pathname).toBe('/favorites');
   });
 
-  test('testa se a aplicação é redirecionada para a página Not Found ao entrar em uma URL desconhecida', () => {
+  test('testa se a aplicação é redirecionada para a página Not Found', () => {
     const { getByText, history } = renderWithRouter(<App />);
     history.push('/anything');
     const notFound = getByText(/Page requested not found/i);
