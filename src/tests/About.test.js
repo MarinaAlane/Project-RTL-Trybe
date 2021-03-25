@@ -1,5 +1,4 @@
 import React from 'react';
-// import { screen } from '@testing-library/react';
 import About from '../components/About';
 import renderWithRouter from './renderWithRouter';
 
@@ -14,17 +13,19 @@ describe('2. Testa o componente <About.js />.', () => {
     expect(heading).toBeInTheDocument();
   });
 
-  /* it('Testa se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
-    const { getByRole } = renderWithRouter(<About />);
+  it('Testa se a página contém dois parágrafos com texto sobre a Pokédex.', () => {
+    const { getAllByText } = renderWithRouter(<About />);
 
-    const paragraphs = 
-  }); */
+    const paragraphs = getAllByText(/Pokémons/i);
+    console.log(paragraphs.length);
+
+    expect(paragraphs.length).toBe(2);
+  });
 
   it('Testa se a página contém uma determinada imagem de uma Pokédex', () => {
     const { getByAltText } = renderWithRouter(<About />);
 
     const pokedexImg = getByAltText('Pokédex');
-    console.log(pokedexImg.src);
 
     const src = 'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
 
