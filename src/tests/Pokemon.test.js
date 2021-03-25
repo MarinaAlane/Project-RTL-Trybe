@@ -1,51 +1,47 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import pokemons from '../data';
 import renderWithRouter from './renderWithRouter';
-import Pokedex from '../components/Pokedex';
-import isPokemonFavoriteById from '../App';
+import Pokemon from '../components/Pokemon';
+// import isPokemonFavoriteById from '../App';
+import pokemons from '../data';
+import App from '../App';
 
+const pokemon = pokemons[0];
+{/* <Pokemon
+    pokemon={ pokemon }
+    isFavorite={ isPokemonFavoriteById[pokemon.id] }
+  /> */}
 test('É renderizado um card com as informações de determinado pokémon.', () => {
-  const { getByTestId, getByAltText } = renderWithRouter(<Pokedex
-    pokemons={ pokemons }
-    isPokemonFavoriteById={ isPokemonFavoriteById }
-  />);
+  const { getByTestId, getByAltText } = renderWithRouter(<App />);
 
-  expect(getByTestId('pokemon-name')).toBeDefined();
-  expect(getByTestId('pokemonType')).toBeDefined();
-  expect(getByTestId('pokemon-weight')).toBeDefined();
-
-  const pokemonImg = getByAltText(/\w+\ssprite/i);
-  expect(pokemonImg.src).toBeDefined();
+  expect(getByTestId(/pokemon-name/i)).toContainHTML('Pikachu');
+  expect(getByTestId(/pokemonType/i)).toContainHTML('Electric');
+  expect(getByTestId(/pokemon-weight/i)).toContainHTML('Average weight: 6.0 kg');
+  expect(getByAltText(/pikachu\ssprite/i).src).toBe('https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
 });
 
 test('O card do Pokémon contém um link de nav para exibir detalhes.', () => {
-  const { getByRole } = renderWithRouter(<Pokedex
-    pokemons={ pokemons }
-    isPokemonFavoriteById={ isPokemonFavoriteById }
-  />);
+  const { getByRole } = renderWithRouter(<App />);
 
   const moreDetailsLink = getByRole('link', { name: 'More details' });
   expect(moreDetailsLink).toBeDefined();
 });
 
 test('Ao clicar no link de navegação do Pokémon, é redirecionado para Detalhes', () => {
-  const { history, getByRole } = renderWithRouter(<Pokedex
-    pokemons={ pokemons }
-    isPokemonFavoriteById={ isPokemonFavoriteById }
-  />);
+  const { history, getByRole } = renderWithRouter(<App />);
 
   const moreDetailsLink = getByRole('link', { name: 'More details' });
   userEvent.click(moreDetailsLink);
   const { pathname } = history.location;
-  expect(pathname).toMatch(/pokemons\/\d{2}/i);
+  expect(pathname).toBe('/pokemons/25');
 });
 
 test('Existe um ícone de estrela nos Pokémons favoritados.', () => {
-  const { queryByAltText } = renderWithRouter(<Pokedex
-    pokemons={ pokemons }
-    isPokemonFavoriteById={ isPokemonFavoriteById }
-  />);
+  const { getByRole, history } = renderWithRouter(<App />);
 
-  expect(queryByAltText(/\w\sis\smarked\sas\sfavorite/i)).toBeDefined();
+  history.push('/pokemons/25');
+  const favoriteChecked = getByRole('checkbox');
+  userEvent.click(favoriteChecked);
+  const favoriteIcon = getByRole('img', { name: 'Pikachu is marked as favorite' });
+  expect(favoriteIcon).toHaveAttribute('src', '/star-icon.svg');
 });
