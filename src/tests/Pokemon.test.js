@@ -15,12 +15,14 @@ describe('Requisito 06 - Testes do Pokemon.js', () => {
     const pokemonImg = getByRole('img');
     const nextPokemonButton = getByTestId('next-pokemon');
 
-    pokemonsList.forEach((currentPokemon) => {
-      expect(pokemonName).toHaveTextContent(currentPokemon.name);
-      expect(pokemonType).toHaveTextContent(currentPokemon.type);
-      expect(pokemonWeight).toHaveTextContent(/average weight:/i);
-      expect(pokemonImg.alt).toBe(`${currentPokemon.name} sprite`);
-      expect(pokemonImg.src).toBe(currentPokemon.image);
+    pokemonsList.forEach(({ name, type, image, averageWeight }) => {
+      expect(pokemonName).toHaveTextContent(name);
+      expect(pokemonType).toHaveTextContent(type);
+      expect(pokemonWeight).toHaveTextContent(
+        `Average weight: ${averageWeight.value} ${averageWeight.measurementUnit}`,
+      );
+      expect(pokemonImg.alt).toBe(`${name} sprite`);
+      expect(pokemonImg.src).toBe(image);
       userEvent.click(nextPokemonButton);
     });
   });
