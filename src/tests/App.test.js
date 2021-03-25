@@ -4,7 +4,7 @@ import renderWithRouter from '../RenderWithRouter';
 import App from '../App';
 
 describe('testando quisito 1', () => {
-  test('verifica se inicia no caminho de url em ' / '', () => {
+  test('verifica se inicia no caminho de url em ` / `', () => {
     const { history } = renderWithRouter(<App />);
     const { pathname } = history.location;
     expect(pathname).toBe('/');
@@ -24,7 +24,7 @@ describe('testando quisito 1', () => {
 
   test('Verifica se existe o link `Favorite Pokémons`', () => {
     const { getByText } = renderWithRouter(<App />);
-    const FavoritePokémons = getByText(/Favorite Pokémons/);
+    const FavoritePokémons = getByText(/^Favorite Pokémons$/i);
     expect(FavoritePokémons).toBeInTheDocument();
   });
 
