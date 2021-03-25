@@ -13,7 +13,7 @@ test('Teste se página contém um h2 com o texto `Page requested not found 😭`
   expect(heading2).toBeInTheDocument();
 });
 
-test('Teste se página contém um h2 com o texto `Page requested not found 😭`', () => {
+test('Testa se página contém uma imagem do Pikachu chorando', () => {
   renderWhithRouter(<NotFound />);
 
   const image = screen.getAllByRole('img');
