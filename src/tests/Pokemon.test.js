@@ -21,8 +21,11 @@ describe('Tests the pokemon page', () => {
     const weightData = pokemonWeight.textContent.split(' ');
     const pokemonImg = getByAltText(`${pokemon.name} sprite`);
     expect(pokemonName).toBeInTheDocument();
+    expect(pokemonName).toHaveTextContent(pokemon.name);
     expect(pokemonImg).toBeInTheDocument();
+    expect(pokemonImg).toHaveAttribute('src', pokemon.image);
     expect(pokemonType).toBeInTheDocument();
+    expect(pokemonType).toHaveTextContent(pokemon.type);
     expect(pokemonWeight).toBeInTheDocument();
     expect(weightData).toBeTruthy();
     expect(weightData).toHaveLength(expectedWeightDataLength);
