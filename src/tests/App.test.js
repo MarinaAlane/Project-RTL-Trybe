@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
@@ -27,7 +27,7 @@ describe('Testing App component', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const home = getByText(/home/i);
 
-    fireEvent.click(home);
+    userEvent.click(home);
 
     const { pathname } = history.location;
     expect(pathname).toBe('/');
@@ -37,7 +37,7 @@ describe('Testing App component', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const about = getByText(/about/i);
 
-    fireEvent.click(about);
+    userEvent.click(about);
 
     const { pathname } = history.location;
 
@@ -48,7 +48,7 @@ describe('Testing App component', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const favoritesPokemons = getByText(/favorite/i);
 
-    fireEvent.click(favoritesPokemons);
+    userEvent.click(favoritesPokemons);
 
     const { pathname } = history.location;
 
