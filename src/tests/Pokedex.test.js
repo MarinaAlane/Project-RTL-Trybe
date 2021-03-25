@@ -5,7 +5,7 @@ import App from '../App';
 
 describe('Tests Pokedex', () => {
   beforeEach(() => {
-    renderedScreen = render(<MemoryRouter><App /></MemoryRouter>);
+    render(<MemoryRouter><App /></MemoryRouter>);
   });
 
   test('Tests encountered Pokémons', () => {
