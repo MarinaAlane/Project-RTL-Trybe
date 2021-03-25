@@ -3,7 +3,7 @@ import { fireEvent } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
-describe('Comportamentos do App.', () => {
+describe('Testa o componente <App.js />.', () => {
   it('Renderiza um cabecalho com o texto `Pokédex`', () => {
     const { getByText } = renderWithRouter(<App />);
 
