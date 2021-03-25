@@ -14,6 +14,7 @@ test('renders a reading with the text `Pokédex`', () => {
   expect(heading).toBeInTheDocument();
 });
 
+// havia consultado o projeto de um colega para entender o MemoryRouter, mas fiz minha propria logica assim que compreendi a estrutura
 test('if it renders when finish loading /', () => {
   const { getByText, history } = renderWithRouter(<App />);
 
