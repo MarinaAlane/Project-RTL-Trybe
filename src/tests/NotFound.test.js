@@ -5,7 +5,7 @@ import NotFound from '../components/NotFound';
 describe('testing App component paths of the webpage', () => {
   it('Testing NotFound page', () => {
     const { getByRole } = render(<NotFound />);
-    const notFound = getByRole('heading', { text: 'Page requested' });
+    const notFound = getByRole('heading', { name: /Page requested not found/i });
     expect(notFound).toBeInTheDocument();
   });
 
