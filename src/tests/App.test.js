@@ -1,8 +1,7 @@
 import React from 'react';
-// import { MemoryRouter } from 'react-router-dom';
-// import { render } from '@testing-library/react';
 import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
+// Projeto realizado com ajuda da Daniela Müller e Raquel
 
 test('renders a reading with the text `Pokédex`', () => {
   const { getByText } = renderWithRouter(<App />);
