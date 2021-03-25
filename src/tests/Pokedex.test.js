@@ -74,13 +74,13 @@ describe('É exibido o próximo Pokémon da lista quando o botão Próximo poké
       expect(pokeImg).toHaveLength(1);
     });
   });
-const btnTypes = screen.getAllByTestId('pokemon-type-button');
 
 describe('Sobre botões de filtro', () => {
   it('Teste se a Pokédex tem os botões de filtro.', () => {
     // acessa o elemento
     renderWithRouter(<App />);
     const btnAll = screen.getByText('All');
+    const btnTypes = screen.getAllByTestId('pokemon-type-button');
     // teste
     btnTypes.forEach((btnType) => {
       expect(btnType).toBeInTheDocument();
@@ -125,7 +125,22 @@ describe('Sobre botão de resetar', () => {
     // teste
   });
   it('O texto do botão deve ser All', () => {
-    // Acessa elemento
-    // Teste
+    renderWithRouter(<App />);
+    const btnAll = screen.getByRole('button', { name: 'All' });
+    expect(btnAll).toBeInTheDocument();
+  });
+});
+
+describe('', () => {
+  it('Teste se  os botão de filtro são criados de forma dinâmica', () => {
+    renderWithRouter(<App />);
+    const typesOfPokemons = ['Electric',
+      'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon'];
+    typesOfPokemons.forEach((type) => {
+      const typePokemon = screen.getByRole('button', { name: type });
+      expect(typePokemon).toBeInTheDocument();
+    });
+    const allButtons = screen.getAllByTestId('pokemon-type-button');
+    allButtons.forEach((button) => expect(button).toBeInTheDocument());
   });
 });
