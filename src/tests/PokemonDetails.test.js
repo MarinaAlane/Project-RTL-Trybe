@@ -9,12 +9,13 @@ const getPokemon = (pokemonName) => pokemons.find(
 );
 
 describe('Tests for PokemonDetails Component', () => {
+  const MOREDETAILS = 'More details';
   test('if the detailed informations were renderized', () => {
     const { getAllByRole, getByText, getByTestId } = renderWithRouter(<App />);
     const pokemonName = getByTestId('pokemon-name');
     const pokemon = getPokemon(pokemonName.textContent);
     expect(pokemon).toBeTruthy();
-    userEvent.click(getByText('More details'));
+    userEvent.click(getByText(MOREDETAILS));
     const headings = getAllByRole('heading', { level: 2 });
     const summary = getByText(pokemon.summary);
     for (let index = 0; index < headings.length; index += 1) {
@@ -30,7 +31,7 @@ describe('Tests for PokemonDetails Component', () => {
     const { getByTestId, getByText, getAllByAltText } = renderWithRouter(<App />);
     const pokemonName = getByTestId('pokemon-name');
     const pokemon = getPokemon(pokemonName.textContent);
-    userEvent.click(getByText('More details'));
+    userEvent.click(getByText(MOREDETAILS));
     const locationMaps = getAllByAltText(`${pokemon.name} location`);
     for (let index = 0; index < locationMaps.length; index += 1) {
       expect(locationMaps[index]).toHaveAttribute('alt', `${pokemon.name} location`);
@@ -47,7 +48,7 @@ describe('Tests for PokemonDetails Component', () => {
   test('if the user can favorite a pokemon from details page', () => {
     const { getByText, getByLabelText, getAllByRole } = renderWithRouter(<App />);
     const FAVORITE = 'Pokémon favoritado?';
-    userEvent.click(getByText('More details'));
+    userEvent.click(getByText(MOREDETAILS));
     const favCheckBox = getByLabelText(FAVORITE);
     const labelFavCheckBox = getByText(FAVORITE);
     expect(favCheckBox).toBeInTheDocument();
