@@ -70,6 +70,5 @@ describe('Test the Pokedex component', () => {
       }
     }
     expect(nextButton).toBeVisible();
-
   });
 });
