@@ -27,11 +27,13 @@ describe('Test the Pokedex component', () => {
     const { getByText, getAllByTestId, getByTestId } = renderWithRouter(<App />);
     userEvent.click(getByText('All'));
     const firstPokemon = getAllByTestId('pokemon-name');
+    const nextPokemonButton = getByTestId('next-pokemon');
+    expect(nextPokemonButton).toHaveTextContent('Próximo pokémon');
     expect(firstPokemon[0]).toBeInTheDocument();
     expect(firstPokemon.length).toEqual(1);
     let currentPokemon = '';
     do {
-      userEvent.click(getByTestId('next-pokemon'));
+      userEvent.click(nextPokemonButton);
       currentPokemon = getAllByTestId('pokemon-name');
       expect(currentPokemon[0]).toBeInTheDocument();
       expect(currentPokemon.length).toEqual(1);
