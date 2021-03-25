@@ -4,7 +4,7 @@ import renderWithRouter from './renderWithRouter';
 import { NotFound } from '../components';
 
 describe('Componente NotFound.js', () => {
-  it('A página deve ter um heading h2 com o texto encountered pokemons',
+  it('A página deve ter um heading h2 com o texto Page requested not found',
     () => {
     // acessa o elemento
       renderWithRouter(<NotFound />);
