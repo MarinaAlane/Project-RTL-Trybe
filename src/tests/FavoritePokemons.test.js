@@ -11,6 +11,11 @@ describe('Testa o componente <FavoritePokemons.js />', () => {
     expect(notFound).toBeInTheDocument();
   });
 
-  // it('', () => {});
+  /* it('Teste se é exibido todos os cards de pokémons favoritados', () => {
+    const { getByText, getAllByAltText } = renderWithRouter(<FavoritePokemons />);
+
+    const favorites = getAllByAltText(/favorite/i);
+    console.log(favorites);
+  }); */
   // it('', () => {});
 });
