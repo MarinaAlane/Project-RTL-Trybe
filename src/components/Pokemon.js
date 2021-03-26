@@ -24,7 +24,7 @@ const Pokemon = ({ pokemon, showDetailsLink, isFavorite }) => {
       {isFavorite && (
         <img
           className="favorite-icon"
-          src={`/star-icon.svg`}
+          src="/star-icon.svg"
           alt={ `${name} is marked as favorite` }
         />
       )}
@@ -33,7 +33,7 @@ const Pokemon = ({ pokemon, showDetailsLink, isFavorite }) => {
 };
 
 Pokemon.propTypes = {
-  isFavorite: PropTypes.bool.isRequired,
+  isFavorite: PropTypes.bool,
   pokemon: pokemonType.isRequired,
   showDetailsLink: PropTypes.bool,
 };

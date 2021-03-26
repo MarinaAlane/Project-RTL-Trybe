@@ -34,9 +34,9 @@ describe('Testa o componente Pokemon:', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/pokemons/25');
   });
-  it('There is a star icon on favorite Pokémon', () => {
+  it('Verficica se há link favorite Pokémon', () => {
     renderWithRouter(<Pokemon pokemon={ pokemons[0] } isFavorite />);
-    const image = screen.getByAltText(/^Pikachu is marked as favorite$/);
-    expect(image).toHaveAttribute('src', '/star-icon.svg');
+    const pokemonImage = screen.getByAltText(/^Pikachu is marked as favorite$/);
+    expect(pokemonImage).toHaveAttribute('src', '/star-icon.svg');
   });
 });
