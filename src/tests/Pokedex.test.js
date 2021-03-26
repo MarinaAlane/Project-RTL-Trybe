@@ -108,22 +108,7 @@ describe('Sobre botões de filtro', () => {
     expect(pikachu).toBeInTheDocument();
   });
 
-  it('Ao clicar no botão de tipo, a Pokédex deve ter somente aquele tipo', () => {
-    // acessa o elemento
-    // teste
-  });
-
-  it('O texto do botão deve corresponder ao nome do tipo', () => {
-    // acessa o elemento
-    // teste
-  });
-});
-
-describe('Sobre botão de resetar', () => {
-  it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
-    // acessa o elemento
-    // teste
-  });
+  // Contei com o auxílio do colega Layo Kaminski para fazer o teste acima. Me auxiliou me explicando o textContent e como usar
   it('O texto do botão deve ser All', () => {
     renderWithRouter(<App />);
     const btnAll = screen.getByRole('button', { name: 'All' });
