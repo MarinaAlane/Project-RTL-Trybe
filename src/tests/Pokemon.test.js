@@ -36,7 +36,7 @@ describe('Testa o componente Pokemon:', () => {
   });
   it('There is a star icon on favorite Pokémon', () => {
     renderWithRouter(<Pokemon pokemon={ pokemons[0] } isFavorite />);
-    const pokemonImage = screen.getByAltText(/^Pikachu is marked as favorite$/);
-    expect(pokemonImage).toHaveAttribute('src', '/star-icon.svg');
+    const image = screen.getByAltText(/^Pikachu is marked as favorite$/);
+    expect(image).toHaveAttribute('src', '/star-icon.svg');
   });
 });
