@@ -134,13 +134,19 @@ describe('Sobre botão de resetar', () => {
 describe('', () => {
   it('Teste se  os botão de filtro são criados de forma dinâmica', () => {
     renderWithRouter(<App />);
+    // Array dos tipos de pokémon
     const typesOfPokemons = ['Electric',
       'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon'];
+      // ForEach que vai percorrer todo o array e conferir se o nome do botão corresponde ao tipo
     typesOfPokemons.forEach((type) => {
       const typePokemon = screen.getByRole('button', { name: type });
+      // faz a verificação já que o forEach não retorna nada
       expect(typePokemon).toBeInTheDocument();
     });
+    // Verifica se todos os botões estão lá
     const allButtons = screen.getAllByTestId('pokemon-type-button');
     allButtons.forEach((button) => expect(button).toBeInTheDocument());
   });
+  // consultei o repositório do colega Chistofer para fazer esse último teste
+  // https://github.com/tryber/sd-09-project-react-testing-library/pull/56
 });
