@@ -11,8 +11,4 @@ describe('Test \'FavoritePokemons.js\' Component - Requirement 03', () => {
       const noFavoriteFound = getByText(/No favorite pokemon found/i);
       expect(noFavoriteFound).toBeInTheDocument();
     });
-  it('Shows all favorite pokémon cards', () => {
-    const { getByText } = renderWithRouter(<App />);
-    const favortePokemons = document.getElementsByClassName('favorite-pokemon');    
-  });
 });
