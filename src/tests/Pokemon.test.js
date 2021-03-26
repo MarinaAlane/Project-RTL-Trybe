@@ -23,21 +23,21 @@ describe('testing Pokemon Component', () => {
       userEvent.click(nextPokemon);
     }
     const pokemonName = getByTestId('pokemon-name');
-    const dataName = data.find((pokemon) => (pokemon.name === pokemonName.innerHTML));
-    const { averageWeight: { value, measurementUnit }, name } = dataName;
+    const dataFile = data.find((pokemon) => (pokemon.name === pokemonName.innerHTML));
+    const { averageWeight: { value, measurementUnit }, name, type, image, id } = dataFile;
     expect(pokemonName).toHaveTextContent(name);
     const pokemonWeight = getByTestId('pokemon-weight');
     const weightText = `Average weight: ${value} ${measurementUnit}`;
     expect(pokemonWeight).toHaveTextContent(weightText);
     const pokemonType = getByTestId('pokemonType');
-    expect(pokemonType).toHaveTextContent(dataName.type);
-    const pokemonImage = getByAltText(`${dataName.name} sprite`);
-    expect(pokemonImage.src).toBe(dataName.image);
+    expect(pokemonType).toHaveTextContent(type);
+    const pokemonImage = getByAltText(`${name} sprite`);
+    expect(pokemonImage.src).toBe(image);
     const linkMDetails = getByText(/More Details/i);
     expect(linkMDetails).toBeInTheDocument();
     userEvent.click(linkMDetails);
     const { location: { pathname } } = history;
-    expect(pathname).toBe(`/pokemons/${dataName.id}`);
+    expect(pathname).toBe(`/pokemons/${id}`);
     const pokemonFav = getByLabelText('Pokémon favoritado?');
     userEvent.click(pokemonFav);
     expect(pokemonFav).toBeChecked();
