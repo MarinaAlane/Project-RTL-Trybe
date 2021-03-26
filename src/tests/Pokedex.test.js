@@ -73,7 +73,7 @@ describe('Pokedex', () => {
   });
 
   it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
-    const { getByText, getAllByTestId } = renderWithRouter(<Pokedex
+    const { getByText } = renderWithRouter(<Pokedex
       pokemons={ pokemons }
       isPokemonFavoriteById={ isPokemonFavoriteById }
     />);
@@ -81,26 +81,5 @@ describe('Pokedex', () => {
     const btnAll = getByText('All');
     expect(btnAll).toBeInTheDocument();
     expect(btnAll).toHaveTextContent('All');
-
-    userEvent.click(btnAll);
   });
 });
-
-/* Teste se a Pokédex contém um botão para resetar o filtro
-
-  -O texto do botão deve ser All;
-
-  -A Pokedéx deverá mostrar os Pokémons normalmente (sem filtros) quando o botão All for clicado;
-
-  -Ao carregar a página, o filtro selecionado deverá ser All;
-
-  -Teste se é criado, dinamicamente, um botão de filtro para cada tipo de Pokémon.
-
-  -Os botões de filtragem devem ser dinâmicos;
-
-  -Deve existir um botão de filtragem para cada tipo de Pokémon disponível nos dados, sem repetição. Ou seja, a sua Pokédex deve possuir pokémons do tipo Fire, Psychic, Electric, Bug, Poison, Dragon e Normal;
-
-  -Deve ser mostrado como opção de filtro, um botão para cada um dos tipos. Além disso, o botão All precisa estar sempre visível.
-
-O botão de Próximo pokémon deve ser desabilitado quando a lista filtrada de Pokémons tiver um só pokémon.
-*/
