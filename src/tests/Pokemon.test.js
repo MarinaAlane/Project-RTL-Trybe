@@ -38,7 +38,7 @@ describe('Testing <Pokemon.js />', () => {
     userEvent.click(favorite);
     const name = getByTestId('pokemon-name');
     expect(name).toHaveTextContent('Pikachu');
-    const star = getByAltText(/is marked as favorite/i);
+    const star = getByAltText(/Pikachu is marked as favorite/i);
     expect(star.src).toMatch('/star-icon.svg');
   });
 });
