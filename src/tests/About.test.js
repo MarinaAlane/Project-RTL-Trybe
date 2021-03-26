@@ -6,8 +6,8 @@ describe('testa o component About.js', () => {
   test('testa se a página contém um heading h2', () => {
     const { getByRole, history } = renderWithRouter(<App />);
     history.push('/about');
-    const heading = getByRole('heading', { level: 2 });
-    expect(heading).toBeInTheDocument('About Pokédex');
+    const heading = getByRole('heading', { level: 2, name: 'About Pokédex' });
+    expect(heading).toBeInTheDocument();
   });
 
   test('testa se a página contém dois parágrafos', () => {
