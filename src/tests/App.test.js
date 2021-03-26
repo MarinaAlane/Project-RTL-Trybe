@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
-describe('Test App component', () => {
+describe('Test <App /> component', () => {
   it('should render a reading with the text `Pokédex`', () => {
     const { getByText } = render(
       <MemoryRouter>
