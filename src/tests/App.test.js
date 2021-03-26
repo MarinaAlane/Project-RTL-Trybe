@@ -13,3 +13,9 @@ test('shows the Pokédex when the route is `/`', () => {
   expect(pathname).toBe('/');
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
 });
+test('there are 3 nav links at the Pokédex', () => {
+  const { getByText } = renderWithRouter(<App />);
+  expect(getByText('Home')).not.toBeNull();
+  expect(getByText('About')).not.toBeNull();
+  expect(getByText('Favorite Pokémons')).not.toBeNull();
+});
