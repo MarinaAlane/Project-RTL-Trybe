@@ -18,21 +18,27 @@ test('shows the Pokédex when the route is `/`', () => {
 });
 test('there are 3 nav links at the Pokédex', () => {
   const { getByRole } = renderWithRouter(<App />);
-  expect(getByRole('link', {
-    name: 'Home',
-  })).not.toBeNull();
-  expect(getByRole('link', {
-    name: 'About',
-  })).not.toBeNull();
-  expect(getByRole('link', {
-    name: 'Favorite Pokémons',
-  })).not.toBeNull();
+  expect(getByRole('link', { name: 'Home' })).not.toBeNull();
+  expect(getByRole('link', { name: 'About' })).not.toBeNull();
+  expect(getByRole('link', { name: 'Favorite Pokémons' })).not.toBeNull();
 });
 test('goes to `/` in the pathname when click Home', () => {
-  const { getByText, history: { location: { pathname } } } = renderWithRouter(<App />);
-  console.log(pathname);
-  const homeLink = getByText(/home/i);
-  console.log(homeLink);
+  const { getByRole, history: { location: { pathname } } } = renderWithRouter(<App />);
+  const homeLink = getByRole('link', { name: 'Home' });
   fireEvent.click(homeLink);
   expect(pathname).toBe('/');
+});
+test('goes to `/about` in the pathname when click About', () => {
+  const { getByRole, history } = renderWithRouter(<App />);
+  const aboutLink = getByRole('link', { name: 'About' });
+  fireEvent.click(aboutLink);
+  const { pathname } = history.location;
+  expect(pathname).toBe('/about');
+});
+test('goes to `/favorites` in the pathname when click Favorite Pokémons', () => {
+  const { getByRole, history } = renderWithRouter(<App />);
+  const favoriteLink = getByRole('link', { name: 'Favorite Pokémons' });
+  fireEvent.click(favoriteLink);
+  const { pathname } = history.location;
+  expect(pathname).toBe('/favorites');
 });
