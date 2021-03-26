@@ -1,12 +1,34 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
-import renderWithRouter from '../renderWithRouter';
-import App from '../App';
+import { render } from '@testing-library/react';
+import About from '../components/About';
 
 describe('Testing About component', () => {
   it('verify if the page have the informations of Pokédex', () => {
-    const { getByText, history } = renderWithRouter(<App />);
-    const about = getByText(/about/i);
+    const { getByText } = render(<About />);
+    const description = getByText(/This application simulates/i);
 
-    userEvent.click(about);
+    expect(description).toBeInTheDocument();
   });
+
+  it('verify if the page have a H2 title with write `About Pokédex`', () => {
+    const { getByRole } = render(<About />);
+    const pageTitleH2 = getByRole('heading', { level: 2 });
+
+    expect(pageTitleH2.textContent).toBe('About Pokédex');
+  });
+
+  it('verify if the page have 2 paragraphs', () => {
+    const { getAllByTitle } = render(<About />);
+    const paragraphs = getAllByTitle('paragraph');
+
+    expect(paragraphs.length).toBe(2);
+  });
+
+  it('test if the page have a specyfic image of Pokedéx', () => {
+    const { getByRole } = render(<About />);
+    const pokedexImage = getByRole('img');
+    const imagePath = 'https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
+
+    expect(pokedexImage.src).toBe(imagePath);
+  });
+});
