@@ -1,6 +1,8 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import Pokedex from '../components/Pokedex';
+import App from '../App';
 import pokemons from '../data';
 
 describe('Requirement 05', () => {
@@ -15,6 +17,10 @@ describe('Requirement 05', () => {
     148: true,
     151: true,
   };
+
+  const listOfButtons = pokemons.reduce((prev, cur) => {
+    return prev.includes(cur.type) ? prev : [...prev, cur.type];
+  }, ['All']);
 
   it('should have the heading with the text Encountered pokemons', () => {
     const { getByRole } = renderWithRouter(<Pokedex
@@ -34,10 +40,35 @@ describe('Requirement 05', () => {
     expect(bttn).toBeInTheDocument();
   });
 
-  // // TO-DO:
-  // Teste se é mostrado apenas um Pokémon por vez.
+  it('should show only one pokemon at a time', () => {
+    const { getAllByTestId } = renderWithRouter(<App />);
+    const pokemonCard = getAllByTestId('pokemon-name');
+
+    expect(pokemonCard.length).toBe(1);
+  });
+
+  it('should have buttons for filter each pokemon type and the filters work', () => {
+    const { getAllByTestId, getByTestId, getByRole } = renderWithRouter(<App />);
+    const typeButtons = getAllByTestId('pokemon-type-button');
+    const buttonAll = getByRole('button', { name: 'All' });
+
+    expect(typeButtons.length).toBe(listOfButtons.length - 1);
+    expect(buttonAll).toBeInTheDocument();
+
+    listOfButtons.forEach((buttonText) => {
+      const testedButton = getByRole('button', { name: buttonText });
+      expect(testedButton).toBeInTheDocument();
+
+      userEvent.click(testedButton);
+      const pokemonType = getByTestId('pokemonType');
+      expect(() => (listOfButtons.includes(pokemonType.innerHTML))).toBeTruthy();
+    });
+  });
+
   // Teste se a Pokédex tem os botões de filtro.
   // Teste se a Pokédex contém um botão para resetar o filtro
   // Teste se é criado, dinamicamente, um botão de filtro para cada tipo de Pokémon.
+
+  // // TO-DO:
   // O botão de Próximo pokémon deve ser desabilitado quando a lista filtrada de Pokémons tiver um só pokémon.
 });
