@@ -42,3 +42,8 @@ test('goes to `/favorites` in the pathname when click Favorite Pokémons', () =>
   const { pathname } = history.location;
   expect(pathname).toBe('/favorites');
 });
+test('goes to Not Found page when unknown pathname have been navigate for', () => {
+  const { getByText, history } = renderWithRouter(<App />);
+  history.push('/not-found-test-page');
+  expect(getByText('Page requested not found')).toBeDefined();
+});
