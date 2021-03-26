@@ -1,6 +1,5 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 import { render, fireEvent } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from '../services/renderWithRouter';
@@ -39,12 +38,7 @@ describe('Testa o componente App.js', () => {
   });
 
   it('Test if is redirected to the home page,when clicked on the home link', () => {
-    const history = createMemoryHistory();
-    const { getByRole } = render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>,
-    );
+    const { getByRole, history } = renderWithRouter(<App />);
     const button = getByRole('link', { name: 'Home' });
     fireEvent.click(button);
     expect(history.location.pathname).toBe('/');
