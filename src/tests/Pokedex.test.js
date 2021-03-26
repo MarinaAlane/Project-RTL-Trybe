@@ -19,7 +19,7 @@ const isPokemonFavoriteById = {
 const testId = 'pokemon-name';
 
 describe('Render <Pokedex /> component,`', () => {
-  test('show heading element with text `Encountered pokémons`', () => {
+  test('Renders a heading `h2` with the text `Encountered pokémons`', () => {
     renderWithRouter(<Pokedex
       pokemons={ pokemons }
       isPokemonFavoriteById={ isPokemonFavoriteById }
