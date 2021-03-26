@@ -66,12 +66,12 @@ describe('Pokemon.js tests', () => {
     expect(detailsLink).toBeInTheDocument();
     expect(detailsLink).toHaveAttribute('href', `/pokemons/${id}`);
   });
-  it('should render details page when details link is clicked', async () => {
+  it('should render details page when details link is clicked', () => {
     renderWithRouter(<App />);
     const { name } = dummyPokemon;
     const detailsLink = screen.queryByText(DETAILS_LINK_TEXT);
     userEvent.click(detailsLink);
-    const detailsHeading = await screen.findByRole(
+    const detailsHeading = screen.getByRole(
       'heading',
       {
         level: 2,
