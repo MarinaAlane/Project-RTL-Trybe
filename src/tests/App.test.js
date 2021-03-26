@@ -1,5 +1,8 @@
 import React from 'react';
+
+import { fireEvent } from '@testing-library/react';
 import renderWithRouter from '../helper/renderWithRouter';
+
 import App from '../App';
 
 test('renders a reading with the text `Pokédex`', () => {
@@ -14,8 +17,22 @@ test('shows the Pokédex when the route is `/`', () => {
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
 });
 test('there are 3 nav links at the Pokédex', () => {
-  const { getByText } = renderWithRouter(<App />);
-  expect(getByText('Home')).not.toBeNull();
-  expect(getByText('About')).not.toBeNull();
-  expect(getByText('Favorite Pokémons')).not.toBeNull();
+  const { getByRole } = renderWithRouter(<App />);
+  expect(getByRole('link', {
+    name: 'Home',
+  })).not.toBeNull();
+  expect(getByRole('link', {
+    name: 'About',
+  })).not.toBeNull();
+  expect(getByRole('link', {
+    name: 'Favorite Pokémons',
+  })).not.toBeNull();
+});
+test('goes to `/` in the pathname when click Home', () => {
+  const { getByText, history: { location: { pathname } } } = renderWithRouter(<App />);
+  console.log(pathname);
+  const homeLink = getByText(/home/i);
+  console.log(homeLink);
+  fireEvent.click(homeLink);
+  expect(pathname).toBe('/');
 });
