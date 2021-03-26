@@ -14,8 +14,10 @@ describe('testing PokemonDetails component', () => {
     userEvent.click(linkMDetails);
     const titleName = getByText('Pikachu Details');
     expect(titleName).toBeInTheDocument();
-    const headingH2 = getByRole('heading', { name: 'Summary' });
+    const headingH2 = getByRole('heading', { level: 2, name: /Summary/i });
     expect(headingH2).toBeInTheDocument();
+    const paragraph = getByText(/This intelligent Pokémon roasts hard berries/i);
+    expect(paragraph).toBeInTheDocument();
     expect(linkMDetails).not.toBeInTheDocument();
   });
 
