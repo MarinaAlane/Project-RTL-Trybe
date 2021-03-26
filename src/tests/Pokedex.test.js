@@ -7,6 +7,11 @@ import pokemons from '../data';
 describe('test of component Pokedex', () => {
   test('should have one h2 tag with text Encountered pokémons', () => {
     const { getByRole } = renderWithRouter(<App />);
+    // const h2 = getByRole('H2', {
+    //   level: 4,
+    //   name: /Encountered pokémons/,
+    // });
+    // expect(h2).toBeInTheDocument();
     const h2 = getByRole('heading', {
       level: 2,
       name: 'Encountered pokémons',
@@ -16,9 +21,10 @@ describe('test of component Pokedex', () => {
 
   test('should list all the pokemons', () => {
     const { getByRole, getByTestId } = renderWithRouter(<App />);
+    // const idPokemon = getByTestId(/pokemon-name/);
     const idPokemon = getByTestId('pokemon-name');
     const button = getByRole('button', { name: 'Próximo pokémon' });
-    fireEvent.click(btn);
+    fireEvent.click(button);
     expect(idPokemon.innerHTML).toBe('Charmander');
     fireEvent.click(button);
     expect(idPokemon.innerHTML).toBe('Caterpie');
