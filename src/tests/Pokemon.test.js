@@ -9,6 +9,9 @@ const next = 'next-pokemon';
 test('O nome correto do Pokémon deve ser exibido', () => {
   const { getByTestId, getByText } = renderWithRouter(<App />);
   const cardPokemon = getByText(/Pikachu/i);
+  const pokemonType = (getByTestId('pokemonType'));
+
+  expect(pokemonType.textContent).toBe('Electric');
 
   expect(cardPokemon).toBeInTheDocument();
   fireEvent.click(getByTestId(next));
