@@ -3,7 +3,7 @@ import { fireEvent } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
 
-describe('Test \'App.js\' Component - Requirement 01', () => {
+describe('Test \'App.js\' Component - Requirement 02', () => {
   it('Starts rendering in path `/`', () => {
     const { history } = renderWithRouter(<App />);
     const { pathname } = history.location;
