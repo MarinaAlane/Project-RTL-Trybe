@@ -12,7 +12,7 @@ describe('testes para requito 3', () => {
     expect(mensagem).toBeInTheDocument();
   });
 
-  test('Verificar se contem `No favorite pokemon found`', () => {
+  test('Verificar se renderiza favoritos', () => {
     const { getByText, getByLabelText } = renderWithRouter(<App />);
     fireEvent.click(getByText(/^More details$/));
     expect(getByText(/^Pikachu$/)).toBeInTheDocument(null);
