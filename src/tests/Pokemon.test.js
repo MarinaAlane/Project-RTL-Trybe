@@ -1,1 +1,42 @@
-test('', () => {});
+import React from 'react';
+import { Router } from 'react-router-dom';
+import { screen, fireEvent, render } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
+import Pokemon from '../components/Pokemon';
+import pokemons from '../data';
+import App from '../App';
+
+const renderWithRouter = (component) => {
+  const history = createMemoryHistory();
+  return ({
+    ...render(<Router history={ history }>{component}</Router>), history,
+  });
+};
+
+describe('Testa o componente Pokemon:', () => {
+  it('Verifica se é renderizado um card c/ as informações de determinado pokémon', () => {
+    renderWithRouter(<Pokemon pokemon={ pokemons[0] } />);
+    const name = screen.getByTestId('pokemon-name');
+    expect(name).toHaveTextContent(/^Pikachu$/);
+    const pokemonWeight = screen.getByTestId('pokemon-weight');
+    expect(pokemonWeight).toHaveTextContent(/^Average weight: 6.0 kg$/);
+    const image = screen.getByAltText(/^Pikachu sprite$/);
+    expect(image).toHaveAttribute('src', 'https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
+  });
+  it('Verifica se há link de navegação para ver os detalhes deste Pokémon', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    fireEvent.click(getByText('More details'));
+    expect(history.location.pathname).toBe('/pokemons/25');
+  });
+  it('Verifica mostrar a página de detalhes do Pokémon clicando em Mais detalhes', () => {
+    const { history } = renderWithRouter(<Pokemon pokemon={ pokemons[0] } />);
+    fireEvent.click(screen.getByText(/More details/i));
+    const { pathname } = history.location;
+    expect(pathname).toBe('/pokemons/25');
+  });
+  it('There is a star icon on favorite Pokémon', () => {
+    renderWithRouter(<Pokemon pokemon={ pokemons[0] } isFavorite />);
+    const pokemonImage = screen.getByAltText(/^Pikachu is marked as favorite$/);
+    expect(pokemonImage).toHaveAttribute('src', '/star-icon.svg');
+  });
+});
