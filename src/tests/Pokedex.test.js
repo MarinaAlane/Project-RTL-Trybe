@@ -81,5 +81,6 @@ describe('Pokedex', () => {
     const btnAll = getByText('All');
     expect(btnAll).toBeInTheDocument();
     expect(btnAll).toHaveTextContent('All');
+    userEvent.click(btnAll);
   });
 });
