@@ -4,7 +4,6 @@ import { cleanup, render } from '@testing-library/react';
 import FavoritePokemons from '../components/FavoritePokemons';
 import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
-import pokemons from '../data';
 
 afterEach(cleanup);
 
