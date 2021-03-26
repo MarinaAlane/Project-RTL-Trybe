@@ -1,9 +1,8 @@
 import React from 'react';
-// import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import About from '../components/About';
 
-describe('Requisito 02 - App.js', () => {
+describe('Requisito 02 - About.js', () => {
   it('Testa se a pág contém informações sobre a "Pokédex".', () => {
     const { getByText } = renderWithRouter(<About />);
 
@@ -23,13 +22,11 @@ describe('Requisito 02 - App.js', () => {
   });
 
   it('Testa se a pág contém dois parágrafos com texto sobre a Pokédex.', () => {
-    const { getByText } = renderWithRouter(<About />);
+    const { getAllByText } = renderWithRouter(<About />);
 
-    const paragraph1 = getByText(/encyclopedia containing all Pokémons/i);
-    expect(paragraph1).toBeInTheDocument();
+    const paragraphs = getAllByText(/Pokémons/i);
 
-    const paragraph2 = getByText(/One can filter Pokémons by type/i);
-    expect(paragraph2).toBeInTheDocument();
+    expect(paragraphs.length).toBe(2);
   });
 
   it('Testa se a pág contém a imagem de uma Pokédex com url expecífica', () => {
