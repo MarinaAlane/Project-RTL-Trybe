@@ -17,8 +17,8 @@ describe('testando o arquivo PokemonDetails ', () => {
     const zero = 0;
     const detailsLink = getByText('More details');
     fireEvent.click(detailsLink);
-    expect(getByText('Pikachu Details')).toBeInTheDocument();
     expect(detailsLink).not.toBeInTheDocument();
+    expect(getByText('Pikachu Details')).toBeInTheDocument();
     expect(getByText('Summary')).toBeInTheDocument();
     expect(getAllByRole('generic')[zero]).toHaveTextContent('roasts hard berries');
   });
