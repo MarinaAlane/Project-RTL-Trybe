@@ -53,7 +53,6 @@ describe('testing pokedex page', () => {
       const pokemonTypeText = getByTestId('pokemonType');
       expect(pokemonTypeText.innerHTML).toBe(pokemon);
     });
-    console.log(pokemonTypeButtons[0]);
   });
 
   it('testing to reset filter', () => {
