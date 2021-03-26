@@ -16,7 +16,7 @@ test('renders a reading with the text `Pokédex`', () => {
 });
 
 describe('Requirement number one', () => {
-  test('the home page contains Home, About and Favorites Pokémon.', () => {
+  it('contains Home, About and Favorites Pokémon.', () => {
     const { getAllByRole } = renderWithRouter(<App />);
     const pageLinks = getAllByRole('link');
     expect(pageLinks[0].innerHTML).toBe('Home');
@@ -24,7 +24,7 @@ describe('Requirement number one', () => {
     expect(pageLinks[2].innerHTML).toBe('Favorite Pokémons');
   });
 
-  test('page redirects to Home "/"', () => {
+  it('redirects to Home "/"', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const homeLink = getByText(/home/i);
     expect(homeLink).toBeInTheDocument();
@@ -33,7 +33,7 @@ describe('Requirement number one', () => {
     expect(home).toBe('/');
   });
 
-  test('page redirects to About "/about"', () => {
+  it('redirects to About "/about"', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const aboutLink = getByText(/about/i);
     expect(aboutLink).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe('Requirement number one', () => {
     expect(about).toBe('/about');
   });
 
-  test('page redirects to Favorite Pokémons "/favorites"', () => {
+  it('redirects to Favorite Pokémons "/favorites"', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const favoritesLink = getByText(/Favorite Pokémons/i);
     expect(favoritesLink).toBeInTheDocument();
