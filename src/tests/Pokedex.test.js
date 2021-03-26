@@ -10,14 +10,14 @@ test('has a heading with text `Encountered pokémons', () => {
   expect(header).toBeInTheDocument();
 });
 
-test('shows next Pokémon when `Próximo pokémon` is clicked', () => {
-  const { getByRole, getByTestId } = renderWithRouter(<App />);
+test('shows next Pokémon when it is clicked', () => {
+  const { getByTestId } = renderWithRouter(<App />);
   const pokemon = getByTestId('pokemon-name');
-  const nextButton = getByRole('button', { name: 'Próximo pokémon' });
+  const nextButton = getByTestId('next-pokemon');
 
   userEvent.click(nextButton);
-
   expect(pokemon.textContent).toBe('Charmander');
+
   userEvent.click(nextButton);
   expect(pokemon.textContent).toBe('Caterpie');
 });
@@ -53,7 +53,7 @@ test('has filter buttom with text All', () => {
 test('has buttons for each Pokémon type', () => {
   const { getByRole } = renderWithRouter(<App />);
   const pokemonsTypes = [
-    'Electric', 'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon'
+    'Electric', 'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon',
   ];
 
   pokemonsTypes.forEach((type) => {
