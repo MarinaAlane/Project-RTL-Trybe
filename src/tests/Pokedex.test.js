@@ -18,9 +18,9 @@ describe('Requirement 05', () => {
     151: true,
   };
 
-  const listOfButtons = pokemons.reduce((prev, cur) => {
-    return prev.includes(cur.type) ? prev : [...prev, cur.type];
-  }, ['All']);
+  const listOfButtons = pokemons.reduce((prev, cur) => (
+    prev.includes(cur.type) ? prev : [...prev, cur.type]
+  ), ['All']);
 
   it('should have the heading with the text Encountered pokemons', () => {
     const { getByRole } = renderWithRouter(<Pokedex
@@ -64,11 +64,4 @@ describe('Requirement 05', () => {
       expect(() => (listOfButtons.includes(pokemonType.innerHTML))).toBeTruthy();
     });
   });
-
-  // Teste se a Pokédex tem os botões de filtro.
-  // Teste se a Pokédex contém um botão para resetar o filtro
-  // Teste se é criado, dinamicamente, um botão de filtro para cada tipo de Pokémon.
-
-  // // TO-DO:
-  // O botão de Próximo pokémon deve ser desabilitado quando a lista filtrada de Pokémons tiver um só pokémon.
 });
