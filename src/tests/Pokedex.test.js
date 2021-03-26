@@ -2,7 +2,6 @@ import React from 'react';
 import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import renderWhithRouter from '../components/RenderWithRouter';
-// import Pokedex from '../components/Pokedex';
 import App from '../App';
 import pokemons from '../data';
 
