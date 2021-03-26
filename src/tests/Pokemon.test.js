@@ -18,6 +18,8 @@ describe('Testa o componente Pokemon:', () => {
     renderWithRouter(<Pokemon pokemon={ pokemons[0] } />);
     const name = screen.getByTestId('pokemon-name');
     expect(name).toHaveTextContent(/^Pikachu$/);
+    const type = screen.getByTestId('pokemonType');
+    expect(type).toHaveTextContent(/^Electric$/);
     const pokemonWeight = screen.getByTestId('pokemon-weight');
     expect(pokemonWeight).toHaveTextContent(/^Average weight: 6.0 kg$/);
     const image = screen.getByAltText(/^Pikachu sprite$/);
@@ -28,13 +30,8 @@ describe('Testa o componente Pokemon:', () => {
     fireEvent.click(getByText('More details'));
     expect(history.location.pathname).toBe('/pokemons/25');
   });
-  it('Verifica mostrar a página de detalhes do Pokémon clicando em Mais detalhes', () => {
-    const { history } = renderWithRouter(<Pokemon pokemon={ pokemons[0] } />);
-    fireEvent.click(screen.getByText(/More details/i));
-    const { pathname } = history.location;
-    expect(pathname).toBe('/pokemons/25');
-  });
-  it('Verficica se há link favorite Pokémon', () => {
+
+  it('Verfica se há link favorite Pokémon', () => {
     const poke = pokemons[0];
 
     const { getByAltText } = renderWithRouter(<Pokemon pokemon={ poke } isFavorite />);
