@@ -5,10 +5,12 @@ import renderWhithRouter from '../components/RenderWithRouter';
 import App from '../App';
 import pokemons from '../data';
 
-const moreDetails = 'More details'
+const moreDetails = 'More details';
 test('Teste se as informações detalhadas do Pokémon selecionado são mostradas na tela.',
   () => {
     renderWhithRouter(<App />);
+    const string = ('This intelligent Pokémon roasts hard berries '
+    + 'with electricity to make them tender enough to eat.');
     const linkDatalhes = screen.getByText(moreDetails);
     userEvent.click(linkDatalhes);
 
@@ -25,9 +27,7 @@ test('Teste se as informações detalhadas do Pokémon selecionado são mostrada
     expect(linkDatalhes).not.toBeInTheDocument();
     expect(headingSumario).toBeInTheDocument();
     expect(textoSumario).toBeInTheDocument();
-    expect(textoSumario.nextSibling.textContent).toBe(
-      'This intelligent Pokémon roasts hard berries with electricity to make them tender enough to eat.',
-    );
+    expect(textoSumario.nextSibling.textContent).toBe(string);
 
     const nomePok = screen.getByTestId('pokemon-name');
     const tipoPok = screen.getByTestId('pokemonType');
