@@ -28,25 +28,27 @@ test('shows one Pokémon at a time', () => {
   expect(getAllByTestId('pokemon-name').length).toBe(1);
 });
 
-test('has filter buttons', () => {
-  const { getByText, getByRole } = renderWithRouter(<App />);
-  const buttonNext = getByRole('button', { name: 'Próximo pokémon' });
-  const buttonFire = getByRole('button', { name: 'Fire' });
-  const buttonPsychic = getByRole('button', { name: 'Psychic' });
+test('has a reset to filter buttons', () => {
+  const { getAllByTestId, getByText } = renderWithRouter(<App />);
+  const allTypeButtons = getAllByTestId('pokemon-type-button');
 
-  userEvent.click(buttonFire);
+  expect(allTypeButtons[0]).toHaveTextContent('Electric');
+  userEvent.click(allTypeButtons[0]);
+  expect(getByText('Pikachu')).toBeInTheDocument();
+  expect(allTypeButtons[1]).toHaveTextContent('Fire');
+  userEvent.click(allTypeButtons[1]);
   expect(getByText('Charmander')).toBeInTheDocument();
-  userEvent.click(buttonNext);
-  expect(getByText('Rapidash')).toBeInTheDocument();
-  userEvent.click(buttonPsychic);
-  expect(getByText('Alakazam')).toBeInTheDocument();
-  userEvent.click(buttonNext);
-  expect(getByText('Mew')).toBeInTheDocument();
+  expect(allTypeButtons[2]).toHaveTextContent('Bug');
+  expect(allTypeButtons[3]).toHaveTextContent('Poison');
+  expect(allTypeButtons[4]).toHaveTextContent('Psychic');
+  expect(allTypeButtons[5]).toHaveTextContent('Normal');
+  expect(allTypeButtons[6]).toHaveTextContent('Dragon');
 });
 
 test('has filter buttom with text All', () => {
   const { getByRole } = renderWithRouter(<App />);
   const buttonAll = getByRole('button', { name: 'All' });
+  userEvent.click(buttonAll);
   expect(buttonAll).toBeInTheDocument();
 });
 
