@@ -27,15 +27,15 @@ describe('Requirement 7: Component PokemonDetails', () => {
     expect(imgs[1].src).toBe('https://cdn.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
   });
   it('Tests whether it is possible to favor the pokemon', () => {
-    const { getByRole, getByText, queryAllByRole } = renderWithRouter(<App />);
+    const { getByText, queryAllByRole, getByLabelText } = renderWithRouter(<App />);
     userEvent.click(getByText(/More Details/i));
-    const checkBox = getByRole('checkbox');
+    const checkBox = getByLabelText('Pokémon favoritado?');
     if (!(checkBox.checked)) {
-      userEvent.click(getByRole('checkbox'));
+      userEvent.click(checkBox);
     }
     expect(queryAllByRole('img')
       .filter((img) => img.alt === 'Pikachu is marked as favorite').length).toBe(1);
-    userEvent.click(getByRole('checkbox'));
+    userEvent.click(checkBox);
     expect(queryAllByRole('img')
       .filter((img) => img.alt === 'Pikachu is marked as favorite').length).toBe(0);
   });
