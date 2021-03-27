@@ -20,3 +20,11 @@ test('there are h2 heading with About Pokédex text', () => {
   const aboutPokedex = getByRole('heading', {level: 2, name: 'About Pokédex'});
   expect(aboutPokedex).toBeDefined();
 });
+test('there are 2 paragraphs with Pokémon includes in their text', () => {
+  const { getAllByText } = renderWithRouter(<About />);
+  const aboutParagraphs = getAllByText((content, element) => {
+    return element.tagName === 'P' && content.includes('Pokémons');
+  });
+  expect(aboutParagraphs).toBeDefined();
+  expect(aboutParagraphs.length).toBe(2);
+});
