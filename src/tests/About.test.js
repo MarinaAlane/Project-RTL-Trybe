@@ -18,8 +18,8 @@ describe('Testing About component', () => {
   });
 
   it('verify if the page have 2 paragraphs', () => {
-    const { getAllByTitle } = render(<About />);
-    const paragraphs = getAllByTitle('paragraph');
+    const { getAllByText } = render(<About />);
+    const paragraphs = getAllByText(/pokémons/i);
 
     expect(paragraphs.length).toBe(2);
   });
