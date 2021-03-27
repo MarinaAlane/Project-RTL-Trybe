@@ -1,4 +1,4 @@
-export default () => ([
+const favoritePokemonsMock = [
   {
     id: 25,
     name: 'Pikachu',
@@ -24,4 +24,6 @@ export default () => ([
       'This intelligent Pokémon roasts hard berries '
       + 'with electricity to make them tender enough to eat.',
   },
-]);
+];
+
+export default favoritePokemonsMock;
