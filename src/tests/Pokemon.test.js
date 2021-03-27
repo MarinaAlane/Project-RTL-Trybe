@@ -6,7 +6,7 @@ import App from '../App';
 describe('Testing Pokémon component', () => {
   it('verify if are render the name, type and average weigth', () => {
     const { getByTestId, getByText, getByAltText } = renderWithRouter(<App />);
-    const pokemonName = getByTestId('pokemon-name');
+    const pokemonName = getByText('Pikachu');
     const pokemonType = getByTestId('pokemonType');
     const pokemonAverage = getByText('Average weight: 6.0 kg');
     const pokemonAltImage = getByAltText('Pikachu sprite');
