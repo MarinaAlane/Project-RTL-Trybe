@@ -28,3 +28,8 @@ test('there are 2 paragraphs with Pokémon includes in their text', () => {
   expect(aboutParagraphs).toBeDefined();
   expect(aboutParagraphs.length).toBe(2);
 });
+test('there are image of pokedex', () => {
+  const { getByRole } = renderWithRouter(<About />);
+  const pokedexImage = getByRole('img');
+  expect(pokedexImage.src).toBe('https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
+});
