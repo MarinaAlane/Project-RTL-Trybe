@@ -38,7 +38,7 @@ describe('Testing Pokémon Details component', () => {
   });
 
   it('Check if it is possible to bookmark a pokémon through the details page', () => {
-    const { queryByText, queryAllByRole, queryByAltText } = renderWithRouter(<App />);
+    const { queryByText, queryByAltText } = renderWithRouter(<App />);
 
     const linkDetails = queryByText(/More details/i);
     userEvent.click(linkDetails);
