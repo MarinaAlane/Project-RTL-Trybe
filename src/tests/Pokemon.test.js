@@ -13,7 +13,7 @@ describe('Testing Pokémon component', () => {
     const imagePath = 'https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png';
 
     expect(pokemonName).toBeInTheDocument();
-    expect(pokemonType).toBeInTheDocument();
+    expect(pokemonType.textContent).toBeInTheDocument();
     expect(pokemonAverage).toBeInTheDocument();
     expect(pokemonAltImage.src).toBe(imagePath);
   });
@@ -39,6 +39,6 @@ describe('Testing Pokémon component', () => {
 
     const favoriteIconPikachu = getByAltText('Pikachu is marked as favorite');
 
-    expect(favoriteIconPikachu).toBeInTheDocument();
+    expect(favoriteIconPikachu.src).toBe('http://localhost/star-icon.svg');
   });
 });
