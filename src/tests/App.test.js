@@ -1,8 +1,7 @@
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
-import { Pokedex } from '../components';
 
 describe('Testando componente App', () => {
   it('Testando se há o texto `Pokédex`', () => {
