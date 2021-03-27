@@ -13,7 +13,7 @@ describe('Testing Pokémon component', () => {
     const imagePath = 'https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png';
 
     expect(pokemonName).toBeInTheDocument();
-    expect(pokemonType.textContent).toBeInTheDocument();
+    expect(pokemonType.textContent).toBe('Electric');
     expect(pokemonAverage).toBeInTheDocument();
     expect(pokemonAltImage.src).toBe(imagePath);
   });

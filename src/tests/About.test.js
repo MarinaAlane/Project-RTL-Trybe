@@ -19,6 +19,9 @@ describe('Testing About component', () => {
 
   it('verify if the page have 2 paragraphs', () => {
     const { getAllByText } = render(<About />);
+    // Ajustado após verificar o ok do avaliador
+    // PR de referência IvanRafael
+    // Acredito que o melhor seria usar o getAllByTitle
     const paragraphs = getAllByText(/pokémons/i);
 
     expect(paragraphs.length).toBe(2);
