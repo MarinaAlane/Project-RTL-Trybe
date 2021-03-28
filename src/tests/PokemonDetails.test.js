@@ -33,8 +33,19 @@ describe('Testing Pokémon Details component', () => {
 
     const mapsOfLocationPokemon = queryAllByAltText('Pikachu location');
     const expectedLength = 2;
+    const firstMap = 'https://cdn.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png';
+    const secondMap = 'https://cdn.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png';
+    const labelFirstMap = queryByText('Kanto Viridian Forest');
+    const labelSecondMap = queryByText('Kanto Power Plant');
+
+    const expectedLabelFirstMap = 'Kanto Viridian Forest';
+    const expectedLabelSecondMap = 'Kanto Power Plant';
 
     expect(mapsOfLocationPokemon.length).toBe(expectedLength);
+    expect(mapsOfLocationPokemon[0].src).toBe(firstMap);
+    expect(mapsOfLocationPokemon[1].src).toBe(secondMap);
+    expect(labelFirstMap.innerHTML).toBe(expectedLabelFirstMap);
+    expect(labelSecondMap.innerHTML).toBe(expectedLabelSecondMap);
   });
 
   it('Check if it is possible to bookmark a pokémon through the details page', () => {
