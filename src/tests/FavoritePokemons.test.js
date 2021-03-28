@@ -54,7 +54,7 @@ describe('Testing page Favorite Pokémons', () => {
     // Verify Favorite Pokémon
     const linkFavoritePokemon = getByText(/Favorite Pokémons/i);
     userEvent.click(linkFavoritePokemon);
-    const listOfFavorites = getAllByTestId('pokemon');
+    const listOfFavorites = getAllByTestId('pokemon-name');
     const expectLengthOfArray = 3;
 
     expect(listOfFavorites.length).toBe(expectLengthOfArray);
