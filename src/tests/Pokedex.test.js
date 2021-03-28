@@ -6,6 +6,16 @@ import renderWithRouter from '../renderWithRouter';
 
 afterEach(cleanup);
 
+test('Teste se página contém um heading `h2` com o texto `Encountered pokémons`.', () => {
+  const { getByText, container } = renderWithRouter(<App />);
+  const heading = getByText('Encountered pokémons');
+  const element = container.querySelector('h2');
+
+  expect(heading).toBeInTheDocument();
+  expect(element).toBeInTheDocument();
+  expect(heading.tagName).toBe('H2');
+});
+
 test('O botão deve conter o texto Próximo pokémon', () => {
   const { getByRole } = renderWithRouter(<App />);
   const next = getByRole('button', { name: /Próximo pokémon/i });
@@ -43,16 +53,16 @@ test('Os próximos Pokémons da lista devem ser mostrados, um a um.', () => {
   expect(getByText('Dragonair')).toBeInTheDocument();
 });
 
-test('Primeiro Pokémon deve ser mostrado ao clicar no botão', () => {
-  const { getByTestId, getByText } = renderWithRouter(<App pokemons={ pokemons } />);
+// test('Primeiro Pokémon deve ser mostrado ao clicar no botão', () => {
+//   const { getByTestId, getByText } = renderWithRouter(<App pokemons={ pokemons } />);
 
-  const dragonair = getByText(/Dragonair/i);
-  expect(dragonair).toBeInTheDocument();
+//   const dragonair = getByText(/Dragonair/i);
+//   expect(dragonair).toBeInTheDocument();
 
-  fireEvent.click(getByTestId('next-pokemon'));
-  const pikachu = getByText(/Pikachu/i);
-  expect(pikachu).toBeInTheDocument();
-});
+//   fireEvent.click(getByTestId('next-pokemon'));
+//   const pikachu = getByText(/Pikachu/i);
+//   expect(pikachu).toBeInTheDocument();
+// });
 
 test('Os Pokémons do tipo selecionado do botão de tipo devem estar circulados.', () => {
   const { getByRole, getByText } = renderWithRouter(<App />);
