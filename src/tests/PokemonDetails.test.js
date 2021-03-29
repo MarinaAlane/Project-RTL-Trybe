@@ -47,12 +47,12 @@ describe('Tests PokemonDetails', () => {
     expect(screen.getByText(`Game Locations of ${thisPokemon.name}`)).toBeInTheDocument();
     const pokemonMaps = Array.from(screen
       .getAllByAltText(`${thisPokemon.name} location`));
-    thisPokemon.foundAt.map((element) => element.map)
+    expect(thisPokemon.foundAt.map((element) => element.map)
       .forEach((map) => {
-        pokemonMaps.some((pokemonMap) => (
+        expect(pokemonMaps.some((pokemonMap) => (
           pokemonMap.src === map
-        ));
-      });
+        ))).toBeTruthy();
+      }));
     expect(screen.getByText('Pokémon favoritado?')).toBeInTheDocument();
     expect(screen.getByText(thisPokemon.summary)).toBeInTheDocument();
   });
