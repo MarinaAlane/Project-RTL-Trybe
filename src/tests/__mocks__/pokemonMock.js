@@ -1,9 +1,16 @@
 export const isFavoritePokemonMock = {
-  10: true,
-  25: true,
+  4: false,
+  10: false,
+  23: false,
+  25: false,
+  65: false,
+  78: false,
+  143: false,
+  148: false,
+  151: false,
 };
 
-const pokemonsMock = [
+export const pokemonMock = [
   {
     id: 25,
     name: 'Pikachu',
@@ -232,5 +239,3 @@ const pokemonsMock = [
       + ' its whole body, the weather will begin to change instantly.',
   },
 ];
-
-export default pokemonsMock;
