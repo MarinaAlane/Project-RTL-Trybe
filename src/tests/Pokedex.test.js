@@ -39,6 +39,7 @@ function renderPokedexSetup(props) {
 }
 
 function renderPokedexSetupWithChecks(props = {}) {
+  const ALL = 'All';
   const utils = renderPokedexSetup(props);
   const {
     dbPokemonFetch,
@@ -59,7 +60,6 @@ function renderPokedexSetupWithChecks(props = {}) {
     expect(pokemonName).toHaveTextContent(pokemonNames[0]);
   };
 
-  const ALL = 'All';
   const clickFilterAndVerifyChange = (type = ALL) => {
     const filteredTestPokemons = dbPokemonFetchByType(type);
     const filteredPokemonNames = filteredTestPokemons.map(
@@ -140,4 +140,16 @@ test('dynamic buttons were created sucessfull for each pokemon type', () => {
     expect(typesNameButtonsWithOutAll).toContain(type);
     expect(buttonAll).toBeInTheDocument();
   });
+});
+
+test('button next pokemon disabled when there is one pokemon at filtered list', () => {
+  const TEST_CASE = 'Electric';
+  const {
+    dbPokemonFetchByType,
+    nextPokemonButton,
+  } = renderPokedexSetup();
+  const eletricPokemons = dbPokemonFetchByType(TEST_CASE);
+  expect(eletricPokemons).toHaveLength(1);
+  userEvent.click(screen.getByRole('button', { name: TEST_CASE }));
+  expect(nextPokemonButton).toBeDisabled();
 });
