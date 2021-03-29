@@ -70,7 +70,7 @@ test('view only one pokemonCard when pokemonTypes/nextPokemon button is clicked'
   });
 });
 
-test('there are a filter fire button that only display filtered fire pokemons', () => {
+test('there are a filter fire button that only display filtered psychic pokemons', () => {
   const POKEMON_TYPE = 'Psychic';
   const FIRST_POKEMON = 'Alakazam';
 
@@ -92,4 +92,41 @@ test('there are a filter fire button that only display filtered fire pokemons', 
   });
   expect(screen.queryByTestId(POKEMON_NAME, { name: FIRST_POKEMON }))
     .toHaveTextContent(FIRST_POKEMON);
+});
+
+test.only('start with and there are All button to override any filtered view', () => {
+  const FILTER_TEST = 'Fire';
+
+  const {
+    dbPokemonFetch: dbAllPokemonFetch,
+    dbPokemonFetchByType,
+    nextPokemonButton,
+    pokemonTypesButtons,
+  } = renderPokedexSetup();
+
+  const allPokemonNames = dbAllPokemonFetch('name');
+  const filteredTestPokemons = dbPokemonFetchByType(FILTER_TEST);
+  const againButtonAll = screen.queryByRole('button', { name: /all/i });
+  const pokemonName = screen.queryByTestId(POKEMON_NAME);
+
+  const checkByPokemons = (pokemonNames = allPokemonNames) => {
+    pokemonNames.forEach((name) => {
+      expect(pokemonName).toHaveTextContent(name);
+      userEvent.click(nextPokemonButton);
+    });
+    expect(pokemonName).toHaveTextContent(pokemonNames[0]);
+  };
+  const clickFilterAndVerifyChange = (type = FILTER_TEST) => {
+    const TEST_BUTTON = pokemonTypesButtons.find(
+      (typeButton) => typeButton.textContent === type,
+    );
+    userEvent.click(TEST_BUTTON);
+    const filteredPokemonNames = filteredTestPokemons.map((pokemon) => pokemon.name);
+    checkByPokemons(filteredPokemonNames);
+  };
+
+  checkByPokemons();
+  clickFilterAndVerifyChange();
+  userEvent.click(againButtonAll);
+  checkByPokemons();
 });
