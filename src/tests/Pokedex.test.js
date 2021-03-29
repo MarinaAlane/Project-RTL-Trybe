@@ -25,7 +25,10 @@ function renderPokedexSetup(props) {
     ...utils,
     nextPokemonButton,
     pokemonTypesButtons,
-    dbPokemonFetch: (data) => pokemonMock.map((pokemon) => pokemon[data]),
+    dbPokemonFetch: (data) => pokemonMock
+      .map((pokemon) => pokemon[data]),
+    dbPokemonFetchByType: (type) => pokemonMock
+      .filter((pokemon) => pokemon.type === type),
   };
 }
 
@@ -40,7 +43,7 @@ test('there are h2 heading text: Encountered pokémons', () => {
   expect(heading.textContent).toBe('Encountered pokémons');
 });
 
-test('if next pokémon appears when button was pressed and loop pokemons', () => {
+test('if next pokémon appears when button was pressed and loop over pokemons', () => {
   const { dbPokemonFetch, nextPokemonButton } = renderPokedexSetup();
 
   dbPokemonFetch('name').forEach((pokemon) => {
@@ -65,4 +68,28 @@ test('view only one pokemonCard when pokemonTypes/nextPokemon button is clicked'
     }
     userEvent.click(typeButton);
   });
+});
+
+test('there are a filter fire button that only display filtered fire pokemons', () => {
+  const POKEMON_TYPE = 'Psychic';
+  const FIRST_POKEMON = 'Alakazam';
+
+  const {
+    dbPokemonFetchByType,
+    nextPokemonButton,
+  } = renderPokedexSetup();
+
+  const pokemonByType = dbPokemonFetchByType(POKEMON_TYPE);
+  const pokemonTypeBtn = screen.queryByRole('button', { name: POKEMON_TYPE });
+  expect(pokemonTypeBtn).not.toBeNull();
+
+  userEvent.click(pokemonTypeBtn);
+
+  pokemonByType.forEach(({ name: pokeName }) => {
+    expect(screen.queryByTestId(POKEMON_NAME, { name: pokeName }))
+      .toHaveTextContent(pokeName);
+    userEvent.click(nextPokemonButton);
+  });
+  expect(screen.queryByTestId(POKEMON_NAME, { name: FIRST_POKEMON }))
+    .toHaveTextContent(FIRST_POKEMON);
 });
