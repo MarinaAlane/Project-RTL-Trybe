@@ -40,8 +40,9 @@ describe('Tests PokemonDetails', () => {
 
   test('Tests Pokemon Info', () => {
     expect(screen.getByText(`${thisPokemon.name} Details`)).toBeInTheDocument();
-    expect(Array.from(screen.getAllByRole('heading', { level: 2, name: 'Summary' }))
-      .some((elemento) => elemento.textContent === 'Summary'))
+    const arrayOfH2 = Array.from(screen.getAllByRole('heading', { level: 2 }));
+    expect(arrayOfH2
+      .some((element) => element.textContent === 'Summary'))
       .toBeTruthy();
   });
 });
