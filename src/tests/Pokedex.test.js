@@ -148,8 +148,8 @@ test('button next pokemon disabled when there is one pokemon at filtered list', 
     dbPokemonFetchByType,
     nextPokemonButton,
   } = renderPokedexSetup();
-  const eletricPokemons = dbPokemonFetchByType(TEST_CASE);
-  expect(eletricPokemons).toHaveLength(1);
+  const testCasePokemons = dbPokemonFetchByType(TEST_CASE);
+  expect(testCasePokemons).toHaveLength(1);
   userEvent.click(screen.getByRole('button', { name: TEST_CASE }));
   expect(nextPokemonButton).toBeDisabled();
 });
