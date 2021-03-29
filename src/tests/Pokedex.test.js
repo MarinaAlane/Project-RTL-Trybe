@@ -52,3 +52,17 @@ test('if next pokémon appears when button was pressed and loop pokemons', () =>
   expect(screen.queryByTestId(POKEMON_NAME, { name: 'Pikachu' }))
     .toHaveTextContent('Pikachu');
 });
+
+test('view only one pokemonCard when pokemonTypes/nextPokemon button is clicked', () => {
+  const { nextPokemonButton, pokemonTypesButtons } = renderPokedexSetup();
+
+  pokemonTypesButtons.forEach((typeButton) => {
+    const { disabled: testAnotherPokemon } = nextPokemonButton;
+    expect(screen.queryAllByTestId(POKEMON_NAME)).toHaveLength(1);
+    if (!testAnotherPokemon) {
+      userEvent.click(nextPokemonButton);
+      expect(screen.queryAllByTestId(POKEMON_NAME)).toHaveLength(1);
+    }
+    userEvent.click(typeButton);
+  });
+});
