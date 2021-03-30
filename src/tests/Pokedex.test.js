@@ -25,7 +25,6 @@ describe('Teste o componente Pokedex.js', () => {
     expect(all.textContent).toBe('All');
   });
 
-
   it('Deve existir um botão de filtragem para cada tipo de Pokémon', () => {
     const { getAllByTestId } = renderWithRouter(<App />);
     const bottonType = getAllByTestId('pokemon-type-button');
