@@ -1,137 +1,48 @@
 import React from 'react';
-import { fireEvent, cleanup } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from '../renderWithRouter';
 
-afterEach(cleanup);
+describe('Teste o componente Pokedex.js', () => {
+  it('h2 com texto - Encountered pokémons', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const aga2 = getByRole('heading', { level: 2 });
 
-test('Teste se página contém um heading `h2` com o texto `Encountered pokémons`.', () => {
-  const { getByText, container } = renderWithRouter(<App />);
-  const heading = getByText('Encountered pokémons');
-  const element = container.querySelector('h2');
+    expect(aga2).toHaveTextContent('Encountered pokémons');
+  });
 
-  expect(heading).toBeInTheDocument();
-  expect(element).toBeInTheDocument();
-  expect(heading.tagName).toBe('H2');
-});
+  it('Próximo pokémon ', () => {
+    const { getByTestId } = renderWithRouter(<App />);
+    const bottonNext = getByTestId('next-pokemon');
 
-test('O botão deve conter o texto Próximo pokémon', () => {
-  const { getByRole } = renderWithRouter(<App />);
-  const next = getByRole('button', { name: /Próximo pokémon/i });
-  expect(next).toBeInTheDocument();
-});
+    expect(bottonNext.textContent).toBe('Próximo pokémon');
+  });
 
-test('Os próximos Pokémons da lista devem ser mostrados, um a um.', () => {
-  const { getByText, getByRole } = renderWithRouter(<App />);
-  const next = getByRole('button', { name: /Próximo pokémon/i });
-  expect(next).toBeInTheDocument();
-  expect(getByText('Pikachu')).toBeInTheDocument();
+  it('All', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const all = getByText('All');
 
-  fireEvent.click(next);
-  expect(getByText('Charmander')).toBeInTheDocument();
+    expect(all.textContent).toBe('All');
+  });
 
-  fireEvent.click(next);
-  expect(getByText('Caterpie')).toBeInTheDocument();
 
-  fireEvent.click(next);
-  expect(getByText('Ekans')).toBeInTheDocument();
+  it('Deve existir um botão de filtragem para cada tipo de Pokémon', () => {
+    const { getAllByTestId } = renderWithRouter(<App />);
+    const bottonType = getAllByTestId('pokemon-type-button');
 
-  fireEvent.click(next);
-  expect(getByText('Alakazam')).toBeInTheDocument();
+    expect(bottonType[0].textContent).toBe('Electric');
+    expect(bottonType[1].textContent).toBe('Fire');
+    expect(bottonType[2].textContent).toBe('Bug');
+    expect(bottonType[3].textContent).toBe('Poison');
+    expect(bottonType[4].textContent).toBe('Psychic');
+    expect(bottonType[5].textContent).toBe('Normal');
+    expect(bottonType[6].textContent).toBe('Dragon');
+  });
 
-  fireEvent.click(next);
-  expect(getByText('Mew')).toBeInTheDocument();
+  it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const all = getByText('All');
 
-  fireEvent.click(next);
-  expect(getByText('Rapidash')).toBeInTheDocument();
-
-  fireEvent.click(next);
-  expect(getByText('Snorlax')).toBeInTheDocument();
-
-  fireEvent.click(next);
-  expect(getByText('Dragonair')).toBeInTheDocument();
-});
-
-// test('Primeiro Pokémon deve ser mostrado ao clicar no botão', () => {
-//   const { getByTestId, getByText } = renderWithRouter(<App pokemons={ pokemons } />);
-
-//   const dragonair = getByText(/Dragonair/i);
-//   expect(dragonair).toBeInTheDocument();
-
-//   fireEvent.click(getByTestId('next-pokemon'));
-//   const pikachu = getByText(/Pikachu/i);
-//   expect(pikachu).toBeInTheDocument();
-// });
-
-test('Os Pokémons do tipo selecionado do botão de tipo devem estar circulados.', () => {
-  const { getByRole, getByText } = renderWithRouter(<App />);
-  const eletric = getByRole('button', { name: /Electric/i });
-  fireEvent.click(eletric);
-  expect(getByText(/Pikachu/i)).toBeInTheDocument();
-
-  const next = getByRole('button', { name: /Próximo pokémon/i });
-  const fire = getByRole('button', { name: /Fire/i });
-  fireEvent.click(fire);
-  expect(getByText(/Charmander/i)).toBeInTheDocument();
-  fireEvent.click(next);
-  expect(getByText(/Rapidash/i)).toBeInTheDocument();
-
-  const bug = getByRole('button', { name: /Bug/i });
-  fireEvent.click(bug);
-  expect(getByText(/Caterpie/i)).toBeInTheDocument();
-
-  const poison = getByRole('button', { name: /Poison/i });
-  fireEvent.click(poison);
-  expect(getByText(/Ekans/i)).toBeInTheDocument();
-
-  const psy = getByRole('button', { name: /Psychic/i });
-  fireEvent.click(psy);
-  expect(getByText(/Alakazam/i)).toBeInTheDocument();
-  fireEvent.click(next);
-  expect(getByText(/Mew/i)).toBeInTheDocument();
-
-  const normal = getByRole('button', { name: /Normal/i });
-  fireEvent.click(normal);
-  expect(getByText(/Snorlax/i)).toBeInTheDocument();
-
-  const dragon = getByRole('button', { name: /Dragon/i });
-  fireEvent.click(dragon);
-  expect(getByText(/Dragonair/i)).toBeInTheDocument();
-});
-
-test('O texto do botão deve corresponder ao nome do tipo, ex. Psychic.', () => {
-  const { getByRole, getByText } = renderWithRouter(<App />);
-  const type = getByRole('button', { name: /All/i });
-  fireEvent.click(type);
-
-  const next = getByRole('button', { name: /Próximo pokémon/i });
-  expect(next).toBeInTheDocument();
-  expect(getByText('Pikachu')).toBeInTheDocument();
-
-  fireEvent.click(next);
-  expect(getByText('Charmander')).toBeInTheDocument();
-
-  fireEvent.click(next);
-  expect(getByText('Caterpie')).toBeInTheDocument();
-
-  fireEvent.click(next);
-  expect(getByText('Ekans')).toBeInTheDocument();
-
-  fireEvent.click(next);
-  expect(getByText('Alakazam')).toBeInTheDocument();
-
-  fireEvent.click(next);
-  expect(getByText('Mew')).toBeInTheDocument();
-
-  fireEvent.click(next);
-  expect(getByText('Rapidash')).toBeInTheDocument();
-
-  fireEvent.click(next);
-  expect(getByText('Snorlax')).toBeInTheDocument();
-
-  fireEvent.click(next);
-  expect(getByText('Dragonair')).toBeInTheDocument();
-
-  fireEvent.click(next);
-  expect(getByText('Pikachu')).toBeInTheDocument();
+    fireEvent.click(all);
+  });
 });
