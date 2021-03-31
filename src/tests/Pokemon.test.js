@@ -15,13 +15,14 @@ const pokemon = {
 };
 
 const MORE_DETAILS = 'More details';
+const POKEMON_NAME = 'pokemon-name';
 
 describe('Testando o componente <Pokemon.js />', () => {
   it('Verifica se é renderizado um card com as informações de um pokémon.', () => {
     const { getByTestId, getAllByRole } = renderWithRouter(<App />);
     const { name, type, averageWeight: { value, measurementUnit }, image } = pokemon;
 
-    const namePokemon = getByTestId('pokemon-name');
+    const namePokemon = getByTestId(POKEMON_NAME);
     expect(namePokemon.textContent).toBe(name);
 
     const typePokemon = getByTestId('pokemonType');
@@ -61,7 +62,7 @@ describe('Testando o componente <Pokemon.js />', () => {
   it('Verifica se existe um ícone de estrela nos Pokémons favoritados', () => {
     const { getByText, getByTestId, getAllByRole, history } = renderWithRouter(<App />);
 
-    const namePokemon = getByTestId('pokemon-name');
+    const namePokemon = getByTestId(POKEMON_NAME);
     const linkPokemon = getByText(MORE_DETAILS);
     userEvent.click(linkPokemon);
 
@@ -70,12 +71,12 @@ describe('Testando o componente <Pokemon.js />', () => {
 
     history.push('/favorites');
 
-    const nameFavorite = getByTestId('pokemon-name');
+    const nameFavorite = getByTestId(POKEMON_NAME);
     expect(nameFavorite).toStrictEqual(namePokemon);
 
     const imagesPokemon = getAllByRole('img');
     expect(imagesPokemon[1].src).toMatch('/star-icon.svg');
-    expect(imagesPokemon[1].alt).toStrictEqual(`${namePokemon.textContent} is marked as favorite`);
-
+    expect(imagesPokemon[1].alt)
+      .toStrictEqual(`${namePokemon.textContent} is marked as favorite`);
   });
 });
