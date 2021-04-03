@@ -1,12 +1,12 @@
 export const isFavoritePokemonMock = {
   4: false,
   10: false,
-  23: false,
+  23: true,
   25: false,
   65: false,
   78: false,
   143: false,
-  148: false,
+  148: true,
   151: false,
 };
 
