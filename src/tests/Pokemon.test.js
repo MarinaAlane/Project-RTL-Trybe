@@ -1,4 +1,5 @@
 import React from 'react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { createMemoryHistory } from 'history';
 import Pokemon from '../components/Pokemon';
