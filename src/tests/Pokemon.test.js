@@ -16,4 +16,18 @@ describe('Tests Pokemon', () => {
     return acc;
   }, {});
   const thisPokemon = pokemons.randomElement();
+  render(
+    <>
+      <p>DummyText</p>
+      <p>DummyText</p>
+      <MemoryRouter>
+        <Pokemon />
+      </MemoryRouter>
+      <p>
+        { isPokemonFavoriteById }
+        { thisPokemon }
+      </p>
+    </>,
+  );
+  screen.getByText('');
 });
