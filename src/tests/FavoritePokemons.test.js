@@ -1,7 +1,7 @@
 import React from 'react';
 import renderWithRouter from '../helper/renderWithRouter';
 import FavoritePokemons from '../components/FavoritePokemons';
-import favoritePokemonsMock from './__mocks__/pokemonFavoriteMock';
+import onlyPikachuMock from './__mocks__/onlyPikachu';
 
 test('display No favorite pokemon found, when there are no favorite pokemons', () => {
   const { getByText } = renderWithRouter(<FavoritePokemons />);
@@ -11,7 +11,7 @@ test('display No favorite pokemon found, when there are no favorite pokemons', (
 test('show all favorite pokemons', () => {
   const { getByTestId, getByAltText } = renderWithRouter(
     <FavoritePokemons
-      pokemons={ favoritePokemonsMock }
+      pokemons={ onlyPikachuMock }
     />,
   );
   const favoritePokemonName = getByTestId('pokemon-name');
