@@ -34,5 +34,7 @@ describe('Tests Pokemon', () => {
       .toHaveAttribute('href', `/pokemons/${pokemon.id}`);
     expect(screen.getByAltText(`${pokemon.name} sprite`))
       .toHaveAttribute('src', `${pokemon.image}`);
+    expect(screen.getByAltText(`${pokemon.name} is marked as favorite`))
+      .toHaveAttribute('src', '/star-icon.svg');
   });
 });
