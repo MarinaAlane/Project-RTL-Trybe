@@ -3,7 +3,7 @@ import NotFound from '../components/NotFound';
 import renderWithRouter from './renderWithRouter';
 
 describe('4. Testa o componente <NotFound.js />', () => {
-  it('Testa ha um heading `h2` com o texto `Page requested not found', () => {
+  it('Testa ha um heading h2 com o texto Page requested not found', () => {
     const { getByRole } = renderWithRouter(<NotFound />);
 
     const heading = getByRole('heading', { level: 2 });
@@ -19,7 +19,6 @@ describe('4. Testa o componente <NotFound.js />', () => {
 
     const altRegex = /Pikachu crying because the page requested was not found/i;
     const img = getByAltText(altRegex);
-    console.log(img.src);
 
     expect(img.src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
   });
