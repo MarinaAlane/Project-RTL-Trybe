@@ -1,8 +1,6 @@
 import React from 'react';
-import { cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
-import App from '../App';
 import Pokemon from '../components/Pokemon';
 
 const dummyPokemon = {
@@ -52,17 +50,28 @@ describe('Test \'Pokemon.js\' Component - Requirement 06', () => {
     expect(details).toHaveAttribute('href', `/pokemons/${id}`);
   });
   it('redirects to pokemon details', () => {
-    const { getByTestId, queryByText, getByRole } = renderWithRouter(<App />);
-    const name = getByTestId('pokemon-name').innerHTML;
-    const details = queryByText('More details');
-    userEvent.click(details);
-    const detailsHeader = getByRole(
-      'heading',
-      {
-        level: 2,
-        name: `${name} Details`,
-      },
+    const { getByRole, history } = renderWithRouter(
+      <Pokemon
+        pokemon={ dummyPokemon }
+        isFavorite={ false }
+      />,
     );
-    expect(detailsHeader).toBeInTheDocument();
+    const details = getByRole('link', { name: 'More details' });
+    userEvent.click(details);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/pokemons/65');
+  });
+  it('has a star icon in favorite pokemons', () => {
+    const { getByAltText } = renderWithRouter(
+      <Pokemon
+        pokemon={ dummyPokemon }
+        isFavorite
+      />,
+    );
+    const { name } = dummyPokemon;
+    const star = getByAltText(`${name} is marked as favorite`);
+    expect(star.src).toContain('/star-icon.svg');
+    expect(star).toBeInTheDocument();
   });
 });
