@@ -48,7 +48,7 @@ describe('Test \'Pokedex.js\' Component - Requirement 05', () => {
       const nextButton = getByTestId(nextPokemon);
       expect(nextButton).toBeInTheDocument();
       const firstPokemon = getByTestId(nameTestId).textContent;
-      let pokemonType = getByTestId('pokemonType').textContent;
+      let pokemonType = getByTestId('pokemon-type').textContent;
       expect(pokemonType).toBe(filterType);
       userEvent.click(nextButton);
       let pokemon;
@@ -57,7 +57,7 @@ describe('Test \'Pokedex.js\' Component - Requirement 05', () => {
       for (let i = 0; pokemon !== firstPokemon && i < maxClicks; i += 1) {
         userEvent.click(nextButton);
         pokemon = getByTestId(nameTestId).textContent;
-        pokemonType = getByTestId('pokemonType').textContent;
+        pokemonType = getByTestId('pokemon-type').textContent;
         expect(pokemonType).toBe(filterType);
         if (pokemon === firstPokemon) {
           loopComplete = true;
