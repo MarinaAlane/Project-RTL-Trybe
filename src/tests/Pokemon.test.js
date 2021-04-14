@@ -32,7 +32,7 @@ describe('Test \'Pokemon.js\' Component - Requirement 06', () => {
     );
     const { name, type, averageWeight: { value, measurementUnit }, image } = dummyPokemon;
     expect(getByTestId('pokemon-name').innerHTML).toBe(name);
-    expect(getByTestId('pokemonType').innerHTML).toBe(type);
+    expect(getByTestId('pokemon-type').innerHTML).toBe(type);
     expect(getByTestId('pokemon-weight').innerHTML)
       .toBe(`Average weight: ${value} ${measurementUnit}`);
     expect(getAllByAltText(`${name} sprite`)[0]).toHaveAttribute('src', image);
