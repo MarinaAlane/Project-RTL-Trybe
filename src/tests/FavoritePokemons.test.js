@@ -30,4 +30,12 @@ describe('Testando o componente FavoritePokémons.js', () => {
     const cards = getAllByTestId('pokemon-name');
     expect(cards.length).toBe(pokemons.length);
   });
+
+  test('Teste se nenhum card de pokémon é exibido, se ele não estiver favoritado', () => {
+    const { queryAllByTestId } = renderWithRouter(
+      <FavoritePokemons pokemons={ [] } />,
+    );
+    const cards = queryAllByTestId('pokemon-name');
+    expect(cards.length).toBe(0);
+  });
 });
