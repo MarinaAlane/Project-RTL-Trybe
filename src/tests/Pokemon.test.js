@@ -9,7 +9,7 @@ describe('Test <Pokemon /> component', () => {
     const { getByText, getByAltText, getByTestId } = renderWithRouter(<App />);
     expect(getByText('Pikachu')).toBeInTheDocument();
     expect(getByText('Average weight: 6.0 kg')).toBeInTheDocument();
-    const pokemonType = (getByTestId('pokemonType'));
+    const pokemonType = getByTestId('pokemonType');
     expect(pokemonType.textContent).toBe('Electric');
     const image = getByAltText('Pikachu sprite');
     const imagePath = 'https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png';
