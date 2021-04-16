@@ -21,7 +21,6 @@ describe('Test <FavoritePokemons /> component', () => {
       getByRole,
       getByLabelText,
       getAllByTestId,
-      history,
     } = renderWithRouter(<App />);
     const electric = getByRole('button', { name: 'Electric' });
     userEvent.click(electric);
@@ -40,8 +39,6 @@ describe('Test <FavoritePokemons /> component', () => {
     userEvent.click(favoriteLabel);
     const favoritesLink = getByRole('link', { name: 'Favorite Pokémons' });
     userEvent.click(favoritesLink);
-    console.log(history.location.pathname);
-    // expect(getByText('Pikachu')).toBeInTheDocument();
     const favorites = getAllByTestId('pokemon-name');
     expect(favorites.length).toBe(2);
   });
