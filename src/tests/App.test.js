@@ -60,7 +60,7 @@ describe('Testa se os links estão redirecionando corretamente', () => {
     const { getByText, history } = renderWithRouter(<App />);
     const wrongLink = '/pagina/que-nao-existe/';
     history.push(wrongLink);
-    const noMatch = getByText(/Page requested not found/i)
+    const noMatch = getByText(/Page requested not found/i);
     expect(noMatch).toBeInTheDocument();
   });
 });
