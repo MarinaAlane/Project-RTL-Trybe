@@ -18,7 +18,6 @@ import pokemons from './data';
 
 import './App.css';
 
-
 class App extends Component {
   static setIsPokemonFavoriteById() {
     const favoritePokemonIds = readFavoritePokemonIds();
