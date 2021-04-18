@@ -21,6 +21,6 @@ describe('Teste se a página contém um heading h2 com o texto About Pokédex', 
     const { getByRole } = renderWithRouter(<About />);
     const image = getByRole('img');
     expect(image).toBeInTheDocument();
-    expect(image.src).toBe('https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png')
+    expect(image.src).toBe('https://cdn.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
   });
 });
