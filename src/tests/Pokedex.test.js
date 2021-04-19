@@ -16,6 +16,17 @@ const pokemonType = [
   'Dragon',
 ];
 
+const types = [
+  'Electric',
+  'Fire',
+  'Bug',
+  'Poison',
+  'Psychic',
+  'Normal',
+  'Dragon',
+];
+
+
 describe('5. Testa o componente <Pokedex.js />', () => {
   it('Testa ha um heading h2 com o texto "Encountered pokémons"', () => {
     const { getByRole } = renderWithRouter(<App />);
@@ -59,29 +70,78 @@ describe('5. Testa o componente <Pokedex.js />', () => {
     const { getAllByTestId } = renderWithRouter(<App />);
 
     const pokemons = getAllByTestId('pokemonType');
-    console.log(pokemons.length);
     expect(pokemons.length).toBe(1);
   });
+
+  it('Teste se a Pokédex tem os botões de filtro', () => {
+      const { getByRole, getByTestId, getByText } = renderWithRouter(<App />);
+
+      types.forEach((pokemon) => {
+        const btn = getByRole('button', {name: pokemon})
+
+        userEvent.click(btn);
+
+        const currentPokemon = getByTestId('pokemonType').innerHTML;
+        // O pokemon atual deve ter tipo do botao selecionado
+        expect(currentPokemon).toBe(pokemon);
+        // O texto do botão deve corresponder ao nome do tipo
+        expect(btn.innerHTML).toBe(pokemon);
+        
+        if (pokemon === 'Psychic' || pokemon === 'Fire') {
+          userEvent.click(getByText(/Próximo pokémon/i));
+          
+          const otherPokemon = getByTestId('pokemonType').innerHTML;
+          expect(otherPokemon).toBe(pokemon);
+          expect(btn.innerHTML).toBe(pokemon);
+        }
+      });
+    });
+
+  it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
+    const { getByRole, getByTestId, getByText } = renderWithRouter(<App />);
+
+    // const btnAll = (getByText(/All/i));
+    expect(getByText(/All/i)).toBeInTheDocument();
+
+    // userEvent.click(getByText(/Próximo pokémon/i));
+    let currentPokemon = getByTestId('pokemonType').innerHTML;
+    expect(currentPokemon).toBe('Electric');
+    userEvent.click(getByText(/Próximo pokémon/i));
+    let otherPokemon = getByTestId('pokemonType').innerHTML;
+    expect(otherPokemon).toBe('Fire');
+
+    userEvent.click(getByRole('button', {name: 'All'}));
+
+    // userEvent.click(getByText(/Próximo pokémon/i));
+    currentPokemon = getByTestId('pokemonType').innerHTML;
+    expect(currentPokemon).toBe('Electric');
+    userEvent.click(getByText(/Próximo pokémon/i));
+    otherPokemon = getByTestId('pokemonType').innerHTML;
+    expect(otherPokemon).toBe('Fire');
+  });
+
+  it('Testa se é criado, dinamicamente, um botão de filtro para cada tipo.', () => {
+    const { getAllByRole, getByTestId, getByText, getAllByText } = renderWithRouter(<App />);
+
+    expect(getByText(/All/i)).toBeInTheDocument();
+
+    types.forEach((type) => {
+      // const typeButton = getAllByText(type);
+      const typeButton = getAllByRole('button', {name: type});
+      expect(typeButton.length).toBe(1);
+    });
+  });
+
+  it('Btn Próximo pokémon deve ser disable se a lista tiver um só pokemon', () => {
+    const { getByText, getByRole } = renderWithRouter(<App />);
+
+    types.forEach((type) => {
+      // if (type !== 'Psychic' || type !== 'Fire') {
+      if (type !== 'Fire' && type !== 'Psychic') {
+        userEvent.click(getByRole('button', {name: type}));
+        expect(getByText(/Próximo pokémon/i)).toBeDisabled();
+        console.log(type);
+      }
+    });
+  });
 });
-
-/*
-  describe('Teste se a Pokédex tem os botões de filtro', () => {
-    it('A partir da seleção de um botão de tipo, a Pokédex deve circular somente pelos pokémons daquele tipo', () => {});
-    it('O texto do botão deve corresponder ao nome do tipo', () => {});
-
-  });
-  describe('Teste se a Pokédex contém um botão para resetar o filtro', () => {
-    it('O texto do botão deve ser All', () => {});
-    it('A Pokedéx deverá mostrar os Pokémons normalmente (sem filtros) quando o botão All for clicado', () => {});
-    it('Ao carregar a página, o filtro selecionado deverá ser All', () => {});
-
-  });
-  describe('Teste se é criado, dinamicamente, um botão de filtro para cada tipo de Pokémon', () => {
-
-    it('Os botões de filtragem devem ser dinâmicos', () => {});
-    it('Deve existir um botão de filtragem para cada tipo de Pokémon disponível nos dados, sem repetição', () => {});
-    it('Deve ser mostrado como opção de filtro, um botão para cada um dos tipos. Além disso, o botão All precisa estar sempre visível', () => {});
-  });
-
-  it('O botão de Próximo pokémon deve ser desabilitado quando a lista filtrada de Pokémons tiver um só pokémon', () => {});
-  }); */
