@@ -4,15 +4,15 @@ import renderWithRouter from '../services/renderWithRouter';
 
 describe('Testes do modulo NotFound', () => {
   it('Testa de a página tem o texto "Not Found"', () => {
-    const { getByText } = renderWithRouter(<NotFound />);
-    const errorMessage = getByText(/Page requested not found/i);
+    const { getByRole } = renderWithRouter(<NotFound />);
+    const errorMessage = getByRole('heading', { ariaLevel: 2 });
     expect(errorMessage).toBeInTheDocument();
   });
 
   it('Testa se a imagem aparece', () => {
-    const { getByRole } = renderWithRouter(<NotFound />);
-    const image = getByRole('img');
-    expect(image).toBeInTheDocument();
-    expect(image.src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+    const { getAllByRole } = renderWithRouter(<NotFound />);
+    const image = getAllByRole('img');
+    expect(image[1]).toBeInTheDocument();
+    expect(image[1].src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
   });
 });
