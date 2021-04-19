@@ -15,6 +15,5 @@ describe('Testes do modulo NotFound', () => {
     history.push('/linkerrado');
     const image = getByRole('img', { src: 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif' });
     expect(image).toBeInTheDocument();
-    //expect(image.src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
   });
 });
