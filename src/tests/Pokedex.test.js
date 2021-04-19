@@ -54,6 +54,14 @@ describe('5. Testa o componente <Pokedex.js />', () => {
       }
     }
   });
+
+  it('Testa se é mostrado apenas um Pokémon por vez', () => {
+    const { getAllByTestId } = renderWithRouter(<App />);
+
+    const pokemons = getAllByTestId('pokemonType');
+    console.log(pokemons.length);
+    expect(pokemons.length).toBe(1);
+  });
 });
 
 /*
