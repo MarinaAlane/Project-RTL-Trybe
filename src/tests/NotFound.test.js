@@ -3,10 +3,11 @@ import NotFound from '../components/NotFound';
 import renderWithRouter from '../services/renderWithRouter';
 
 describe('Testes do modulo NotFound', () => {
-  it('Testa de a página tem o texto "Not Found"', () => {
+  it('Testa se a página tem o texto "Not Found"', () => {
     const { getByRole } = renderWithRouter(<NotFound />);
     const errorMessage = getByRole('heading', { ariaLevel: 2 });
     expect(errorMessage).toBeInTheDocument();
+    expect(errorMessage).toHaveTextContent('Page requested not found 😭');
   });
 
   it('Testa se a imagem aparece', () => {
