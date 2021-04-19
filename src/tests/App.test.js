@@ -2,7 +2,7 @@ import React from 'react';
 import { MemoryRouter, Router } from 'react-router-dom';
 import { fireEvent, render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
-import renderRounter from './renderRouter';
+import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
 test('renders a reading with the text `Pokédex`', () => {
@@ -92,7 +92,7 @@ test('verifica se ao clicar em Favorite Pokémons direciona para favorites', () 
 });
 
 test('tenta entrar com o pathname xablau', () => {
-  const { getByText, history } = renderRounter(<App />);
+  const { getByText, history } = renderWithRouter(<App />);
 
   const route = '/xablau';
   history.push(route);
