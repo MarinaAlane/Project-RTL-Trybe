@@ -5,11 +5,12 @@ import { createMemoryHistory } from 'history';
 
 export default function renderWithRouter(component) {
   const history = createMemoryHistory();
-  return({
+  return ({
     ...render(
       <Router history={ history }>
         { component }
-      </Router>
-    ), history,
-  })
+      </Router>,
+    ),
+      history,
+  });
 }

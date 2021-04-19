@@ -1,5 +1,5 @@
 import React from 'react';
-import { MemoryRouter, withRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { fireEvent, render } from '@testing-library/react';
 import renderWithRouter from './History';
 import App from '../App';
@@ -8,7 +8,7 @@ test('renders a reading with the text `Pokédex`', () => {
   const { getByText } = render(
     <MemoryRouter>
       <App />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
   const heading = getByText(/Pokédex/i);
   expect(heading).toBeInTheDocument();
@@ -16,9 +16,9 @@ test('renders a reading with the text `Pokédex`', () => {
 
 test('shows the Pokédex when the route is `/`', () => {
   const { getByText } = render(
-    <MemoryRouter initialEntries={['/']}>
+    <MemoryRouter initialEntries={ ['/'] }>
       <App />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
 
   expect(getByText('Encountered pokémons')).toBeInTheDocument();
@@ -26,17 +26,15 @@ test('shows the Pokédex when the route is `/`', () => {
 
 test('shows the nav with 3 links: home, about and favorite pokemon', () => {
   const { getAllByRole } = render(
-    <MemoryRouter initialEntries={['/']}>
+    <MemoryRouter initialEntries={ ['/'] }>
       <App />
-    </MemoryRouter>
+    </MemoryRouter>,
   );
   const navBar = getAllByRole('link');
 
-  expect(navBar.length).toBe(4);
   expect(navBar[0].textContent).toBe('Home');
   expect(navBar[1].textContent).toBe('About');
   expect(navBar[2].textContent).toBe('Favorite Pokémons');
-
 });
 
 test('redirect to `/` when click on `Home` link', () => {
