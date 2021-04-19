@@ -13,7 +13,8 @@ describe('Testes do modulo NotFound', () => {
   it('Testa se a imagem aparece', () => {
     const { getByRole, history } = renderWithRouter(<App />);
     history.push('/linkerrado');
-    const image = getByRole('img', { src: 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif' });
+    const image = getByRole('img');
     expect(image).toBeInTheDocument();
+    expect(image.src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
   });
 });
