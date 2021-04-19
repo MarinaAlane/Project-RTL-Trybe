@@ -1,7 +1,6 @@
 import React from 'react';
 import renderWithRouter from './History';
 import About from '../components/About';
-import { getAllByText } from '@testing-library/react';
 
 it('About Pokedex in heading', () => {
   const { getByRole } = renderWithRouter(<About />);
