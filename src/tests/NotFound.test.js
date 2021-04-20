@@ -4,6 +4,8 @@ import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
 import NotFound from '../components/NotFound';
 
+// Requisito 4
+
 const renderWithHistory = (component) => {
   const history = createMemoryHistory();
 
