@@ -1,8 +1,8 @@
 import React from 'react';
+import { fireEvent } from '@testing-library/react';
 import renderWithRouter from './History';
 import App from '../App';
 import FavoritePokemons from '../components/FavoritePokemons';
-import { fireEvent, getAllByTestId, getAllByText } from '@testing-library/react';
 
 it('show message `no favorite pokemon found` if there isnt', () => {
   const { getByText } = renderWithRouter(<FavoritePokemons />);
