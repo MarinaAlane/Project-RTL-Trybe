@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, getByLabelText } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import renderWithRouter from './History';
 import App from '../App';
 import pokemons from '../data';
@@ -19,7 +19,9 @@ it('render info about selected pokemon', () => {
 it('find a section of maps with pokemons location', () => {
   const { queryByText, getByRole, getAllByAltText } = renderWithRouter(<App />);
   fireEvent.click(queryByText(linkDetails));
-  expect(getByRole('heading', { level: 2, name: `Game Locations of ${pokemon.name}` })).toBeInTheDocument();
+  expect(
+    getByRole('heading', { level: 2, name: `Game Locations of ${pokemon.name}` })
+  ).toBeInTheDocument();
   pokemon.foundAt.forEach(({ location, map }, index) => {
     expect(queryByText(location)).toBeInTheDocument();
     expect(getAllByAltText(`${pokemon.name} location`)[index].src).toBe(map);
