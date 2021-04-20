@@ -60,3 +60,24 @@ test('Testa se a página é direcionada para a URL / ao clicar no link Home', ()
   const { pathname } = history.location;
   expect(pathname).toBe('/');
 });
+
+test('Testa se a página é direcionada para a URL /about ao clicar no link About', () => {
+  const history = createMemoryHistory();
+
+  const renderWithHistory = {
+    ...render(<MemoryRouter history={ history }><App /></MemoryRouter>), history,
+  };
+
+  const { getByText, history: historyTest } = renderWithHistory;
+
+  const aboutLink = getByText('About');
+  userEvent.click(aboutLink);
+
+  historyTest.push('/about');
+
+  const { pathname } = history.location;
+  expect(pathname).toBe('/about');
+
+  const aboutTitle = getByText('About Pokédex');
+  expect(aboutTitle).toBeInTheDocument();
+});
