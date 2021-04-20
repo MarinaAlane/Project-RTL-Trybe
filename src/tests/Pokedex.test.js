@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, getByTestId } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import renderWithRouter from './History';
 import App from '../App';
 import pokemons from '../data';
@@ -14,7 +14,7 @@ it('Heading with text `Encountered pokémons`', () => {
 it('Print next pokemon when clicked in button `Próximo pokémon`', () => {
   const { getByRole, getByTestId } = renderWithRouter(<App />);
   const pokemon = getByTestId('pokemon-name');
-  const nextButton = getByRole('button', { name: 'Próximo pokémon'});
+  const nextButton = getByRole('button', { name: 'Próximo pokémon' });
 
   fireEvent.click(nextButton);
   expect(pokemon.textContent).toBe('Charmander');
@@ -48,7 +48,7 @@ it('Button for each type', () => {
 
   pokemons.forEach(({ type }) => {
     expect(getByRole('button', { name: type })).toBeInTheDocument();
-  })
+  });
 });
 
 it('Button next pokemon disabled when filtered result one pokemon', () => {
