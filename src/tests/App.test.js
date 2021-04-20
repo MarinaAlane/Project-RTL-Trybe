@@ -1,6 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
 import App from '../App';
 
 test('renders a reading with the text `Pokédex`', () => {
@@ -39,4 +40,15 @@ test('Testa se o topo da aplicação possui um conjunto de links de navegação'
 
   const favoriteLink = getByText('Favorite Pokémons');
   expect(favoriteLink).toBeInTheDocument();
-})
+});
+
+test('Testa se a página é direcionada para a URL / ao clicar no link Home', () => {
+  const { getByText } = render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>,
+  );
+
+  const homeLink = getByText('Home');
+  userEvent.Click(homeLink);
+});
