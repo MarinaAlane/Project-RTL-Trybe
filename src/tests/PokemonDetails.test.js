@@ -20,7 +20,7 @@ it('find a section of maps with pokemons location', () => {
   const { queryByText, getByRole, getAllByAltText } = renderWithRouter(<App />);
   fireEvent.click(queryByText(linkDetails));
   expect(
-    getByRole('heading', { level: 2, name: `Game Locations of ${pokemon.name}` })
+    getByRole('heading', { level: 2, name: `Game Locations of ${pokemon.name}` }),
   ).toBeInTheDocument();
 
   pokemon.foundAt.forEach(({ location, map }, index) => {
