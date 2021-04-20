@@ -26,7 +26,6 @@ const types = [
   'Dragon',
 ];
 
-
 describe('5. Testa o componente <Pokedex.js />', () => {
   it('Testa ha um heading h2 com o texto "Encountered pokémons"', () => {
     const { getByRole } = renderWithRouter(<App />);
@@ -74,45 +73,42 @@ describe('5. Testa o componente <Pokedex.js />', () => {
   });
 
   it('Teste se a Pokédex tem os botões de filtro', () => {
-      const { getByRole, getByTestId, getByText } = renderWithRouter(<App />);
+    const { getByRole, getByTestId, getByText } = renderWithRouter(<App />);
 
-      types.forEach((pokemon) => {
-        const btn = getByRole('button', {name: pokemon})
+    types.forEach((pokemon) => {
+      const btn = getByRole('button', { name: pokemon });
 
-        userEvent.click(btn);
+      userEvent.click(btn);
 
-        const currentPokemon = getByTestId('pokemonType').innerHTML;
-        // O pokemon atual deve ter tipo do botao selecionado
-        expect(currentPokemon).toBe(pokemon);
-        // O texto do botão deve corresponder ao nome do tipo
+      const currentPokemon = getByTestId('pokemonType').innerHTML;
+      // O pokemon atual deve ter tipo do botao selecionado
+      expect(currentPokemon).toBe(pokemon);
+      // O texto do botão deve corresponder ao nome do tipo
+      expect(btn.innerHTML).toBe(pokemon);
+
+      if (pokemon === 'Psychic' || pokemon === 'Fire') {
+        userEvent.click(getByText(/Próximo pokémon/i));
+
+        const otherPokemon = getByTestId('pokemonType').innerHTML;
+        expect(otherPokemon).toBe(pokemon);
         expect(btn.innerHTML).toBe(pokemon);
-        
-        if (pokemon === 'Psychic' || pokemon === 'Fire') {
-          userEvent.click(getByText(/Próximo pokémon/i));
-          
-          const otherPokemon = getByTestId('pokemonType').innerHTML;
-          expect(otherPokemon).toBe(pokemon);
-          expect(btn.innerHTML).toBe(pokemon);
-        }
-      });
+      }
     });
+  });
 
   it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
     const { getByRole, getByTestId, getByText } = renderWithRouter(<App />);
 
-    // const btnAll = (getByText(/All/i));
     expect(getByText(/All/i)).toBeInTheDocument();
 
-    // userEvent.click(getByText(/Próximo pokémon/i));
     let currentPokemon = getByTestId('pokemonType').innerHTML;
     expect(currentPokemon).toBe('Electric');
     userEvent.click(getByText(/Próximo pokémon/i));
     let otherPokemon = getByTestId('pokemonType').innerHTML;
     expect(otherPokemon).toBe('Fire');
 
-    userEvent.click(getByRole('button', {name: 'All'}));
+    userEvent.click(getByRole('button', { name: 'All' }));
 
-    // userEvent.click(getByText(/Próximo pokémon/i));
     currentPokemon = getByTestId('pokemonType').innerHTML;
     expect(currentPokemon).toBe('Electric');
     userEvent.click(getByText(/Próximo pokémon/i));
@@ -121,14 +117,13 @@ describe('5. Testa o componente <Pokedex.js />', () => {
   });
 
   it('Testa se é criado, dinamicamente, um botão de filtro para cada tipo.', () => {
-    const { getAllByRole, getByTestId, getByText, getAllByText } = renderWithRouter(<App />);
+    const { getAllByTestId, getByText } = renderWithRouter(<App />);
 
     expect(getByText(/All/i)).toBeInTheDocument();
 
-    types.forEach((type) => {
-      // const typeButton = getAllByText(type);
-      const typeButton = getAllByRole('button', {name: type});
-      expect(typeButton.length).toBe(1);
+    const typeButtons = getAllByTestId('pokemon-type-button');
+    types.forEach((type, index) => {
+      expect(type).toBe(typeButtons[index].innerHTML);
     });
   });
 
@@ -136,11 +131,9 @@ describe('5. Testa o componente <Pokedex.js />', () => {
     const { getByText, getByRole } = renderWithRouter(<App />);
 
     types.forEach((type) => {
-      // if (type !== 'Psychic' || type !== 'Fire') {
       if (type !== 'Fire' && type !== 'Psychic') {
-        userEvent.click(getByRole('button', {name: type}));
+        userEvent.click(getByRole('button', { name: type }));
         expect(getByText(/Próximo pokémon/i)).toBeDisabled();
-        console.log(type);
       }
     });
   });
