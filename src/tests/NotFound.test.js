@@ -28,11 +28,6 @@ test('Testa se a página possui uma imagem na Pokédex', () => {
   const { getAllByRole } = render(<NotFound />);
 
   const images = getAllByRole('img');
-  expect(images[0]).toBeInTheDocument();
-  images.map((image) => {
-    if (image.src === 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif') {
-      expect(image.src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
-    }
-    return image;
-  });
+  expect(images[1]).toBeInTheDocument();
+  expect(images[1].src).toBe('https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
 });
