@@ -1,7 +1,8 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
 
 test('renders a reading with the text `Pokédex`', () => {
@@ -43,12 +44,19 @@ test('Testa se o topo da aplicação possui um conjunto de links de navegação'
 });
 
 test('Testa se a página é direcionada para a URL / ao clicar no link Home', () => {
-  const { getByText } = render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>,
-  );
+  const history = createMemoryHistory();
+
+  const renderWithHistory = {
+    ...render(<MemoryRouter history={ history }><App /></MemoryRouter>), history,
+  };
+
+  const { getByText, history: historyTest } = renderWithHistory;
 
   const homeLink = getByText('Home');
-  userEvent.Click(homeLink);
+  userEvent.click(homeLink);
+
+  historyTest.push('/');
+
+  const { pathname } = history.location;
+  expect(pathname).toBe('/');
 });
