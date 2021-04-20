@@ -18,7 +18,7 @@ it('render pokemons card info ', () => {
 });
 
 it('Exist a link to show more info', () => {
-  const{ getByText } = renderWithRouter(<App />);
+  const { getByText } = renderWithRouter(<App />);
 
   expect(getByText(linkDetails)).toBeInTheDocument();
 });
