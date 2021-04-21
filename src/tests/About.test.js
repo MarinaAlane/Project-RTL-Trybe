@@ -13,11 +13,9 @@ test('Testa se a página possui o título About Pokédex', () => {
 test('Testa se a página possui dois parágrafos com o texto Pokédex', () => {
   const { getByText } = render(<About />);
 
-  const p1 = getByText(
-    'This application simulates a Pokédex, a digital encyclopedia containing all Pokémons'
-  );
+  const p1 = getByText(/This application simulates a Pokédex/i);
   const p2 = getByText(
-    'One can filter Pokémons by type, and see more details for each one of them'
+    'One can filter Pokémons by type, and see more details for each one of them',
   );
 
   expect(p1).toBeInTheDocument();
