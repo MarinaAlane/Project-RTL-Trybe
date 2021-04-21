@@ -1,1 +1,34 @@
-test('', () => {});
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
+import { createMemoryHistory } from 'history';
+import App from '../App';
+
+describe('Test Component Pokemon', () => {
+  it('should have the pokemon card', () => {
+    const history = createMemoryHistory();
+    render(
+      <Router history={ history }>
+        <App />
+      </Router>,
+    );
+
+    const pokemonName = screen.getByTestId('pokemon-name');
+    expect(pokemonName.innerHTML).toBe('Pikachu');
+    const pokemonType = screen.getByTestId('pokemonType');
+    expect(pokemonType.innerHTML).toBe('Electric');
+    const pokemonWeight = screen.getByTestId('pokemon-weight');
+    expect(pokemonWeight.innerHTML).toBe('Average weight: 6.0 kg');
+    const pokemonImg = screen.getByAltText('Pikachu sprite');
+    expect(pokemonImg.src).toBe('https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
+    const pokemonDetails = screen.getByText('More details');
+    expect(pokemonDetails.attributes[0].value).toBe('/pokemons/25');
+    userEvent.click(pokemonDetails);
+    expect(history.location.pathname).toBe('/pokemons/25');
+    const favorite = screen.getByLabelText('Pokémon favoritado?');
+    userEvent.click(favorite);
+    const favoriteIcon = screen.getByAltText('Pikachu is marked as favorite');
+    expect(favoriteIcon.src).toBe('http://localhost/star-icon.svg');
+  });
+});
