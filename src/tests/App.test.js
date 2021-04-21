@@ -1,17 +1,19 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { render } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, fireEvent } from '@testing-library/react';
+// import userEvent from '@testing-library/user-event';
 import App from '../App';
 
 const renderWithHistory = (component) => {
   const history = createMemoryHistory();
 
   return {
-    ...render(<MemoryRouter history={ history }>{ component }</MemoryRouter>), history,
+    ...render(<Router history={ history }>{ component }</Router>), history,
   };
 };
+
+const favoritePokemons = 'Favorite Pokémons';
 
 test('renders a reading with the text `Pokédex`', () => {
   const { getByText } = render(
@@ -47,17 +49,15 @@ test('Testa se o topo da aplicação possui um conjunto de links de navegação'
   const aboutLink = getByText('About');
   expect(aboutLink).toBeInTheDocument();
 
-  const favoriteLink = getByText('Favorite Pokémons');
-  expect(favoriteLink).toBeInTheDocument();
+  const favoriteLink1 = getByText(favoritePokemons);
+  expect(favoriteLink1).toBeInTheDocument();
 });
 
 test('Testa direcionamento para a URL / ao clicar no link Home', () => {
   const { getByText, history } = renderWithHistory(<App />);
 
   const homeLink = getByText('Home');
-  userEvent.click(homeLink);
-
-  historyTest.push('/');
+  fireEvent.click(homeLink);
 
   const { pathname } = history.location;
   expect(pathname).toBe('/');
@@ -67,9 +67,7 @@ test('Testa direcionamento para a URL /about ao clicar no link About', () => {
   const { getByText, history } = renderWithHistory(<App />);
 
   const aboutLink = getByText('About');
-  userEvent.click(aboutLink);
-
-  historyTest.push('/about');
+  fireEvent.click(aboutLink);
 
   const { pathname } = history.location;
   expect(pathname).toBe('/about');
@@ -81,14 +79,24 @@ test('Testa direcionamento para a URL /about ao clicar no link About', () => {
 test('Testa direcionamento para a URL /favorites ao clicar em Favorite Pokémons', () => {
   const { getByText, history } = renderWithHistory(<App />);
 
-  const favoriteLink = getByText('Favorite Pokémons');
-  userEvent.click(favoriteLink);
+  const favoriteLink2 = getByText(favoritePokemons);
+  expect(favoriteLink2).toHaveTextContent(favoritePokemons);
 
-  historyTest.push('/favorites');
+  fireEvent.click(favoriteLink2);
 
   const { pathname } = history.location;
   expect(pathname).toBe('/favorites');
 
-  const aboutTitle = getByText('Favorite pokémons');
-  expect(aboutTitle).toBeInTheDocument();
+  const favoriteTitle = getByText(favoritePokemons);
+  expect(favoriteTitle).toBeInTheDocument();
+});
+
+test('Testa direcionamento para página Not Found caso a URL seja desconhecida', () => {
+  const { getByRole, history } = renderWithHistory(<App />);
+
+  history.push('/xablau');
+
+  const notFound = getByRole('heading', { level: 2 });
+  expect(notFound).toBeInTheDocument();
+  expect(notFound).toHaveTextContent('Page requested not found');
 });
