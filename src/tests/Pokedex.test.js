@@ -20,7 +20,6 @@ describe('5. Testa o componente <Pokedex.js />', () => {
     const { getByRole } = renderWithRouter(<App />);
 
     const heading = getByRole('heading', { level: 2 });
-    // console.log(heading.innerHTML);
     const pokedexRegex = /Encountered pokémons/i;
     const isHeading = pokedexRegex.test(heading.innerHTML);
 
@@ -34,9 +33,8 @@ describe('5. Testa o componente <Pokedex.js />', () => {
     expect(btnText).toBeInTheDocument();
 
     for (let index = 0; index < pokemons.length; index += 1) {
-      const currentPokemon = getByTestId('pokemon-name').innerHTML;
-      expect(currentPokemon).toBe(pokemons[index].name);
-
+      const currentPokemon = getByTestId(/pokemon-name/i);
+      expect(currentPokemon.innerHTML).toBe(pokemons[index].name);
       userEvent.click(getByText(/Próximo pokémon/i));
     }
   });
@@ -55,28 +53,20 @@ describe('5. Testa o componente <Pokedex.js />', () => {
 
     types.forEach((pokemon, index) => {
       expect(filterButtons[index].innerHTML).toBe(pokemon);
-      // console.log(`btntype: ${filterButtons[index].innerHTML}, type: ${pokemon}`);
     });
   });
 
   it('Teste se a Pokédex contém um botão para resetar o filtro', () => {
-    const { getByRole, getByTestId, getByText } = renderWithRouter(<App />);
+    const { getByRole, getByTestId } = renderWithRouter(<App />);
 
-    expect(getByText(/All/i)).toBeInTheDocument();
+    const resetBtn = getByRole('button', { name: 'All' });
+    expect(resetBtn).toBeInTheDocument();
 
-    let currentPokemon = getByTestId('pokemonType').innerHTML;
-    expect(currentPokemon).toBe('Electric');
-    userEvent.click(getByText(/Próximo pokémon/i));
-    let otherPokemon = getByTestId('pokemonType').innerHTML;
-    expect(otherPokemon).toBe('Fire');
+    userEvent.click(resetBtn);
 
-    userEvent.click(getByRole('button', { name: 'All' }));
+    const pokemonInScreen = getByTestId('pokemon-name');
 
-    currentPokemon = getByTestId('pokemonType').innerHTML;
-    expect(currentPokemon).toBe('Electric');
-    userEvent.click(getByText(/Próximo pokémon/i));
-    otherPokemon = getByTestId('pokemonType').innerHTML;
-    expect(otherPokemon).toBe('Fire');
+    expect(pokemonInScreen.innerHTML).toBe(pokemons[0].name);
   });
 
   it('Testa se é criado, dinamicamente, um botão de filtro para cada tipo.', () => {
