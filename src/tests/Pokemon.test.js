@@ -5,8 +5,8 @@ import App from '../App';
 import renderWithRouter from './renderWithRouter';
 import pokemons from '../data';
 
-const getPath = (path) => {
-  const index = path.indexOf('pokemons');
+const getPath = (path, keyWord) => {
+  const index = path.indexOf(keyWord);
   return path.substring(index - 1, path.length);
 };
 
@@ -34,17 +34,16 @@ describe('Teste o componente <Pokemon.js />', () => {
     expect(img).toBeInTheDocument();
     expect(img.src).toBe(image);
   });
-   it('Teste se o card contém um link para exibir detalhes do Pokémon', () => {
+
+  it('Teste se o card contém um link para exibir detalhes do Pokémon', () => {
     const { getByText } = renderWithRouter(<App />);
     const { id } = pokemons[0];
-    // console.log(pathname);
-    const link = getByText(/More details/i);
 
+    const link = getByText(/More details/i);
     userEvent.click(link);
-    // const { location: { pathname } } = history;
-    const url = getPath(link.href);
+    const url = getPath(link.href, 'pokemons');
     expect(url).toBe(`/pokemons/${id}`);
-   });
+  });
 
   it('Teste se ao clicar no link, é redirecionado para a página de detalhes', () => {
     const { getByText, history } = renderWithRouter(<App />);
@@ -55,12 +54,20 @@ describe('Teste o componente <Pokemon.js />', () => {
     expect(pathname).toBe(`/pokemons/${id}`);
   });
 
- /* it('Teste também se a URL exibida no navegador muda para /pokemon/<id>, onde <id> é o id do Pokémon cujos detalhes se deseja ver', () => {});
-
   it('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
-    // O ícone deve ser uma imagem com o atributo src contendo o caminho /star-icon.svg
+    const { queryByAltText, getByText, getByRole } = renderWithRouter(<App />);
+    const { name } = pokemons[0];
+
+    userEvent.click(getByText(/More details/i));
+    const checkbox = getByRole('checkbox');
+    userEvent.click(checkbox);
 
     // A imagem deve ter o atributo alt igual a <pokemon> is marked as favorite, onde <pokemon> é o nome do Pokémon exibido
+    const icon = queryByAltText(`${name} is marked as favorite`);
+    expect(icon.alt).toBe(`${name} is marked as favorite`);
 
-  }); */
+    // O ícone deve ser uma imagem com o atributo src contendo o caminho /star-icon.svg
+    const url = getPath(icon.src, 'star-icon');
+    expect(url).toBe('/star-icon.svg');
+  });
 });
