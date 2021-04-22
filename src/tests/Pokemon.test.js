@@ -5,8 +5,12 @@ import App from '../App';
 import renderWithRouter from './renderWithRouter';
 import pokemons from '../data';
 
-describe('Teste o componente <Pokemon.js />', () => {
+const getPath = (path) => {
+  const index = path.indexOf('pokemons');
+  return path.substring(index - 1, path.length);
+};
 
+describe('Teste o componente <Pokemon.js />', () => {
   it('Teste se é renderizado um card com as informações de determinado pokémon', () => {
     const { getByAltText, getByTestId } = renderWithRouter(<App />);
 
@@ -30,24 +34,28 @@ describe('Teste o componente <Pokemon.js />', () => {
     expect(img).toBeInTheDocument();
     expect(img.src).toBe(image);
   });
-
    it('Teste se o card contém um link para exibir detalhes do Pokémon', () => {
-    const { getByText, history } = renderWithRouter(<App />);
-    // const { location: { pathname } } = history;
-
+    const { getByText } = renderWithRouter(<App />);
     const { id } = pokemons[0];
-
+    // console.log(pathname);
     const link = getByText(/More details/i);
 
     userEvent.click(link);
-    const { location: { pathname } } = history;
-    expect(pathname).toBe(`/pokemons/${id}`)
-    // console.log(pathname);
+    // const { location: { pathname } } = history;
+    const url = getPath(link.href);
+    expect(url).toBe(`/pokemons/${id}`);
    });
 
- /* it('Teste se ao clicar no link de navegação do Pokémon, é feito o redirecionamento da aplicação para a página de detalhes de Pokémon', () => {});
+  it('Teste se ao clicar no link, é redirecionado para a página de detalhes', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    const { id } = pokemons[0];
 
-  it('Teste também se a URL exibida no navegador muda para /pokemon/<id>, onde <id> é o id do Pokémon cujos detalhes se deseja ver', () => {});
+    userEvent.click(getByText(/More details/i));
+    const { location: { pathname } } = history;
+    expect(pathname).toBe(`/pokemons/${id}`);
+  });
+
+ /* it('Teste também se a URL exibida no navegador muda para /pokemon/<id>, onde <id> é o id do Pokémon cujos detalhes se deseja ver', () => {});
 
   it('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
     // O ícone deve ser uma imagem com o atributo src contendo o caminho /star-icon.svg
