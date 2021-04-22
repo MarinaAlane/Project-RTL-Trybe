@@ -22,7 +22,7 @@ describe('Teste o componente <Pokemon.js />', () => {
     expect(pokemonName).toEqual(name);
 
     // 'O tipo correto do pokémon deve ser mostrado na tela'
-    const pokemonType = getByTestId(/pokemonType/i).innerHTML;
+    const pokemonType = getByTestId('pokemonType').innerHTML;
     expect(pokemonType).toEqual(type);
 
     // 'O peso médio do pokémon deve ser exibido com um texto'
