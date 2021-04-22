@@ -52,10 +52,14 @@ describe('Teste o componente <PokemonDetails.js />', () => {
 
     expect(locationImg.length).toBe(location.length);
 
-    /* it('Devem ser exibidos, o nome da localização e uma imagem do mapa em cada localização', () => {
+    // Devem ser exibidos, o nome da localização e uma imagem do mapa em cada localização
 
+    locationImg.forEach((img, index) => {
+      expect(img.src).toBe(location[index].map);
+      const locationName = img.nextElementSibling.textContent;
+      expect(locationName).toBe(location[index].location);
     });
-
+/*
     it('A imagem da localização deve ter um atributo src com a URL da localização', () => {
 
     });
