@@ -66,3 +66,5 @@ test('Testa se a Pokédex tem os botões de filtro', () => {
   });
   expect(buttonAll).toBeInTheDocument();
 });
+
+// testando evaluator
