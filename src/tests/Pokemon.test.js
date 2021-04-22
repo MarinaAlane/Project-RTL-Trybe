@@ -31,9 +31,21 @@ describe('Teste o componente <Pokemon.js />', () => {
     expect(img.src).toBe(image);
   });
 
-  /* it('Teste se o card do Pokémon indicado na Pokédex contém um link de navegação para exibir detalhes deste Pokémon', () => {});
+   it('Teste se o card contém um link para exibir detalhes do Pokémon', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    // const { location: { pathname } } = history;
 
-  it('Teste se ao clicar no link de navegação do Pokémon, é feito o redirecionamento da aplicação para a página de detalhes de Pokémon', () => {});
+    const { id } = pokemons[0];
+
+    const link = getByText(/More details/i);
+
+    userEvent.click(link);
+    const { location: { pathname } } = history;
+    expect(pathname).toBe(`/pokemons/${id}`)
+    // console.log(pathname);
+   });
+
+ /* it('Teste se ao clicar no link de navegação do Pokémon, é feito o redirecionamento da aplicação para a página de detalhes de Pokémon', () => {});
 
   it('Teste também se a URL exibida no navegador muda para /pokemon/<id>, onde <id> é o id do Pokémon cujos detalhes se deseja ver', () => {});
 
