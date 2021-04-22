@@ -3,6 +3,7 @@ import { fireEvent } from '@testing-library/react';
 import { Pokedex } from '../components';
 import renderWithRouter from '../services/renderWithRouter';
 import pokemons from '../data';
+import App from '../App';
 
 const isPokemonFavoriteById = {
   4: false,
@@ -18,6 +19,7 @@ const isPokemonFavoriteById = {
 
 const np = 'next-pokemon';
 const pn = 'pokemon-name';
+const ptb = 'pokemon-type-button';
 
 describe('Teste do Pokemon.js', () => {
   it('Teste se página contém um heading h2 com o texto Encountered pokémons.', () => {
@@ -63,23 +65,22 @@ describe('Teste do Pokemon.js', () => {
       <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isPokemonFavoriteById } />,
     );
 
-    const filterButtons = getAllByTestId('pokemon-type-button');
+    const filterButtons = getAllByTestId(ptb);
     for (let index = 0; index < pokemonTypes().length; index += 1) {
       expect(filterButtons[index]).toHaveTextContent(pokemonTypes()[index]);
     }
   });
 
-  it('Testa se os filtros estão funcionando', () => {
+  it('A partir da seleção de um botão de tipo, a Pokédex deve...', () => {
     const pokemonTypes = (
       () => [...new Set(pokemons.reduce((types, { type }) => [...types, type], []))]
     );
-    const { getByText, getAllByTestId } = renderWithRouter(
-      <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isPokemonFavoriteById } />,
-    );
-    const element = getAllByTestId('pokemonType');
-    for (let index = 0; index < pokemonTypes.length; index += 1) {
-      fireEvent.click(getByText(pokemonTypes[index]));
-      expect(element).toHaveTextContent(pokemonTypes[index]);
+    const { getAllByTestId } = renderWithRouter(<App />);
+    // <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isPokemonFavoriteById } />,
+    const buttonFilter = getAllByTestId(ptb);
+    for (let index = 0; index < buttonFilter.length; index += 1) {
+      expect(buttonFilter[index]).toHaveTextContent(pokemonTypes()[index]);
+      // const btn = getByTestId(pn).innerHTML;
     }
   });
 
@@ -119,5 +120,44 @@ describe('Teste do Pokemon.js', () => {
       expect(pokName).toHaveTextContent(pokemons[index].name);
       fireEvent.click(btnProx);
     }
+  });
+
+  it('Testar se existe um botão para cada tipo de pokémon', () => {
+    const pokemonTypes = (
+      () => [...new Set(pokemons.reduce((types, { type }) => [...types, type], []))]
+    );
+    const { getAllByTestId } = renderWithRouter(
+      <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isPokemonFavoriteById } />,
+    );
+    const buttonFilter = getAllByTestId(ptb);
+    for (let index = 0; index < buttonFilter.length; index += 1) {
+      expect(buttonFilter[index]).toHaveTextContent(pokemonTypes()[index]);
+    }
+  });
+
+  it('Testar se aparece apenas 1 pokemon na tela', () => {
+    const { queryAllByTestId } = renderWithRouter(
+      <App />,
+    );
+    const pokemon = queryAllByTestId(pn);
+    expect(pokemon.length).toBe(1);
+  });
+
+  it('Testar se o botao All está sempre visivel', () => {
+    const { getByText } = renderWithRouter(
+      <App />,
+    );
+    const buttonAll = getByText('All');
+    expect(buttonAll).toBeInTheDocument();
+  });
+
+  it('O botão de Próximo pokémon deve ser desabilitado', () => {
+    const { getByRole, queryByText } = renderWithRouter(
+      <App />,
+    );
+    const buttonElectric = getByRole('button', { name: 'Electric' });
+    fireEvent.click(buttonElectric);
+    const buttonNext = queryByText('Próximo pokémon');
+    expect(buttonNext).toBeDisabled();
   });
 });
