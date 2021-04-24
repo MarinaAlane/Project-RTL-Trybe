@@ -1,5 +1,8 @@
 import React from 'react';
+import { fireEvent } from '@testing-library/react';
 import App from '../App';
+import RenderWithRouter from '../services/renderWithRouter';
+import pokemon from '../data';
 
 describe('Testa o componente <Pokemon.js />', () => {
   test('Testa se renderiza informações de determinado pokémon.', () => {
@@ -16,9 +19,9 @@ describe('Testa o componente <Pokemon.js />', () => {
   test('Testa se contém um link de navegação para exibir detalhes', () => {
     const { getByText, history, getByRole } = RenderWithRouter(<App />);
     const link = getByText(/More details/i);
-    const pokemonId = data[0].id;
+    const pokemonId = pokemon[0].id;
     expect(link).toBeInTheDocument();
-    userEvent.click(link);
+    fireEvent.click(link);
     const { pathname } = history.location;
     const h2details = getByRole('heading', { level: 2, name: 'Pikachu Details' });
     expect(pathname).toBe(`/pokemons/${pokemonId}`);
@@ -27,9 +30,9 @@ describe('Testa o componente <Pokemon.js />', () => {
   test('Testa se contém um link de navegação para exibir detalhes', () => {
     const { getByText, getByAltText } = RenderWithRouter(<App />);
     const moreDetails = getByText(/More details/i);
-    userEvent.click(moreDetails);
+    fireEvent.click(moreDetails);
     const checkFavorite = getByText(/Pokémon favoritado?/i);
-    userEvent.click(checkFavorite);
+    fireEvent.click(checkFavorite);
     const img = getByAltText(/Pikachu is marked as favorite/i);
     expect(img.src).toBe('http://localhost/star-icon.svg');
   });
