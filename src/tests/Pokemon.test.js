@@ -108,18 +108,6 @@ describe('Teste do Pokemon.js', () => {
     const pathname1 = pathname;
     expect(pathname1).toBe('/pokemons/25');
   });
-
-  it('Testa se tem uma estrela no pokemon favoritado', () => {
-    const { getByTestId, getByText, getByRole } = renderWithRouter(<App />);
-    const linkMoreDetails = getByText(/More Details/i);
-    fireEvent.click(linkMoreDetails);
-    const checkBox = getByRole('checkbox');
-    fireEvent.click(checkBox);
-    const star = getByTestId('star-favorite');
-    expect(star).toBeInTheDocument();
-    expect(star.src).toContain('/star-icon.svg');
-    expect(star.alt).toBe('Pikachu is marked as favorite');
-  });
 });
 
 describe('Testa se o Card do Pokemon contém um link de navegação', () => {
