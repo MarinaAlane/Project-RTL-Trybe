@@ -6,6 +6,7 @@ import pokemons from '../data';
 
 const np = 'next-pokemon';
 const pn = 'pokemon-name';
+const md = 'More details';
 
 describe('Teste do Pokemon.js', () => {
   it('Testa se o nome correto do pokemon está aparecendo na tela', () => {
@@ -68,43 +69,45 @@ describe('Teste do Pokemon.js', () => {
   });
 
   it('Verifica se o Average Weight aparece corretamente', () => {
-    const { getByTestId } = renderWithRouter(<App />);
+    const { getByTestId, getByRole, queryByText } = renderWithRouter(<App />);
+    // const { measurementUnit, value } = averageWeight;
     const pokeWeight = getByTestId('pokemon-weight');
     expect(pokeWeight).toBeInTheDocument();
-    expect(pokeWeight).toHaveTextContent('Average weight: 6.0 kg');
+    const buttonAll = getByRole('button', { name: 'All' });
+    const buttonNext = queryByText('Próximo pokémon');
+    fireEvent.click(buttonAll);
+    pokemons.forEach((elem) => {
+      const { averageWeight } = elem;
+      const { value, measurementUnit } = averageWeight;
+      expect(pokeWeight).toHaveTextContent(
+        `Average weight: ${value} ${measurementUnit}`,
+      );
+      fireEvent.click(buttonNext);
+    });
   });
 
   it('A imagem do Pokemon deve ser exibida', () => {
-    const { getAllByRole } = renderWithRouter(<App />);
-    const image = getAllByRole('img');
-    expect(image[0].src).toBe('https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
-  });
-
-  it('Testa se o Card do Pokemon contém um link de navegação', () => {
-    const { getByText } = renderWithRouter(<App />);
-    const linkMoreDetails = getByText('More details');
-    expect(linkMoreDetails).toBeInTheDocument();
+    const { getByRole, queryByText } = renderWithRouter(<App />);
+    const imagePrinted = getByRole('img');
+    const buttonAll = getByRole('button', { name: 'All' });
+    const buttonNext = queryByText('Próximo pokémon');
+    fireEvent.click(buttonAll);
+    pokemons.forEach((elem) => {
+      const { image } = elem;
+      expect(imagePrinted.src).toBe(image);
+      fireEvent.click(buttonNext);
+    });
   });
 
   it('Testa se o link aparece lá em cima ao clicar em More details', () => {
     const { getByText, history } = renderWithRouter(<App />);
-    const linkMoreDetails = getByText('More details');
+    const linkMoreDetails = getByText(md);
     fireEvent.click(linkMoreDetails);
     const { location } = history;
     const { pathname } = location;
     const pathname1 = pathname;
     expect(pathname1).toBe('/pokemons/25');
   });
-
-  // it('Testa se ao clicar no link de navegacao a pagina é redirecionada', () => {
-  //   const { getByText, history } = renderWithRouter(<App />);
-  //   const linkMoreDetails = getByText('More details');
-  //   fireEvent.click(linkMoreDetails);
-  //   const { location } = history;
-  //   const { pathname } = location;
-  //   const pathname1 = pathname;
-  //   expect(pathname1).toBe('/pokemons/25');
-  // });
 
   it('Testa se tem uma estrela no pokemon favoritado', () => {
     const { getByTestId, getByText, getByRole } = renderWithRouter(<App />);
@@ -116,5 +119,91 @@ describe('Teste do Pokemon.js', () => {
     expect(star).toBeInTheDocument();
     expect(star.src).toContain('/star-icon.svg');
     expect(star.alt).toBe('Pikachu is marked as favorite');
+  });
+});
+
+describe('Testa se o Card do Pokemon contém um link de navegação', () => {
+  it('Testa o botão Electric', () => {
+    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const buttonElectric = getByRole('button', { name: 'Electric' });
+    const linkMoreDetails = getByText(md);
+    fireEvent.click(buttonElectric);
+    fireEvent.click(linkMoreDetails);
+    expect(history.location.pathname).toBe('/pokemons/25');
+  });
+
+  it('Testa o botão Fire', () => {
+    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const buttonFire = getByRole('button', { name: 'Fire' });
+    const linkMoreDetails = getByText(md);
+    fireEvent.click(buttonFire);
+    fireEvent.click(linkMoreDetails);
+    expect(history.location.pathname).toBe('/pokemons/4');
+  });
+
+  it('Testa o botão Bug', () => {
+    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const buttonBug = getByRole('button', { name: 'Bug' });
+    const linkMoreDetails = getByText(md);
+    fireEvent.click(buttonBug);
+    fireEvent.click(linkMoreDetails);
+    expect(history.location.pathname).toBe('/pokemons/10');
+  });
+
+  it('Testa o botão Poison', () => {
+    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const buttonPoison = getByRole('button', { name: 'Poison' });
+    const linkMoreDetails = getByText(md);
+    fireEvent.click(buttonPoison);
+    fireEvent.click(linkMoreDetails);
+    expect(history.location.pathname).toBe('/pokemons/23');
+  });
+
+  it('Testa o botão Psychic', () => {
+    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const buttonPsychic = getByRole('button', { name: 'Psychic' });
+    const linkMoreDetails = getByText(md);
+    fireEvent.click(buttonPsychic);
+    fireEvent.click(linkMoreDetails);
+    expect(history.location.pathname).toBe('/pokemons/65');
+  });
+
+  it('Testa o botão Normal', () => {
+    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const buttonNormal = getByRole('button', { name: 'Normal' });
+    const linkMoreDetails = getByText(md);
+    fireEvent.click(buttonNormal);
+    fireEvent.click(linkMoreDetails);
+    expect(history.location.pathname).toBe('/pokemons/143');
+  });
+
+  it('Testa o botão Dragon', () => {
+    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const buttonDragon = getByRole('button', { name: 'Dragon' });
+    const linkMoreDetails = getByText(md);
+    fireEvent.click(buttonDragon);
+    fireEvent.click(linkMoreDetails);
+    expect(history.location.pathname).toBe('/pokemons/148');
+  });
+
+  it('Testa o Rapidash', () => {
+    const { getByText, getByRole, getByTestId, history } = renderWithRouter(<App />);
+    const btnProx = getByTestId(np);
+    const buttonFire = getByRole('button', { name: 'Fire' });
+    const linkMoreDetails = getByText(md);
+    fireEvent.click(buttonFire);
+    fireEvent.click(btnProx);
+    fireEvent.click(linkMoreDetails);
+    expect(history.location.pathname).toBe('/pokemons/78');
+  });
+  it('Testa o Mew', () => {
+    const { getByText, getByRole, getByTestId, history } = renderWithRouter(<App />);
+    const btnProx = getByTestId(np);
+    const buttonPsychic = getByRole('button', { name: 'Psychic' });
+    const linkMoreDetails = getByText(md);
+    fireEvent.click(buttonPsychic);
+    fireEvent.click(btnProx);
+    fireEvent.click(linkMoreDetails);
+    expect(history.location.pathname).toBe('/pokemons/151');
   });
 });
