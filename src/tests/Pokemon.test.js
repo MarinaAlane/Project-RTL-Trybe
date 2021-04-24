@@ -33,43 +33,43 @@ describe('Teste do Pokemon.js', () => {
     }
   });
 
-  it('Testa se o tipo correto está aparecendo na tela', () => {
-    const { getByTestId } = renderWithRouter(<App />);
-    const pokeType = getByTestId(/pokemonType/i);
-    expect(pokeType).toHaveTextContent('Electric');
-    // const pokemonTypes = [
-    //   'Electric',
-    //   'Fire',
-    //   'Bug',
-    //   'Poison',
-    //   'Psychic',
-    //   'Normal',
-    //   'Dragon',
-    // ];
-    // const { getByRole, getByTestId } = renderWithRouter(<App />);
-    // const pokeType = getByTestId(/pokemonType/i);
-    // const buttonElectric = getByRole('button', { name: 'Electric' });
-    // const buttonFire = getByRole('button', { name: 'Fire' });
-    // const buttonBug = getByRole('button', { name: 'Bug' });
-    // const buttonPoison = getByRole('button', { name: 'Poison' });
-    // const buttonPsychic = getByRole('button', { name: 'Psychic' });
-    // const buttonNormal = getByRole('button', { name: 'Normal' });
-    // const buttonDragon = getByRole('button', { name: 'Dragon' });
-    // fireEvent.click(buttonElectric);
-    // expect(pokeType).toHaveTextContent(pokemonTypes[0]);
-    // fireEvent.click(buttonFire);
-    // expect(pokeType).toHaveTextContent(pokemonTypes[1]);
-    // fireEvent.click(buttonBug);
-    // expect(pokeType).toHaveTextContent(pokemonTypes[2]);
-    // fireEvent.click(buttonPoison);
-    // expect(pokeType).toHaveTextContent(pokemonTypes[3]);
-    // fireEvent.click(buttonPsychic);
-    // expect(pokeType).toHaveTextContent(pokemonTypes[4]);
-    // fireEvent.click(buttonNormal);
-    // expect(pokeType).toHaveTextContent(pokemonTypes[5]);
-    // fireEvent.click(buttonDragon);
-    // expect(pokeType).toHaveTextContent(pokemonTypes[6]);
-  });
+  // it('Testa se o tipo correto está aparecendo na tela', () => {
+  //   const { getByTestId } = renderWithRouter(<App />);
+  //   const pokeType = getByTestId(/pokemonType/i);
+  //   expect(pokeType).toHaveTextContent('Electric');
+  //   // const pokemonTypes = [
+  //   //   'Electric',
+  //   //   'Fire',
+  //   //   'Bug',
+  //   //   'Poison',
+  //   //   'Psychic',
+  //   //   'Normal',
+  //   //   'Dragon',
+  //   // ];
+  //   // const { getByRole, getByTestId } = renderWithRouter(<App />);
+  //   // const pokeType = getByTestId(/pokemonType/i);
+  //   // const buttonElectric = getByRole('button', { name: 'Electric' });
+  //   // const buttonFire = getByRole('button', { name: 'Fire' });
+  //   // const buttonBug = getByRole('button', { name: 'Bug' });
+  //   // const buttonPoison = getByRole('button', { name: 'Poison' });
+  //   // const buttonPsychic = getByRole('button', { name: 'Psychic' });
+  //   // const buttonNormal = getByRole('button', { name: 'Normal' });
+  //   // const buttonDragon = getByRole('button', { name: 'Dragon' });
+  //   // fireEvent.click(buttonElectric);
+  //   // expect(pokeType).toHaveTextContent(pokemonTypes[0]);
+  //   // fireEvent.click(buttonFire);
+  //   // expect(pokeType).toHaveTextContent(pokemonTypes[1]);
+  //   // fireEvent.click(buttonBug);
+  //   // expect(pokeType).toHaveTextContent(pokemonTypes[2]);
+  //   // fireEvent.click(buttonPoison);
+  //   // expect(pokeType).toHaveTextContent(pokemonTypes[3]);
+  //   // fireEvent.click(buttonPsychic);
+  //   // expect(pokeType).toHaveTextContent(pokemonTypes[4]);
+  //   // fireEvent.click(buttonNormal);
+  //   // expect(pokeType).toHaveTextContent(pokemonTypes[5]);
+  //   // fireEvent.click(buttonDragon);
+  //   // expect(pokeType).toHaveTextContent(pokemonTypes[6]);
+  // });
 
   it('Verifica se o Average Weight aparece corretamente', () => {
     const { getByTestId, getByRole, queryByText } = renderWithRouter(<App />);
