@@ -44,7 +44,7 @@ describe('Teste do Pokemon.js', () => {
       'Dragon',
     ];
     const { getByRole, getByTestId } = renderWithRouter(<App />);
-    const pokeType = getByTestId('pokemonType');
+    const pokeType = getByTestId('pokemontype');
     const buttonElectric = getByRole('button', { name: 'Electric' });
     const buttonFire = getByRole('button', { name: 'Fire' });
     const buttonBug = getByRole('button', { name: 'Bug' });
