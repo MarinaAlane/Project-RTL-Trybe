@@ -1,3 +1,6 @@
+import React from 'react';
+import App from '../App';
+
 describe('Testa o componente <Pokemon.js />', () => {
   test('Testa se renderiza informações de determinado pokémon.', () => {
     const { getByTestId, getByAltText } = RenderWithRouter(<App />);
