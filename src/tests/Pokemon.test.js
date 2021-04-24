@@ -2,6 +2,10 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
+import pokemons from '../data';
+
+const np = 'next-pokemon';
+const pn = 'pokemon-name';
 
 describe('Teste do Pokemon.js', () => {
   it('Testa se o nome correto do pokemon está aparecendo na tela', () => {
@@ -11,10 +15,48 @@ describe('Teste do Pokemon.js', () => {
     expect(pokeName).toHaveTextContent('Pikachu');
   });
 
+  it('Testa se o nome correto do pokemon está aparecendo na tela', () => {
+    const { getByText, getByTestId } = renderWithRouter(<App />);
+    const buttonAll = getByText('All');
+    expect(buttonAll).toBeInTheDocument();
+    fireEvent.click(buttonAll);
+    const btnProx = getByTestId(np);
+    const pokName = getByTestId(pn);
+    for (let index = 0; index < pokemons.length; index += 1) {
+      if (index === pokemons.length) {
+        fireEvent.click(btnProx);
+        expect(pokName).toHaveTextContent(pokemons[0].name);
+      }
+      expect(pokName).toHaveTextContent(pokemons[index].name);
+      fireEvent.click(btnProx);
+    }
+  });
+
   it('Testa se o tipo correto está aparecendo na tela', () => {
-    const { getByTestId } = renderWithRouter(<App />);
+    const pokemonTypes = ['Electric', 'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon'];
+    const { getByRole, getByTestId } = renderWithRouter(<App />);
     const pokeType = getByTestId('pokemonType');
-    expect(pokeType).toHaveTextContent('Electric');
+    const buttonElectric = getByRole('button', { name: 'Electric' });
+    const buttonFire = getByRole('button', { name: 'Fire' });
+    const buttonBug = getByRole('button', { name: 'Bug' });
+    const buttonPoison = getByRole('button', { name: 'Poison' });
+    const buttonPsychic = getByRole('button', { name: 'Psychic' });
+    const buttonNormal = getByRole('button', { name: 'Normal' });
+    const buttonDragon = getByRole('button', { name: 'Dragon' });
+    fireEvent.click(buttonElectric);
+    expect(pokeType).toHaveTextContent(pokemonTypes[0]);
+    fireEvent.click(buttonFire);
+    expect(pokeType).toHaveTextContent(pokemonTypes[1]);
+    fireEvent.click(buttonBug);
+    expect(pokeType).toHaveTextContent(pokemonTypes[2]);
+    fireEvent.click(buttonPoison);
+    expect(pokeType).toHaveTextContent(pokemonTypes[3]);
+    fireEvent.click(buttonPsychic);
+    expect(pokeType).toHaveTextContent(pokemonTypes[4]);
+    fireEvent.click(buttonNormal);
+    expect(pokeType).toHaveTextContent(pokemonTypes[5]);
+    fireEvent.click(buttonDragon);
+    expect(pokeType).toHaveTextContent(pokemonTypes[6]);
   });
 
   it('Verifica se o Average Weight aparece corretamente', () => {
@@ -68,15 +110,3 @@ describe('Teste do Pokemon.js', () => {
     expect(star.alt).toBe('Pikachu is marked as favorite');
   });
 });
-
-// it('Testa se mostra os pokemons favoritos', () => {
-//   const { getByText, getByRole } = renderWithRouter(<App />);
-//   const btnDetails = getByText(/More Details/i);
-//   fireEvent.click(btnDetails);
-//   const btnFavorite = getByRole('checkbox');
-//   fireEvent.click(btnFavorite);
-//   const btnFavoritePokemons = getByText(/Favorite Pokémons/i);
-//   fireEvent.click(btnFavoritePokemons);
-//   const pokemonName = getByText(/pikachu/i);
-//   expect(pokemonName).toBeInTheDocument();
-// });
