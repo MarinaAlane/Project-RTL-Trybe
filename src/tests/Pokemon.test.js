@@ -34,7 +34,7 @@ describe('Teste do Pokemon.js', () => {
   });
 
   it('Testa se o tipo correto está aparecendo na tela', () => {
-    const { getByRole, getByTestId } = renderWithRouter(<App />);
+    const { getByTestId } = renderWithRouter(<App />);
     const pokeType = getByTestId(/pokemonType/i);
     expect(pokeType).toHaveTextContent('Electric');
     // const pokemonTypes = [
