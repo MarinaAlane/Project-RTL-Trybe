@@ -33,7 +33,15 @@ describe('Teste do Pokemon.js', () => {
   });
 
   it('Testa se o tipo correto está aparecendo na tela', () => {
-    const pokemonTypes = ['Electric', 'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon'];
+    const pokemonTypes = [
+      'Electric',
+      'Fire',
+      'Bug',
+      'Poison',
+      'Psychic',
+      'Normal',
+      'Dragon'
+    ];
     const { getByRole, getByTestId } = renderWithRouter(<App />);
     const pokeType = getByTestId('pokemonType');
     const buttonElectric = getByRole('button', { name: 'Electric' });
