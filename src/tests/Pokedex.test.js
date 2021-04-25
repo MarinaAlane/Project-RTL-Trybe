@@ -14,6 +14,8 @@ const renderWithRouter = (component) => {
   };
 };
 
+const POKEMON_NAME = 'pokemon-name';
+
 describe('Requisito 5', () => {
   it('Testa se a página possui um h2 com o texto Encountered pokémons', () => {
     const { getByText } = renderWithRouter(<App />);
@@ -26,19 +28,21 @@ describe('Requisito 5', () => {
     const buttonNext = getByTestId('next-pokemon');
     expect(buttonNext).toHaveTextContent('Próximo pokémon');
     pokemons.forEach((pokemon) => {
-      const pokemonName = getByTestId('pokemon-name');
+      const pokemonName = getByTestId(POKEMON_NAME);
       expect(pokemonName).toHaveTextContent(pokemon.name);
       if (pokemonName === 'Dragonair') {
         userEvent.click(buttonNext);
-        const firstPokemon = getByTestId('pokemon-name');
+        const firstPokemon = getByTestId(POKEMON_NAME);
         expect(firstPokemon).toHaveTextContent(pokemon[0].name);
         return;
       }
       userEvent.click(buttonNext);
     });
+  });
 
-    /* userEvent.click(buttonNext);
-    const h2 = getByText('Encountered pokémons');
-    expect(h2).toBeInTheDocument(); */
+  it('Testa se é mostrado um pokémon por vez', () => {
+    const { getAllByTestId } = renderWithRouter(<App />);
+    const pokemonsName = getAllByTestId(POKEMON_NAME);
+    expect(pokemonsName.length).toBe(1);
   });
 });
