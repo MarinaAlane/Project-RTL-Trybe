@@ -80,5 +80,4 @@ describe('Requisito 5', () => {
     const buttonNext = getByTestId('next-pokemon');
     expect(buttonNext).toBeDisabled();
   });
-
 });
