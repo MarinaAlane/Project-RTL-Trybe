@@ -21,7 +21,7 @@ describe('Requisito 6', () => {
     const pokemonName = getByTestId('pokemon-name');
     expect(pokemonName).toBeInTheDocument();
     expect(pokemonName).toHaveTextContent('Pikachu');
-    const pokemonType = getByTestId('pokemonType');
+    const pokemonType = getByTestId('pokemon-type');
     expect(pokemonType).toBeInTheDocument();
     expect(pokemonType).toHaveTextContent('Electric');
     const pokemonWeight = getByTestId('pokemon-weight');
