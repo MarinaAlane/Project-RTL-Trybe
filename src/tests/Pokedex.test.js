@@ -53,5 +53,4 @@ describe('Requisito 5', () => {
     const pokemonType = getByTestId('pokemonType');
     expect(pokemonType).toHaveTextContent('Psychic');
   });
-
 });
