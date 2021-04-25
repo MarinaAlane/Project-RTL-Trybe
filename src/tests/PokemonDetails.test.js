@@ -13,24 +13,26 @@ const renderWithRouter = (component) => {
   };
 };
 
+const MORE_DETAILS = 'More details';
+
 describe('Requisito 7', () => {
   it('Testa as informaçõoes de página de detalhes do pokémon', () => {
     const { queryByText, getByText, getAllByRole } = renderWithRouter(<App />);
-    const pokemonLink = getByText('More details');
+    const pokemonLink = getByText(MORE_DETAILS);
     userEvent.click(pokemonLink);
     const pokemonTitle = getByText('Pikachu Details');
     expect(pokemonTitle).toBeInTheDocument();
-    const pokemonLink2 = queryByText('More Details');
+    const pokemonLink2 = queryByText(MORE_DETAILS);
     expect(pokemonLink2).toBeNull();
     const titles = getAllByRole('heading', { level: 2 });
     expect(titles[1]).toHaveTextContent('Summary');
-    const description = queryByText('This intelligent Pokémon roasts hard berries with electricity to make them tender enough to eat.');
+    const description = queryByText(/This intelligent Pokémon roasts hard berries with/i);
     expect(description).toBeInTheDocument();
   });
 
   it('Testa se existe uma seção de mapas com as localizações do pokémon', () => {
     const { getByText, getAllByRole } = renderWithRouter(<App />);
-    const pokemonLink = getByText('More details');
+    const pokemonLink = getByText(MORE_DETAILS);
     userEvent.click(pokemonLink);
     const titles = getAllByRole('heading', { level: 2 });
     expect(titles[2]).toHaveTextContent('Game Locations of Pikachu');
