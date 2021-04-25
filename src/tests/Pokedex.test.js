@@ -37,13 +37,21 @@ describe('Requisito 5', () => {
         return;
       }
       userEvent.click(buttonNext);
-    });s
+    });
   });
 
   it('Testa se é mostrado um pokémon por vez', () => {
     const { getAllByTestId } = renderWithRouter(<App />);
     const pokemonsName = getAllByTestId(POKEMON_NAME);
     expect(pokemonsName.length).toBe(1);
+  });
+
+  it('Testa se existe os botões de filtro', () => {
+    const { getByRole, getByTestId } = renderWithRouter(<App />);
+    const psychicButton = getByRole('button', { name: 'Psychic' });
+    userEvent.click(psychicButton);
+    const pokemonType = getByTestId('pokemonType');
+    expect(pokemonType).toHaveTextContent('Psychic');
   });
 
 });
