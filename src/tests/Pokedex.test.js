@@ -37,7 +37,7 @@ describe('Requisito 5', () => {
         return;
       }
       userEvent.click(buttonNext);
-    });
+    });s
   });
 
   it('Testa se é mostrado um pokémon por vez', () => {
@@ -45,4 +45,5 @@ describe('Requisito 5', () => {
     const pokemonsName = getAllByTestId(POKEMON_NAME);
     expect(pokemonsName.length).toBe(1);
   });
+
 });
