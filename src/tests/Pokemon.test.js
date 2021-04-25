@@ -20,8 +20,10 @@ describe('Requisito 6', () => {
     const { getByTestId, getByRole } = renderWithRouter(<App />);
     const pokemonName = getByTestId('pokemon-name');
     expect(pokemonName).toBeInTheDocument();
+    expect(pokemonName).toHaveTextContent('Pikachu');
     const pokemonType = getByTestId('pokemonType');
     expect(pokemonType).toBeInTheDocument();
+    expect(pokemonType).toHaveTextContent('Electric');
     const pokemonWeight = getByTestId('pokemon-weight');
     expect(pokemonWeight).toHaveTextContent('Average weight: 6.0 kg');
     const pokemonImage = getByRole('img');
