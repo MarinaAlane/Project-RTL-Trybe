@@ -50,7 +50,7 @@ describe('Requisito 5', () => {
     const { getByTestId, getByRole } = renderWithRouter(<App />);
     const psychicButton = getByRole('button', { name: 'Psychic' });
     userEvent.click(psychicButton);
-    const pokemonType = getByTestId('pokemonType');
+    const pokemonType = getByTestId('pokemon-type');
     expect(pokemonType).toHaveTextContent('Psychic');
   });
 
