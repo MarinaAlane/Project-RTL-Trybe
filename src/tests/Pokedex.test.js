@@ -47,10 +47,38 @@ describe('Requisito 5', () => {
   });
 
   it('Testa se existe os botões de filtro', () => {
-    const { getByRole, getByTestId } = renderWithRouter(<App />);
+    const { getByTestId, getByRole } = renderWithRouter(<App />);
     const psychicButton = getByRole('button', { name: 'Psychic' });
     userEvent.click(psychicButton);
     const pokemonType = getByTestId('pokemonType');
     expect(pokemonType).toHaveTextContent('Psychic');
   });
+
+  it('Testa se existe um botão para resetar o filtro', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const allButton = getByRole('button', { name: 'All' });
+    expect(allButton).toBeInTheDocument();
+    expect(allButton).toHaveTextContent('All');
+
+    userEvent.click(allButton);
+  });
+
+  it('Testa se os botões de filtro são criados dinamicamente', () => {
+    const { getByRole } = renderWithRouter(<App />);
+
+    pokemons.forEach((pokemon) => {
+      const filterButton = getByRole('button', { name: pokemon.type });
+      expect(filterButton).toBeInTheDocument();
+      expect(filterButton).not.toBeNull();
+    });
+  });
+
+  it('Testa se o botão de Próximo Pokémon está desabilitado.', () => {
+    const { getByTestId, getAllByTestId } = renderWithRouter(<App />);
+    const filterButtons = getAllByTestId('pokemon-type-button');
+    userEvent.click(filterButtons[0]);
+    const buttonNext = getByTestId('next-pokemon');
+    expect(buttonNext).toBeDisabled();
+  });
+
 });
