@@ -5,12 +5,12 @@ import renderWithRouter from '../helper/renderWithRouter';
 
 describe('6- Test the component <Pokemon />', () => {
   it('Should render acard with pokemon`s info', () => {
-    const { getByText, getByTestId } = renderWithRouter(<App />);
+    const { getByText, getAllByText } = renderWithRouter(<App />);
     const namePokemon = getByText('Pikachu');
-    const typePokemon = getByTestId('pokemonType');
+    const typePokemon = getAllByText('Electric');
     const weigthPokemon = getByText('Average weight: 6.0 kg');
     expect(namePokemon).toBeInTheDocument();
-    expect(typePokemon.textContent).toBe('Electric');
+    expect(typePokemon).toHaveLength(2);
     expect(weigthPokemon).toBeInTheDocument();
   });
 
