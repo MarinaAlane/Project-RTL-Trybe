@@ -1,39 +1,54 @@
-// test('', () => {});
 import React from 'react';
-import userEvent from '@testing-library/user-event';
-import renderWithRouter from './renderWithRouter';
-import App from '../App';
+import { fireEvent } from '@testing-library/react';
+import renderWithRouter from '../services/renderWithRouter';
+import Pokemon from '../components/Pokemon';
+import pokemons from '../data';
 
-describe('Test <Pokemon /> component', () => {
-  it('should render Pokemon card info', () => {
-    const { getByText, getByAltText, getByTestId } = renderWithRouter(<App />);
-    expect(getByText('Pikachu')).toBeInTheDocument();
-    expect(getByText('Average weight: 6.0 kg')).toBeInTheDocument();
-    const pokemonType = (getByTestId('pokemonType'));
-    expect(pokemonType.textContent).toBe('Electric');
-    const image = getByAltText('Pikachu sprite');
-    const imagePath = 'https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png';
-    expect(image.src).toBe(imagePath);
-  });
+test('render pokemon info', () => {
+  const { getByTestId, getByRole } = renderWithRouter(<Pokemon
+    pokemon={ pokemons[0] }
+    isFavorite={ false }
+  />);
+  const name = getByTestId('pokemon-name');
+  const type = getByTestId('pokemon-type');
+  const weight = getByTestId('pokemon-weight');
+  const image = getByRole('img');
+  expect(name).toHaveTextContent(pokemons[0].name);
+  expect(type).toHaveTextContent(pokemons[0].type);
+  expect(weight).toHaveTextContent(
+    `Average weight: ${pokemons[0]
+      .averageWeight.value} ${pokemons[0]
+      .averageWeight.measurementUnit}`,
+  );
+  expect(image.src).toBe(pokemons[0].image);
+  expect(image.alt).toBe(`${pokemons[0].name} sprite`);
+});
 
-  it('should have a nav link to Pokemon Details, with proper URL', () => {
-    const { getByRole, history } = renderWithRouter(<App />);
-    const detailsButton = getByRole('link', { name: 'More details' });
-    expect(detailsButton).toBeDefined();
-    userEvent.click(detailsButton);
-    const { pathname } = history.location;
-    expect(pathname).toBe('/pokemons/25');
-  });
+test('more details link structure', () => {
+  const { getByRole } = renderWithRouter(<Pokemon
+    pokemon={ pokemons[0] }
+    isFavorite={ false }
+  />);
+  const details = getByRole('link', { name: 'More details' });
+  expect(details.href).toBe(`http://localhost/pokemons/${pokemons[0].id}`);
+});
 
-  it('should add a star on favorite pokemons', () => {
-    const { getByRole, getByLabelText, getByAltText } = renderWithRouter(<App />);
-    const detailsButton = getByRole('link', { name: 'More details' });
-    userEvent.click(detailsButton);
-    const favoriteLabel = getByLabelText('Pokémon favoritado?');
-    userEvent.click(favoriteLabel);
-    const starImage = getByAltText('Pikachu is marked as favorite');
-    console.log(starImage.src);
-    expect(starImage.src).toBe('http://localhost/star-icon.svg');
-    expect(starImage).toBeInTheDocument();
-  });
+test('more details link click', () => {
+  const { getByRole, history } = renderWithRouter(<Pokemon
+    pokemon={ pokemons[0] }
+    isFavorite={ false }
+  />);
+  const details = getByRole('link', { name: 'More details' });
+  fireEvent.click(details);
+  expect(history.location.pathname).toBe(`/pokemons/${pokemons[0].id}`);
+});
+
+test('favorite pokemon icon', () => {
+  const { getAllByRole } = renderWithRouter(<Pokemon
+    pokemon={ pokemons[0] }
+    isFavorite
+  />);
+  const allIcons = getAllByRole('img');
+  expect(allIcons[1].src).toBe('http://localhost/star-icon.svg');
+  expect(allIcons[1].alt).toBe(`${pokemons[0].name} is marked as favorite`);
 });
