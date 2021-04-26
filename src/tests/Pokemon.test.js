@@ -4,7 +4,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import App from '../App';
 
-test('Testa se renderizado um card com o nome do pokémon', () => {
+test('Testa se é renderizado um card com o nome do pokémon', () => {
   const { getByTestId } = render(
     <MemoryRouter>
       <App />
