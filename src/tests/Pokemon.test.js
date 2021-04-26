@@ -4,7 +4,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import App from '../App';
 
-test('Testa renderizado um card com o nome do pokémon', () => {
+test('Testa se renderizado um card com o nome do pokémon', () => {
   const { getByTestId } = render(
     <MemoryRouter>
       <App />
@@ -26,7 +26,7 @@ test('Testa se é renderizado um card com o tipo do pokémon', () => {
   expect(heading.textContent).toBe('Electric');
 });
 
-test('TEsta se é renderizado um card com o peso do pokémon', () => {
+test('Testa se é renderizado um card com o peso do pokémon', () => {
   const { getByTestId } = render(
     <MemoryRouter>
       <App />
