@@ -4,7 +4,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import App from '../App';
 
-test('Testa se é renderizado um card com o nome do pokémon', () => {
+test('testa se é renderizado um card com o nome do pokémon', () => {
   const { getByTestId } = render(
     <MemoryRouter>
       <App />
@@ -15,7 +15,7 @@ test('Testa se é renderizado um card com o nome do pokémon', () => {
   expect(heading.textContent).toBe('Pikachu');
 });
 
-test('Testa se é renderizado um card com o tipo do pokémon', () => {
+test('testa se é renderizado um card com o tipo do pokémon', () => {
   const { getByTestId } = render(
     <MemoryRouter>
       <App />
@@ -26,7 +26,7 @@ test('Testa se é renderizado um card com o tipo do pokémon', () => {
   expect(heading.textContent).toBe('Electric');
 });
 
-test('Testa se é renderizado um card com o peso do pokémon', () => {
+test('testa se é renderizado um card com o peso do pokémon', () => {
   const { getByTestId } = render(
     <MemoryRouter>
       <App />
@@ -37,7 +37,7 @@ test('Testa se é renderizado um card com o peso do pokémon', () => {
   expect(heading.textContent).toBe('Average weight: 6.0 kg');
 });
 
-test('Testa se é exibida a imagem do pokémon', () => {
+test('testa se é exibida a imagem do pokémon', () => {
   const { getByAltText } = render(
     <MemoryRouter>
       <App />
@@ -47,7 +47,7 @@ test('Testa se é exibida a imagem do pokémon', () => {
   expect(image.src).toContain('https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png');
 });
 
-test('Testa se existe o link more details', () => {
+test('testa se existe o link More details', () => {
   const { getByText } = render(
     <MemoryRouter>
       <App />
@@ -57,7 +57,7 @@ test('Testa se existe o link more details', () => {
   expect(heading).toBeInTheDocument();
 });
 
-test('Verifica se existe o id do Pokémon ao clicar em more details', () => {
+test('Verifica se existe o id do Pokémon ao clicar em More details', () => {
   const history = createMemoryHistory();
   const { getByText, getByLabelText, getByAltText } = render(
     <Router history={ history }>
@@ -71,5 +71,3 @@ test('Verifica se existe o id do Pokémon ao clicar em more details', () => {
   const image = getByAltText('Pikachu is marked as favorite');
   expect(image.src).toContain('/star-icon.svg');
 });
-
-// Requisito feito com ajuda externa
