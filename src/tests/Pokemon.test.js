@@ -10,7 +10,7 @@ test('Testa se renderiza as informações do pokémon', () => {
     isFavorite={ false }
   />);
   const name = getByTestId('pokemon-name');
-  const type = getByTestId('pokemonType');
+  const type = getByTestId('pokemon-type');
   const weight = getByTestId('pokemon-weight');
   const image = getByRole('img');
   expect(name).toHaveTextContent(pokemons[0].name);
