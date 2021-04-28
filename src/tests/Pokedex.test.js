@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import { Pokedex } from '../components';
-import renderWithRouter from '../services/renderWithRouter';
+import RenderWithRouter from '../services/RenderWithRouter';
 import pokemons from '../data';
 import App from '../App';
 
@@ -23,7 +23,7 @@ const ptb = 'pokemon-type-button';
 
 describe('Teste do Pokemon.js', () => {
   it('Teste se página contém um heading h2 com o texto Encountered pokémons.', () => {
-    const { getByRole } = renderWithRouter(
+    const { getByRole } = RenderWithRouter(
       <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isPokemonFavoriteById } />,
     );
     const EncounteredPokemons = getByRole('heading', { ariaLevel: 2 });
@@ -31,7 +31,7 @@ describe('Teste do Pokemon.js', () => {
   });
 
   it('Teste Botão "Próximo pokémon"', () => {
-    const { getByTestId } = renderWithRouter(
+    const { getByTestId } = RenderWithRouter(
       <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isPokemonFavoriteById } />,
     );
     const btnProx = getByTestId(np);
@@ -40,7 +40,7 @@ describe('Teste do Pokemon.js', () => {
 
   it('Verifica se o botão "Próximo pokemon" funciona', () => {
     let index = 0;
-    const { getByTestId } = renderWithRouter(
+    const { getByTestId } = RenderWithRouter(
       <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isPokemonFavoriteById } />,
     );
     const btnProx = getByTestId(np);
@@ -61,7 +61,7 @@ describe('Teste do Pokemon.js', () => {
       () => [...new Set(pokemons.reduce((types, { type }) => [...types, type], []))]
     );
 
-    const { getAllByTestId } = renderWithRouter(
+    const { getAllByTestId } = RenderWithRouter(
       <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isPokemonFavoriteById } />,
     );
 
@@ -75,7 +75,7 @@ describe('Teste do Pokemon.js', () => {
     const pokemonTypes = (
       () => [...new Set(pokemons.reduce((types, { type }) => [...types, type], []))]
     );
-    const { getAllByTestId } = renderWithRouter(<App />);
+    const { getAllByTestId } = RenderWithRouter(<App />);
     // <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isPokemonFavoriteById } />,
     const buttonFilter = getAllByTestId(ptb);
     for (let index = 0; index < buttonFilter.length; index += 1) {
@@ -85,7 +85,7 @@ describe('Teste do Pokemon.js', () => {
   });
 
   it('Testa se a Pokédex contém um botão pra resetar o filtro', () => {
-    const { getByText, getByTestId } = renderWithRouter(
+    const { getByText, getByTestId } = RenderWithRouter(
       <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isPokemonFavoriteById } />,
     );
     const buttonAll = getByText('All');
@@ -106,7 +106,7 @@ describe('Teste do Pokemon.js', () => {
   });
 
   it('Testa se o modo selecionado é All', () => {
-    const { getByTestId } = renderWithRouter(
+    const { getByTestId } = RenderWithRouter(
       <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isPokemonFavoriteById } />,
     );
     const btnProx = getByTestId(np);
@@ -126,7 +126,7 @@ describe('Teste do Pokemon.js', () => {
     const pokemonTypes = (
       () => [...new Set(pokemons.reduce((types, { type }) => [...types, type], []))]
     );
-    const { getAllByTestId } = renderWithRouter(
+    const { getAllByTestId } = RenderWithRouter(
       <Pokedex pokemons={ pokemons } isPokemonFavoriteById={ isPokemonFavoriteById } />,
     );
     const buttonFilter = getAllByTestId(ptb);
@@ -136,7 +136,7 @@ describe('Teste do Pokemon.js', () => {
   });
 
   it('Testar se aparece apenas 1 pokemon na tela', () => {
-    const { queryAllByTestId } = renderWithRouter(
+    const { queryAllByTestId } = RenderWithRouter(
       <App />,
     );
     const pokemon = queryAllByTestId(pn);
@@ -144,7 +144,7 @@ describe('Teste do Pokemon.js', () => {
   });
 
   it('Testar se o botao All está sempre visivel', () => {
-    const { getByText } = renderWithRouter(
+    const { getByText } = RenderWithRouter(
       <App />,
     );
     const buttonAll = getByText('All');
@@ -152,7 +152,7 @@ describe('Teste do Pokemon.js', () => {
   });
 
   it('O botão de Próximo pokémon deve ser desabilitado', () => {
-    const { getByRole, queryByText } = renderWithRouter(
+    const { getByRole, queryByText } = RenderWithRouter(
       <App />,
     );
     const buttonElectric = getByRole('button', { name: 'Electric' });
