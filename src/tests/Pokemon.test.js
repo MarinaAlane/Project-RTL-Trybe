@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent } from '@testing-library/react';
-import renderWithRouter from '../services/renderWithRouter';
+import RenderWithRouter from '../services/RenderWithRouter';
 import App from '../App';
 import pokemons from '../data';
 
@@ -10,14 +10,14 @@ const md = 'More details';
 
 describe('Teste do Pokemon.js', () => {
   it('Testa se o nome correto do pokemon está aparecendo na tela', () => {
-    const { getByTestId } = renderWithRouter(<App />);
+    const { getByTestId } = RenderWithRouter(<App />);
     const pokeName = getByTestId('pokemon-name');
     expect(pokeName).toBeInTheDocument();
     expect(pokeName).toHaveTextContent('Pikachu');
   });
 
   it('Testa se o nome correto do pokemon está aparecendo na tela', () => {
-    const { getByText, getByTestId } = renderWithRouter(<App />);
+    const { getByText, getByTestId } = RenderWithRouter(<App />);
     const buttonAll = getByText('All');
     expect(buttonAll).toBeInTheDocument();
     fireEvent.click(buttonAll);
@@ -34,7 +34,7 @@ describe('Teste do Pokemon.js', () => {
   });
 
   // it('Testa se o tipo correto está aparecendo na tela', () => {
-  //   const { getByTestId } = renderWithRouter(<App />);
+  //   const { getByTestId } = RenderWithRouter(<App />);
   //   const pokeType = getByTestId(/pokemonType/i);
   //   expect(pokeType).toHaveTextContent('Electric');
   //   // const pokemonTypes = [
@@ -46,7 +46,7 @@ describe('Teste do Pokemon.js', () => {
   //   //   'Normal',
   //   //   'Dragon',
   //   // ];
-  //   // const { getByRole, getByTestId } = renderWithRouter(<App />);
+  //   // const { getByRole, getByTestId } = RenderWithRouter(<App />);
   //   // const pokeType = getByTestId(/pokemonType/i);
   //   // const buttonElectric = getByRole('button', { name: 'Electric' });
   //   // const buttonFire = getByRole('button', { name: 'Fire' });
@@ -72,7 +72,7 @@ describe('Teste do Pokemon.js', () => {
   // });
 
   it('Verifica se o Average Weight aparece corretamente', () => {
-    const { getByTestId, getByRole, queryByText } = renderWithRouter(<App />);
+    const { getByTestId, getByRole, queryByText } = RenderWithRouter(<App />);
     // const { measurementUnit, value } = averageWeight;
     const pokeWeight = getByTestId('pokemon-weight');
     expect(pokeWeight).toBeInTheDocument();
@@ -90,7 +90,7 @@ describe('Teste do Pokemon.js', () => {
   });
 
   it('A imagem do Pokemon deve ser exibida', () => {
-    const { getByRole, queryByText } = renderWithRouter(<App />);
+    const { getByRole, queryByText } = RenderWithRouter(<App />);
     const imagePrinted = getByRole('img');
     const buttonAll = getByRole('button', { name: 'All' });
     const buttonNext = queryByText('Próximo pokémon');
@@ -103,7 +103,7 @@ describe('Teste do Pokemon.js', () => {
   });
 
   it('Testa se o link aparece lá em cima ao clicar em More details', () => {
-    const { getByText, history } = renderWithRouter(<App />);
+    const { getByText, history } = RenderWithRouter(<App />);
     const linkMoreDetails = getByText(md);
     fireEvent.click(linkMoreDetails);
     const { location } = history;
@@ -115,7 +115,7 @@ describe('Teste do Pokemon.js', () => {
 
 describe('Testa se o Card do Pokemon contém um link de navegação', () => {
   it('Testa o botão Electric', () => {
-    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const { getByText, getByRole, history } = RenderWithRouter(<App />);
     const buttonElectric = getByRole('button', { name: 'Electric' });
     const linkMoreDetails = getByText(md);
     fireEvent.click(buttonElectric);
@@ -124,7 +124,7 @@ describe('Testa se o Card do Pokemon contém um link de navegação', () => {
   });
 
   it('Testa o botão Fire', () => {
-    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const { getByText, getByRole, history } = RenderWithRouter(<App />);
     const buttonFire = getByRole('button', { name: 'Fire' });
     const linkMoreDetails = getByText(md);
     fireEvent.click(buttonFire);
@@ -133,7 +133,7 @@ describe('Testa se o Card do Pokemon contém um link de navegação', () => {
   });
 
   it('Testa o botão Bug', () => {
-    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const { getByText, getByRole, history } = RenderWithRouter(<App />);
     const buttonBug = getByRole('button', { name: 'Bug' });
     const linkMoreDetails = getByText(md);
     fireEvent.click(buttonBug);
@@ -142,7 +142,7 @@ describe('Testa se o Card do Pokemon contém um link de navegação', () => {
   });
 
   it('Testa o botão Poison', () => {
-    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const { getByText, getByRole, history } = RenderWithRouter(<App />);
     const buttonPoison = getByRole('button', { name: 'Poison' });
     const linkMoreDetails = getByText(md);
     fireEvent.click(buttonPoison);
@@ -151,7 +151,7 @@ describe('Testa se o Card do Pokemon contém um link de navegação', () => {
   });
 
   it('Testa o botão Psychic', () => {
-    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const { getByText, getByRole, history } = RenderWithRouter(<App />);
     const buttonPsychic = getByRole('button', { name: 'Psychic' });
     const linkMoreDetails = getByText(md);
     fireEvent.click(buttonPsychic);
@@ -160,7 +160,7 @@ describe('Testa se o Card do Pokemon contém um link de navegação', () => {
   });
 
   it('Testa o botão Normal', () => {
-    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const { getByText, getByRole, history } = RenderWithRouter(<App />);
     const buttonNormal = getByRole('button', { name: 'Normal' });
     const linkMoreDetails = getByText(md);
     fireEvent.click(buttonNormal);
@@ -169,7 +169,7 @@ describe('Testa se o Card do Pokemon contém um link de navegação', () => {
   });
 
   it('Testa o botão Dragon', () => {
-    const { getByText, getByRole, history } = renderWithRouter(<App />);
+    const { getByText, getByRole, history } = RenderWithRouter(<App />);
     const buttonDragon = getByRole('button', { name: 'Dragon' });
     const linkMoreDetails = getByText(md);
     fireEvent.click(buttonDragon);
@@ -178,7 +178,7 @@ describe('Testa se o Card do Pokemon contém um link de navegação', () => {
   });
 
   it('Testa o Rapidash', () => {
-    const { getByText, getByRole, getByTestId, history } = renderWithRouter(<App />);
+    const { getByText, getByRole, getByTestId, history } = RenderWithRouter(<App />);
     const btnProx = getByTestId(np);
     const buttonFire = getByRole('button', { name: 'Fire' });
     const linkMoreDetails = getByText(md);
@@ -188,7 +188,7 @@ describe('Testa se o Card do Pokemon contém um link de navegação', () => {
     expect(history.location.pathname).toBe('/pokemons/78');
   });
   it('Testa o Mew', () => {
-    const { getByText, getByRole, getByTestId, history } = renderWithRouter(<App />);
+    const { getByText, getByRole, getByTestId, history } = RenderWithRouter(<App />);
     const btnProx = getByTestId(np);
     const buttonPsychic = getByRole('button', { name: 'Psychic' });
     const linkMoreDetails = getByText(md);
