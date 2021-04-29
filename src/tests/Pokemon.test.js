@@ -12,7 +12,7 @@ describe('Teste do Pokemon.js', () => {
   });
   it('Testa se o tipo correto está aparecendo na tela', () => {
     const { getByTestId } = renderWithRouter(<App />);
-    const pokeType = getByTestId('pokemon-type');
+    const pokeType = getByTestId(/pokemonType/i);
     expect(pokeType).toHaveTextContent('Electric');
   });
   it('Verifica se o Average Weight aparece corretamente', () => {
@@ -51,14 +51,12 @@ describe('Teste do Pokemon.js', () => {
   //   expect(pathname1).toBe('/pokemons/25');
   // });
   it('Testa se tem uma estrela no pokemon favoritado', () => {
-    const { getByTestId, getByText, getByRole } = renderWithRouter(<App />);
-    const linkMoreDetails = getByText(/More Details/i);
-    fireEvent.click(linkMoreDetails);
-    const checkBox = getByRole('checkbox');
-    fireEvent.click(checkBox);
-    const star = getByTestId('star-favorite');
-    expect(star).toBeInTheDocument();
-    expect(star.src).toContain('/star-icon.svg');
-    expect(star.alt).toBe('Pikachu is marked as favorite');
+    const { getByText, getByAltText } = renderWithRouter(<App />);
+    const moreDetails = getByText(/More details/i);
+    fireEvent.click(moreDetails);
+    const checkFavorite = getByText(/Pokémon favoritado?/i);
+    fireEvent.click(checkFavorite);
+    const img = getByAltText(/Pikachu is marked as favorite/i);
+    expect(img.src).toBe('http://localhost/star-icon.svg');
   });
 });

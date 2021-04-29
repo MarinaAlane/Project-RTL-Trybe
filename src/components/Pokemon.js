@@ -14,7 +14,7 @@ const Pokemon = ({ pokemon, showDetailsLink, isFavorite }) => {
     <div className="pokemon">
       <div className="pokemon-overview">
         <p data-testid="pokemon-name">{`${name}`}</p>
-        <p data-testid="pokemon-type">{`${type}`}</p>
+        <p data-testid="pokemonType">{`${type}`}</p>
         <p data-testid="pokemon-weight">
           {`Average weight: ${value} ${measurementUnit}`}
         </p>
@@ -23,7 +23,6 @@ const Pokemon = ({ pokemon, showDetailsLink, isFavorite }) => {
       <img src={ `${image}` } alt={ `${name} sprite` } />
       {isFavorite && (
         <img
-          data-testid='star-favorite'
           className="favorite-icon"
           src={`/star-icon.svg`}
           alt={ `${name} is marked as favorite` }
