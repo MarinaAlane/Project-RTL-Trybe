@@ -14,7 +14,7 @@ describe('Teste do Pokemon.js', () => {
   });
   it('Testa se o tipo correto está aparecendo na tela', () => {
     const { getByTestId } = renderWithRouter(<App />);
-    const pokeType = getByTestId(/pokemonType/i);
+    const pokeType = getByTestId('pokemonType');
     expect(pokeType).toHaveTextContent('Electric');
   });
   it('Verifica se o Average Weight aparece corretamente', () => {
