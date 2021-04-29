@@ -3,6 +3,8 @@ import { fireEvent } from '@testing-library/react';
 import renderWithRouter from '../services/RenderWithRouter';
 import App from '../App';
 
+const md = /More details/i;
+
 describe('Teste do Pokemon.js', () => {
   it('Testa se o nome correto do pokemon está aparecendo na tela', () => {
     const { getByTestId } = renderWithRouter(<App />);
@@ -29,30 +31,30 @@ describe('Teste do Pokemon.js', () => {
   });
   it('Testa se o Card do Pokemon contém um link de navegação', () => {
     const { getByText } = renderWithRouter(<App />);
-    const linkMoreDetails = getByText('More details');
+    const linkMoreDetails = getByText(md);
     expect(linkMoreDetails).toBeInTheDocument();
   });
   it('Testa se o link aparece lá em cima ao clicar em More details', () => {
     const { getByText, history } = renderWithRouter(<App />);
-    const linkMoreDetails = getByText('More details');
+    const linkMoreDetails = getByText(md);
     fireEvent.click(linkMoreDetails);
     const { location } = history;
     const { pathname } = location;
     const pathname1 = pathname;
     expect(pathname1).toBe('/pokemons/25');
   });
-  it('Testa se ao clicar no link de navegacao a pagina é redirecionada', () => {
-    const { getByText, history } = renderWithRouter(<App />);
-    const linkMoreDetails = getByText('More details');
-    fireEvent.click(linkMoreDetails);
-    const { location } = history;
-    const { pathname } = location;
-    const pathname1 = pathname;
-    expect(pathname1).toBe('/pokemons/25');
-  });
+  // it('Testa se ao clicar no link de navegacao a pagina é redirecionada', () => {
+  //   const { getByText, history } = renderWithRouter(<App />);
+  //   const linkMoreDetails = getByText(md);
+  //   fireEvent.click(linkMoreDetails);
+  //   const { location } = history;
+  //   const { pathname } = location;
+  //   const pathname1 = pathname;
+  //   expect(pathname1).toBe('/pokemons/25');
+  // });
   it('Testa se tem uma estrela no pokemon favoritado', () => {
     const { getByText, getByAltText } = renderWithRouter(<App />);
-    const moreDetails = getByText(/More details/i);
+    const moreDetails = getByText(md);
     fireEvent.click(moreDetails);
     const checkFavorite = getByText(/Pokémon favoritado?/i);
     fireEvent.click(checkFavorite);
