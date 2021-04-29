@@ -41,15 +41,15 @@ describe('Teste do Pokemon.js', () => {
     const pathname1 = pathname;
     expect(pathname1).toBe('/pokemons/25');
   });
-  // it('Testa se ao clicar no link de navegacao a pagina é redirecionada', () => {
-  //   const { getByText, history } = renderWithRouter(<App />);
-  //   const linkMoreDetails = getByText('More details');
-  //   fireEvent.click(linkMoreDetails);
-  //   const { location } = history;
-  //   const { pathname } = location;
-  //   const pathname1 = pathname;
-  //   expect(pathname1).toBe('/pokemons/25');
-  // });
+  it('Testa se ao clicar no link de navegacao a pagina é redirecionada', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    const linkMoreDetails = getByText('More details');
+    fireEvent.click(linkMoreDetails);
+    const { location } = history;
+    const { pathname } = location;
+    const pathname1 = pathname;
+    expect(pathname1).toBe('/pokemons/25');
+  });
   it('Testa se tem uma estrela no pokemon favoritado', () => {
     const { getByText, getByAltText } = renderWithRouter(<App />);
     const moreDetails = getByText(/More details/i);
