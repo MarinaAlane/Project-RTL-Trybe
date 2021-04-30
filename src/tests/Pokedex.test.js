@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent } from '@testing-library/dom';
 import renderWithRouter from '../services/renderWithRouter';
-import Pokedex from '../components/Pokedex';
+import App from '../App';
 import pokemons from '../data';
 
 describe('Test Component Pokedex', () => {
@@ -20,7 +20,7 @@ describe('Test Component Pokedex', () => {
 
   it('should contains a h2 tag with Encountered pokémons on it', () => {
     const { getByRole } = renderWithRouter(
-      <Pokedex
+      <App
         pokemons={ pokemons }
         isPokemonFavoriteById={ favoritePokemonIds }
       />,
@@ -32,7 +32,7 @@ describe('Test Component Pokedex', () => {
 
   it('should show next pokémon on click next pokémon button', () => {
     const { getByTestId, getAllByText, getAllByRole } = renderWithRouter(
-      <Pokedex
+      <App
         pokemons={ pokemons }
         isPokemonFavoriteById={ favoritePokemonIds }
       />,
@@ -74,5 +74,34 @@ describe('Test Component Pokedex', () => {
     fireEvent.click(allBtn[0]);
     actualPokemon = getAllByText(moreDetails);
     expect(actualPokemon[0].attributes[0].value).toBe(pikachuPath);
+  });
+
+  it('should filter the type of the pokemon', () => {
+    const seven = 7;
+
+    const { getAllByTestId } = renderWithRouter(
+      <App
+        pokemons={ pokemons }
+        isPokemonFavoriteById={ favoritePokemonIds }
+      />,
+    );
+
+    const typeButtons = getAllByTestId('pokemon-type-button');
+    expect(typeButtons.length).toBe(seven);
+    expect(typeButtons[0]).toBeInTheDocument();
+    expect(typeButtons[5]).toBeInTheDocument();
+  });
+
+  it('should show all pokemons if click in button All', () => {
+    const { getByText } = renderWithRouter(
+      <App
+        pokemons={ pokemons }
+        isPokemonFavoriteById={ favoritePokemonIds }
+      />,
+    );
+
+    const allButton = getByText('All');
+    expect(allButton.type).toBe('button');
+    expect(allButton).toBeInTheDocument();
   });
 });
