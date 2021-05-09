@@ -77,17 +77,12 @@ describe('Testando o componente Pokedex.js', () => {
     fireEvent.click(eletricBtn);
     expect(nextPokemon).toHaveAttribute('disabled');
 
-    fireEvent.click(fireBtn);
-    expect(nextPokemon).toHaveAttribute('disabled');
-
     fireEvent.click(bugBtn);
     expect(nextPokemon).toHaveAttribute('disabled');
 
     fireEvent.click(poisonBtn);
     expect(nextPokemon).toHaveAttribute('disabled');
 
-    fireEvent.click(psychicBtn);
-    expect(nextPokemon).toHaveAttribute('disabled');
     fireEvent.click(normalBtn);
     expect(nextPokemon).toHaveAttribute('disabled');
 
