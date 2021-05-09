@@ -1,13 +1,13 @@
-import React from 'react';
-import renderWithRouter from './RenderWithRouter';
-import App from '../App';
+// import React from 'react';
+// import renderWithRouter from './RenderWithRouter';
+// import App from '../App';
 
-describe('Testando o componente Pokemon.js', () => {
-  test('Teste se é renderizado um card com as informações de determinado pokémon', () => {
-    const { getByTestId, getByText } = renderWithRouter(<App />);
-    const pokemonName = getByTestId('pokemon-name');
-    expect(pokemonName).toHaveTextContent(/pokemon/i);
-  });
+// describe('Testando o componente Pokemon.js', () => {
+//   test('Teste se é renderizado um card com as informações de determinado pokémon', () => {
+//     const { getByTestId, getByText } = renderWithRouter(<App />);
+//     const pokemonName = getByTestId('pokemon-name');
+//     expect(pokemonName).toHaveTextContent(/pokemon/i);
+//   });
 
-  test('');
-});
+//   test('');
+// });
