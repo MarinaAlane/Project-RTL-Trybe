@@ -41,7 +41,7 @@ describe('Testando o componente Pokemon.js', () => {
 
     );
     const btnIcon = getByAltText('Pikachu is marked as favorite');
-    expect(btnIcon).toHaveAttribute('alt', `${pokemons[0].name} is marked as favorite`);
+    expect(btnIcon).toHaveAttribute('alt', 'Pikachu is marked as favorite');
     expect(btnIcon).toHaveAttribute('src', '/star-icon.svg');
   });
 });
