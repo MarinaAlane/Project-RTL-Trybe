@@ -15,7 +15,6 @@ test('renders a reading with the text `Pokédex`', () => {
   expect(heading).toBeInTheDocument();
 });
 
-
 test('testing whether the route is "/"', () => {
   const { getByText } = render(
     <MemoryRouter initialEntries={ ['/'] }>
