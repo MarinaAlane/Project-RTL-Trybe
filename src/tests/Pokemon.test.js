@@ -1,48 +1,38 @@
 import React from 'react';
-import { screen, fireEvent } from '@testing-library/react';
-import App from '../App';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
-import pokemons from '../data';
+import App from '../App';
 
-describe.only('Testing the <Pokemon.js /> component', () => {
-  test('renders a card with the information of a certain Pokémon.', () => {
-    const { history } = renderWithRouter(<App />);
+describe('Test <Pokemon /> component', () => {
+  it('should render Pokemon card info', () => {
+    const { getByText, getByAltText, getByTestId } = renderWithRouter(<App />);
+    expect(getByText('Pikachu')).toBeInTheDocument();
+    expect(getByText('Average weight: 6.0 kg')).toBeInTheDocument();
+    const pokemonType = (getByTestId('pokemonType'));
+    expect(pokemonType.textContent).toBe('Electric');
+    const image = getByAltText('Pikachu sprite');
+    const imagePath = 'https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png';
+    expect(image.src).toBe(imagePath);
+  });
 
-    expect(screen.getByTestId('pokemon-name')
-      .textContent)
-      .toBe('Pikachu');
-    expect(screen.getByTestId('pokemonType')
-      .textContent).toBe('Electric');
-    expect(screen.getByTestId('pokemon-weight'))
-      .toBeDefined();
-    expect(screen.getByTestId('pokemon-weight').textContent)
-      .toBe('Average weight: 6.0 kg');
+  it('should have a nav link to Pokemon Details, with proper URL', () => {
+    const { getByRole, history } = renderWithRouter(<App />);
+    const detailsButton = getByRole('link', { name: 'More details' });
+    expect(detailsButton).toBeDefined();
+    userEvent.click(detailsButton);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/pokemons/25');
+  });
 
-    const urlImage = 'https://cdn.bulbagarden.net/upload/b/b2/Spr_5b_025_m.png';
-    const altImage = 'Pikachu sprite';
-    expect(screen.getByRole('img').src)
-      .toBe(urlImage);
-    expect(screen.getByRole('img').alt)
-      .toBe(altImage);
-
-    const linkDetails = screen.getByRole('link',
-      {
-        name: /More details/i,
-      });
-    fireEvent.click(linkDetails);
-    expect('/pokemons/25').toBeDefined();
-    expect(history.location.pathname).toBe('/pokemons/25');
-
-    const favorite = screen.getByLabelText('Pokémon favoritado?');
-    fireEvent.click(favorite);
-
-    const linkFavorite = screen.getByText('Favorite Pokémons');
-    fireEvent.click(linkFavorite);
-
-    const pikachu = pokemons[0];
-    const { name } = pikachu;
-    const star = screen
-      .getByRole('img', { name: `${name} is marked as favorite` });
-    expect(star).toHaveAttribute('src', '/star-icon.svg');
+  it('should add a star on favorite pokemons', () => {
+    const { getByRole, getByLabelText, getByAltText } = renderWithRouter(<App />);
+    const detailsButton = getByRole('link', { name: 'More details' });
+    userEvent.click(detailsButton);
+    const favoriteLabel = getByLabelText('Pokémon favoritado?');
+    userEvent.click(favoriteLabel);
+    const starImage = getByAltText('Pikachu is marked as favorite');
+    console.log(starImage.src);
+    expect(starImage.src).toBe('http://localhost/star-icon.svg');
+    expect(starImage).toBeInTheDocument();
   });
 });
