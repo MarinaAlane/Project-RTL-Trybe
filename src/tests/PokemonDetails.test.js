@@ -24,7 +24,7 @@ describe('Requirement 7', () => {
   });
 
   test('if there is a section with maps containing the locations of the pokémon', () => {
-    const { queryByText, queryAllByAltText, getByRole} = renderWithRouter(<App />);
+    const { queryByText, queryAllByAltText, getByRole } = renderWithRouter(<App />);
 
     userEvent.click(queryByText(/more details/i));
 
@@ -32,8 +32,8 @@ describe('Requirement 7', () => {
 
     const gameLocationsHeader = getByRole('heading', {
       level: 2,
-      name: `Game Locations of ${pokemons[0].name}` },
-    );
+      name: `Game Locations of ${pokemons[0].name}`,
+    });
 
     expect(gameLocationsHeader).toBeInTheDocument();
 
