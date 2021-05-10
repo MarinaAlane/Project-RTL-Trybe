@@ -1,30 +1,19 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 import NotFound from '../components/NotFound';
 
-describe('Test the <NotFound.js /> component', () => {
-  test('Test if contains an h2 heading with the text Page requested not found', () => {
-    const { getByRole } = render(
-      <MemoryRouter>
-        <NotFound />
-      </MemoryRouter>,
-    );
-    const heading = getByRole('heading', {
-      level: 2,
-    });
-    expect(heading).toBeInTheDocument();
-    expect(heading.textContent).toBe('Page requested not found');
+describe('Test <NotFound /> component', () => {
+  it('should render a h2 tag with text "Page requested not found"', () => {
+    const { getByRole } = render(<NotFound />);
+    const h2 = getByRole('heading', { level: 2, name: /Page requested not found/ });
+    expect(h2).toBeInTheDocument();
   });
 
-  test('Test if the page shows the image', () => {
-    const { getAllByRole } = render(
-      <MemoryRouter>
-        <NotFound />
-      </MemoryRouter>,
-    );
-    const src = 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif';
-    const img = getAllByRole('img');
-    expect(img[1].src).toBe(src);
+  it('should display an image', () => {
+    const { getByAltText } = render(<NotFound />);
+    const img = getByAltText('Pikachu crying because the page requested was not found');
+    const imgPath = 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif';
+    expect(img.src).toBe(imgPath);
+    expect(img).toBeInTheDocument();
   });
 });
