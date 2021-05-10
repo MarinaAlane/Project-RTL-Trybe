@@ -14,7 +14,7 @@ describe('Test the <NotFound.js /> component', () => {
       level: 2,
     });
     expect(heading).toBeInTheDocument();
-    expect(heading.textContent).toBe('Page requested not found 😭');
+    expect(heading.textContent).toBe('Page requested not found');
   });
 
   test('Test if the page shows the image', () => {
