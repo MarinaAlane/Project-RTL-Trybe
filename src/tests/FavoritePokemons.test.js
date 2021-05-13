@@ -16,7 +16,7 @@ describe('testes tela de favorites pokemon', () => {
   it('testa se a cards na tela', () => {
     const pokemonFavorite = [pokemons[0]];
     const { getByText } = renderWithRouter(
-      <FavoritePokemons pokemons={ pokemonFavorite } />
+      <FavoritePokemons pokemons={ pokemonFavorite } />,
     );
     const name = getByText('Pikachu');
     expect(name).toBeInTheDocument();
