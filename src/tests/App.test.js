@@ -34,7 +34,7 @@ describe('1. Teste o componente <App.js />', () => {
     const links = getAllByRole('link');
 
     userEvent.click(links[0]);
-    const { pathname } = history.location();
+    const { pathname } = history.location;
 
     expect(pathname).toBe('/');
   });
