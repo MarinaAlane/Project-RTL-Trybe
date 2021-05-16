@@ -21,7 +21,7 @@ describe('testing the homePage "/"', () => {
   });
 });
 
-describe('testing the navigation menu', () => {
+describe('testing the navigation bar', () => {
   it('shows the menu', () => {
     const { getByText } = renderWithRouter(<App />);
     const homeLink = getByText('Home');
@@ -33,7 +33,7 @@ describe('testing the navigation menu', () => {
     expect(favoriteLink).toBeInTheDocument();
   });
 
-  it('Should redirect to "/"', () => {
+  it('Should redirect to "/", by clicking on the home link', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     fireEvent.click(getByText('Home'));
@@ -41,7 +41,7 @@ describe('testing the navigation menu', () => {
 
     expect(pathname).toBe('/');
   });
-  it('Should redirect to "/about"', () => {
+  it('Should redirect to "/about", by clicking on the about link', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     fireEvent.click(getByText('About'));
@@ -49,7 +49,7 @@ describe('testing the navigation menu', () => {
 
     expect(pathname).toBe('/about');
   });
-  it('Should redirect to "/favorites"', () => {
+  it('Should redirect to "/favorites", by clicking on the Favorite Pokemons link', () => {
     const { getByText, history } = renderWithRouter(<App />);
 
     fireEvent.click(getByText('Favorite Pokémons'));
@@ -57,7 +57,7 @@ describe('testing the navigation menu', () => {
 
     expect(pathname).toBe('/favorites');
   });
-  it('Should to redirect to "Not Found', () => {
+  it('Should to redirect to "Not Found", entering an unknown URL', () => {
     const { getByText, history } = renderWithRouter(<App />);
     history.push('/error');
     const notFound = getByText(/not found/i);
