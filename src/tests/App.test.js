@@ -47,7 +47,7 @@ describe('1. Teste o componente <App.js />', () => {
     userEvent.click(links[1]);
     const { pathname } = history.location;
 
-    expect(pathname).toBe('about');
+    expect(pathname).toBe('/about');
   });
 
   it('Test if application is redirected to the favorites', () => {
