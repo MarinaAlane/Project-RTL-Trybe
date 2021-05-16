@@ -51,7 +51,7 @@ describe('5. Teste o componente <Pokedex.js />', () => {
     });
     userEvent.click(buttonPsychic);
 
-    const pokemonType = getByTestId('pokemonType');
+    const pokemonType = getByTestId('pokemon-type');
     expect(pokemonType.textContent).toBe('Psychic');
   });
 
@@ -63,7 +63,7 @@ describe('5. Teste o componente <Pokedex.js />', () => {
     });
     userEvent.click(buttonBug);
 
-    const pokemonBug = getByTestId('pokemonType');
+    const pokemonBug = getByTestId('pokemon-type');
     expect(pokemonBug.textContent).toBe('Bug');
 
     const buttonAll = getByRole('button', {
