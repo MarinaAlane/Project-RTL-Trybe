@@ -9,5 +9,5 @@ const renderWithRouter = (component) => {
     ...render(<Router history={ history }>{component}</Router>), history,
   });
 };
-
+// teste
 export default renderWithRouter;
