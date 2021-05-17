@@ -1,4 +1,4 @@
-import React from  'react';
+import React from 'react';
 import renderWithRouter from './renderWithRouter';
 import About from '../components/About';
 
@@ -40,5 +40,4 @@ describe('Requisito 2', () => {
     expect(pokedexImage).toHaveAttribute('src', imgURL);
     expect(pokedexImage).toBeInTheDocument();
   });
-
 });
