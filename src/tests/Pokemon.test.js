@@ -8,7 +8,7 @@ describe('6. Teste o componente <Pokemon.js />', () => {
     const { getByRole, getByTestId } = renderWithRouter(<App />);
 
     const namePokemon = getByTestId('pokemon-name');
-    const typePokemon = getByTestId('pokemon-type');
+    const typePokemon = getByTestId('pokemonType');
     const averageWeightPokemon = getByTestId('pokemon-weight');
     const imagePokemon = getByRole('img');
 

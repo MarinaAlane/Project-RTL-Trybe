@@ -28,7 +28,7 @@ describe('1. Teste o componente <App.js />', () => {
     expect(links[2].textContent).toBe('Favorite Pokémons');
   });
 
-  it('Test if the application is redirected to the home page, at the URL "/" ', () => {
+  it('Test if the application is redirected to the home page, at the URL "/"', () => {
     const { getAllByRole, history } = renderWithRouter(<App />);
 
     const links = getAllByRole('link');
@@ -39,7 +39,7 @@ describe('1. Teste o componente <App.js />', () => {
     expect(pathname).toBe('/');
   });
 
-  it('Test if the application is redirected to the about, at the URL "/about" ', () => {
+  it('Test if the application is redirected to the about, at the URL "/about"', () => {
     const { getAllByRole, history } = renderWithRouter(<App />);
 
     const links = getAllByRole('link');
