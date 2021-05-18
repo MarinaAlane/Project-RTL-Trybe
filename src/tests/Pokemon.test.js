@@ -11,7 +11,9 @@ test('renders a card with pokémon info', () => {
   const type = getByTestId('pokemon-type');
   expect(type).toHaveTextContent(/Electric/);
   const weight = getByTestId('pokemon-weight');
-  expect(weight).toHaveTextContent(/Average weight/);
+  const { value } = pokemons[0].averageWeight;
+  const { measurementUnit } = pokemons[0].averageWeight;
+  expect(weight).toHaveTextContent(`Average weight: ${value} ${measurementUnit}`);
   const img = getByRole('img');
   expect(img.alt).toBe(`${pokemons[0].name} sprite`);
   expect(img.src).toBe(`${pokemons[0].image}`);
