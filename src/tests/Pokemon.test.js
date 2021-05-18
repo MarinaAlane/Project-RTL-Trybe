@@ -27,14 +27,12 @@ test('tests if card contains a link for more info', () => {
 });
 
 test('renders a star icon in favorited pokemon', () => {
-  st('contains cards of favorited pokémons', () => {
-    const { getByText, getByAltText } = renderWithRouter(<App />);
-    const moreDetails = getByText(/More details/);
-    fireEvent.click(moreDetails);
-    const favorite = getByText(/Pokémon favoritado?/);
-    fireEvent.click(favorite);
-    const starIcon = getByAltText(`${pokemons[0].name} is marked as favorite`);
-    expect(starIcon).toBeInTheDocument();
-    expect(starIcon.src).toBe('/star-icon.svg');
-  });
+  const { getByText, getByAltText } = renderWithRouter(<App />);
+  const moreDetails = getByText(/More details/);
+  fireEvent.click(moreDetails);
+  const favorite = getByText(/Pokémon favoritado?/);
+  fireEvent.click(favorite);
+  const starIcon = getByAltText(`${pokemons[0].name} is marked as favorite`);
+  expect(starIcon).toBeInTheDocument();
+  expect(starIcon.src).toBe('http://localhost/star-icon.svg');
 });
