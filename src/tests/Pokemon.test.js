@@ -1,8 +1,10 @@
-
 import React from 'react';
 import { fireEvent } from '@testing-library/dom';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
+
+// realizado requisito com ajuda da cainan
+// https://github.com/tryber/sd-08-project-react-testing-library/blob/Cainan6697-react-testing/src/tests/Pokemon.test.js
 
 describe('Pokemon', () => {
   it('information shown by the card is correct', () => {
